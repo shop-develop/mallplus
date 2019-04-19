@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zscat.mallplus.pms.mapper.PmsProductAttributeCategoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zscat.mallplus.pms.entity.PmsProductAttributeCategory">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="attribute_count" property="attributeCount" />
+        <result column="param_count" property="paramCount" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, attribute_count, param_count
+    </sql>
+
+</mapper>

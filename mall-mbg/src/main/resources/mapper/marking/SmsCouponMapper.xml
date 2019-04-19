@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zscat.mallplus.marking.mapper.SmsCouponMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zscat.mallplus.marking.entity.SmsCoupon">
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="name" property="name" />
+        <result column="platform" property="platform" />
+        <result column="count" property="count" />
+        <result column="amount" property="amount" />
+        <result column="per_limit" property="perLimit" />
+        <result column="min_point" property="minPoint" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="use_type" property="useType" />
+        <result column="note" property="note" />
+        <result column="publish_count" property="publishCount" />
+        <result column="use_count" property="useCount" />
+        <result column="receive_count" property="receiveCount" />
+        <result column="enable_time" property="enableTime" />
+        <result column="code" property="code" />
+        <result column="member_level" property="memberLevel" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type, name, platform, count, amount, per_limit, min_point, start_time, end_time, use_type, note, publish_count, use_count, receive_count, enable_time, code, member_level
+    </sql>
+
+</mapper>

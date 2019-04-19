@@ -77,7 +77,7 @@ public class MpGenerator {
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Dao.xml";
+                return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Mapper.xml";
             }
         });
 
@@ -98,8 +98,28 @@ public class MpGenerator {
                 "cms_subject_product_relation",
                 "cms_topic","cms_topic_category", "cms_topic_comment","cms_topic_member"}); // 需要生成的表*/
 
-        strategy.setInclude(new String[] { "oms_cart_item","oms_company_address","oms_order","oms_order_item",
+      /*  strategy.setInclude(new String[] { "oms_cart_item","oms_company_address","oms_order","oms_order_item",
                 "oms_order_operate_history","oms_order_return_apply","oms_order_setting", "oms_order_return_reason"}); // 需要生成的表
+*/
+
+      /*  strategy.setInclude(new String[] { "pms_album","pms_album_pic","pms_brand","pms_comment",
+                "pms_comment_replay","pms_feight_template","pms_member_price", "pms_product",
+                "pms_product_attribute","pms_product_consult","pms_product_full_reduction","pms_product_ladder",
+                "pms_product_attribute_category","pms_product_attribute_value", "pms_product_category",
+                "pms_product_category_attribute_relation","pms_product_operate_log","pms_product_vertify_record"
+                ,"pms_sku_stock"}); // 需要生成的表*/
+
+      /*  strategy.setInclude(new String[] { "sms_coupon","sms_coupon_history","sms_coupon_product_category_relation","sms_coupon_product_relation",
+                "sms_flash_promotion","sms_flash_promotion_log","sms_flash_promotion_product_relation", "sms_flash_promotion_session",
+                "sms_group","sms_group_member","sms_home_advertise",
+                "sms_home_brand","sms_home_new_product", "sms_home_recommend_product",
+                "sms_home_recommend_subject","sms_red_packet","sms_user_red_packet"
+                }); // 需要生成的表*/
+
+            strategy.setInclude(new String[] { "ums_collect","ums_member","ums_member_blance_log","ums_member_level",
+                    "ums_member_member_tag_relation","ums_member_product_category_relation",
+                    "ums_member_receive_address", "ums_member_rule_setting","ums_member_statistics_info","ums_member_tag",
+            "ums_member_task","ums_growth_change_history","ums_integration_change_history","ums_integration_consume_setting"}); // 需要生成的表
 
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
@@ -125,7 +145,7 @@ public class MpGenerator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("com.zscat.mallplus");
-        pc.setModuleName("oms");
+        pc.setModuleName("ums");
         mpg.setPackageInfo(pc);
 
 

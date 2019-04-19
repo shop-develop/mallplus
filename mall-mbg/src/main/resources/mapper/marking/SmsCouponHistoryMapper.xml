@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zscat.mallplus.marking.mapper.SmsCouponHistoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zscat.mallplus.marking.entity.SmsCouponHistory">
+        <id column="id" property="id" />
+        <result column="coupon_id" property="couponId" />
+        <result column="member_id" property="memberId" />
+        <result column="coupon_code" property="couponCode" />
+        <result column="member_nickname" property="memberNickname" />
+        <result column="get_type" property="getType" />
+        <result column="create_time" property="createTime" />
+        <result column="use_status" property="useStatus" />
+        <result column="use_time" property="useTime" />
+        <result column="order_id" property="orderId" />
+        <result column="order_sn" property="orderSn" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="note" property="note" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, coupon_id, member_id, coupon_code, member_nickname, get_type, create_time, use_status, use_time, order_id, order_sn, start_time, end_time, note
+    </sql>
+
+</mapper>
