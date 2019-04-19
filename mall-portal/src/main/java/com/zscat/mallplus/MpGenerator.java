@@ -84,7 +84,7 @@ public class MpGenerator {
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
 
-        focList.add(new FileOutConfig("/templates/Controller.java.vm") {
+        focList.add(new FileOutConfig("/templates/controller.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Controller.java";

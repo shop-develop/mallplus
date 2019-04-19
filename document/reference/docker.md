@@ -5,7 +5,7 @@
 docker search java
 ### 下载镜像
 - docker pull java:8
-- docker pull macro/eureka-server:0.0.1
+- docker pull zscat/eureka-server:0.0.1
 ### 列出镜像
 docker images
 ### 删除镜像
@@ -41,9 +41,9 @@ docker cp /etc/localtime $ContainerName:/etc/
 ### Docker Registry 2.0搭建
 docker run -d -p 5000:5000 --restart=always --name registry2 registry:2
 ### 推送到私有仓库
-docker push localhost:5000/macro/eureka-server:0.0.1
+docker push localhost:5000/zscat/eureka-server:0.0.1
 ### 修改镜像标签
-docker tag macro/eureka-server:0.0.1 localhost:5000/macro/eureka-server:0.0.1
+docker tag zscat/eureka-server:0.0.1 localhost:5000/zscat/eureka-server:0.0.1
 
 ## 使用maven构建Docker镜像
 ### 构建镜像
@@ -54,7 +54,7 @@ docker tag macro/eureka-server:0.0.1 localhost:5000/macro/eureka-server:0.0.1
 ### 推送镜像到私有仓库
 - command：mvn clean package docker:build -DpushImage
 - tip：
-    pom.xml修改<imageName>192.168.1.71:5000/macro/${project.artifactId}:${project.version}</imageName>
+    pom.xml修改<imageName>192.168.1.71:5000/zscat/${project.artifactId}:${project.version}</imageName>
 - tip：
     docker要支持http:echo '{ "insecure-registries":["39.98.190.128:5000"] }' > /etc/docker/daemon.json 
 ### 修改Docker镜像存放位置

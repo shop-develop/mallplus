@@ -233,6 +233,6 @@ nginx | 1.10 | http://nginx.org/en/download.html
 
 ## 许可证
 
-[MIT](https://github.com/macrozheng/mall/blob/master/LICENSE)
+[MIT](https://github.com/zscatzheng/mall/blob/master/LICENSE)
 
-Copyright (c) 2018-2019 macrozheng
+Copyright (c) 2018-2019 zscatzheng

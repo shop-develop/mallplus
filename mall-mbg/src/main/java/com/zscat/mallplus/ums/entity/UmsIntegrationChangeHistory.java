@@ -3,7 +3,7 @@ package com.zscat.mallplus.ums.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -27,7 +27,7 @@ public class UmsIntegrationChangeHistory implements Serializable {
     private Long memberId;
 
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 改变类型：0->增加；1->减少
@@ -76,11 +76,11 @@ public class UmsIntegrationChangeHistory implements Serializable {
         this.memberId = memberId;
     }
 
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

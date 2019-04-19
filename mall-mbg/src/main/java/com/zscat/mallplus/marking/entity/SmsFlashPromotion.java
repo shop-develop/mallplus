@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -47,7 +47,7 @@ public class SmsFlashPromotion implements Serializable {
      * 秒杀时间段名称
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
     public Long getId() {
@@ -90,11 +90,11 @@ public class SmsFlashPromotion implements Serializable {
         this.status = status;
     }
 
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

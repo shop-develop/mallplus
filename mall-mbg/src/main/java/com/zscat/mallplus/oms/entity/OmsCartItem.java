@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -92,13 +92,13 @@ public class OmsCartItem implements Serializable {
      * 创建时间
      */
     @TableField("create_date")
-    private LocalDateTime createDate;
+    private Date createDate;
 
     /**
      * 修改时间
      */
     @TableField("modify_date")
-    private LocalDateTime modifyDate;
+    private Date modifyDate;
 
     /**
      * 是否删除
@@ -237,19 +237,19 @@ public class OmsCartItem implements Serializable {
         this.memberNickname = memberNickname;
     }
 
-    public LocalDateTime getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public LocalDateTime getModifyDate() {
+    public Date getModifyDate() {
         return modifyDate;
     }
 
-    public void setModifyDate(LocalDateTime modifyDate) {
+    public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
     }
 

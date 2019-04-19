@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -52,7 +52,7 @@ public class OmsOrderReturnApply implements Serializable {
      * 申请时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 会员用户名
@@ -87,7 +87,7 @@ public class OmsOrderReturnApply implements Serializable {
      * 处理时间
      */
     @TableField("handle_time")
-    private LocalDateTime handleTime;
+    private Date handleTime;
 
     /**
      * 商品图片
@@ -169,7 +169,7 @@ public class OmsOrderReturnApply implements Serializable {
      * 收货时间
      */
     @TableField("receive_time")
-    private LocalDateTime receiveTime;
+    private Date receiveTime;
 
     /**
      * 收货备注
@@ -218,11 +218,11 @@ public class OmsOrderReturnApply implements Serializable {
         this.orderSn = orderSn;
     }
 
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -266,11 +266,11 @@ public class OmsOrderReturnApply implements Serializable {
         this.status = status;
     }
 
-    public LocalDateTime getHandleTime() {
+    public Date getHandleTime() {
         return handleTime;
     }
 
-    public void setHandleTime(LocalDateTime handleTime) {
+    public void setHandleTime(Date handleTime) {
         this.handleTime = handleTime;
     }
 
@@ -378,11 +378,11 @@ public class OmsOrderReturnApply implements Serializable {
         this.receiveMan = receiveMan;
     }
 
-    public LocalDateTime getReceiveTime() {
+    public Date getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(LocalDateTime receiveTime) {
+    public void setReceiveTime(Date receiveTime) {
         this.receiveTime = receiveTime;
     }
 

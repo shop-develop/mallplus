@@ -3,7 +3,7 @@ package com.zscat.mallplus.marking.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -39,10 +39,10 @@ public class SmsFlashPromotionLog implements Serializable {
      * 会员订阅时间
      */
     @TableField("subscribe_time")
-    private LocalDateTime subscribeTime;
+    private Date subscribeTime;
 
     @TableField("send_time")
-    private LocalDateTime sendTime;
+    private Date sendTime;
 
 
     public Integer getId() {
@@ -85,19 +85,19 @@ public class SmsFlashPromotionLog implements Serializable {
         this.productName = productName;
     }
 
-    public LocalDateTime getSubscribeTime() {
+    public Date getSubscribeTime() {
         return subscribeTime;
     }
 
-    public void setSubscribeTime(LocalDateTime subscribeTime) {
+    public void setSubscribeTime(Date subscribeTime) {
         this.subscribeTime = subscribeTime;
     }
 
-    public LocalDateTime getSendTime() {
+    public Date getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(LocalDateTime sendTime) {
+    public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
     }
 

@@ -3,7 +3,7 @@ package com.zscat.mallplus.ums.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -30,7 +30,7 @@ public class UmsMemberMemberTagRelation implements Serializable {
     private Long tagId;
 
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
     public Long getId() {
@@ -57,11 +57,11 @@ public class UmsMemberMemberTagRelation implements Serializable {
         this.tagId = tagId;
     }
 
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

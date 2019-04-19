@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -72,7 +72,7 @@ public class PmsProductConsult implements Serializable {
      * 咨询添加时间
      */
     @TableField("consult_addtime")
-    private LocalDateTime consultAddtime;
+    private Date consultAddtime;
 
     /**
      * 咨询回复内容
@@ -84,7 +84,7 @@ public class PmsProductConsult implements Serializable {
      * 咨询回复时间
      */
     @TableField("consult_reply_time")
-    private LocalDateTime consultReplyTime;
+    private Date consultReplyTime;
 
     /**
      * 0表示不匿名 1表示匿名
@@ -159,11 +159,11 @@ public class PmsProductConsult implements Serializable {
         this.consultContent = consultContent;
     }
 
-    public LocalDateTime getConsultAddtime() {
+    public Date getConsultAddtime() {
         return consultAddtime;
     }
 
-    public void setConsultAddtime(LocalDateTime consultAddtime) {
+    public void setConsultAddtime(Date consultAddtime) {
         this.consultAddtime = consultAddtime;
     }
 
@@ -175,11 +175,11 @@ public class PmsProductConsult implements Serializable {
         this.consultReply = consultReply;
     }
 
-    public LocalDateTime getConsultReplyTime() {
+    public Date getConsultReplyTime() {
         return consultReplyTime;
     }
 
-    public void setConsultReplyTime(LocalDateTime consultReplyTime) {
+    public void setConsultReplyTime(Date consultReplyTime) {
         this.consultReplyTime = consultReplyTime;
     }
 

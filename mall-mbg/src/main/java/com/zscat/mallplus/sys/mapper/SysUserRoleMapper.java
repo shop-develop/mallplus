@@ -1,9 +1,8 @@
 package com.zscat.mallplus.sys.mapper;
 
-import com.zscat.mallplus.sys.entity.SysPermission;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zscat.mallplus.sys.entity.SysRole;
 import com.zscat.mallplus.sys.entity.SysUserRole;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 
@@ -17,9 +16,6 @@ import java.util.List;
  */
 public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 
-    List<SysPermission> getPermissionList(Long adminId);
 
-    List<SysRole> getRoleList(Long adminId);
-
-    List<SysPermission> getRolePermissionListByUserId(Long adminId);
+    List<SysRole> getRoleListByUserid(Long adminId);
 }

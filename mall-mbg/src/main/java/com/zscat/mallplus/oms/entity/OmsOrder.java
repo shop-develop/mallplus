@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -44,7 +44,7 @@ public class OmsOrder implements Serializable {
      * 提交时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 用户帐号
@@ -250,31 +250,31 @@ public class OmsOrder implements Serializable {
      * 支付时间
      */
     @TableField("payment_time")
-    private LocalDateTime paymentTime;
+    private Date paymentTime;
 
     /**
      * 发货时间
      */
     @TableField("delivery_time")
-    private LocalDateTime deliveryTime;
+    private Date deliveryTime;
 
     /**
      * 确认收货时间
      */
     @TableField("receive_time")
-    private LocalDateTime receiveTime;
+    private Date receiveTime;
 
     /**
      * 评价时间
      */
     @TableField("comment_time")
-    private LocalDateTime commentTime;
+    private Date commentTime;
 
     /**
      * 修改时间
      */
     @TableField("modify_time")
-    private LocalDateTime modifyTime;
+    private Date modifyTime;
 
     @TableField("prepay_id")
     private String prepayId;
@@ -324,11 +324,11 @@ public class OmsOrder implements Serializable {
         this.orderSn = orderSn;
     }
 
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -604,43 +604,43 @@ public class OmsOrder implements Serializable {
         this.useIntegration = useIntegration;
     }
 
-    public LocalDateTime getPaymentTime() {
+    public Date getPaymentTime() {
         return paymentTime;
     }
 
-    public void setPaymentTime(LocalDateTime paymentTime) {
+    public void setPaymentTime(Date paymentTime) {
         this.paymentTime = paymentTime;
     }
 
-    public LocalDateTime getDeliveryTime() {
+    public Date getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(LocalDateTime deliveryTime) {
+    public void setDeliveryTime(Date deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 
-    public LocalDateTime getReceiveTime() {
+    public Date getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(LocalDateTime receiveTime) {
+    public void setReceiveTime(Date receiveTime) {
         this.receiveTime = receiveTime;
     }
 
-    public LocalDateTime getCommentTime() {
+    public Date getCommentTime() {
         return commentTime;
     }
 
-    public void setCommentTime(LocalDateTime commentTime) {
+    public void setCommentTime(Date commentTime) {
         this.commentTime = commentTime;
     }
 
-    public LocalDateTime getModifyTime() {
+    public Date getModifyTime() {
         return modifyTime;
     }
 
-    public void setModifyTime(LocalDateTime modifyTime) {
+    public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
 

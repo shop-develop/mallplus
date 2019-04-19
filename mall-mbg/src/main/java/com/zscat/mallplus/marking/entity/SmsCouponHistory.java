@@ -3,7 +3,7 @@ package com.zscat.mallplus.marking.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -45,7 +45,7 @@ public class SmsCouponHistory implements Serializable {
     private Integer getType;
 
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 使用状态：0->未使用；1->已使用；2->已过期
@@ -57,7 +57,7 @@ public class SmsCouponHistory implements Serializable {
      * 使用时间
      */
     @TableField("use_time")
-    private LocalDateTime useTime;
+    private Date useTime;
 
     /**
      * 订单编号
@@ -72,10 +72,10 @@ public class SmsCouponHistory implements Serializable {
     private String orderSn;
 
     @TableField("start_time")
-    private LocalDateTime startTime;
+    private Date startTime;
 
     @TableField("end_time")
-    private LocalDateTime endTime;
+    private Date endTime;
 
     private String note;
 
@@ -128,11 +128,11 @@ public class SmsCouponHistory implements Serializable {
         this.getType = getType;
     }
 
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -144,11 +144,11 @@ public class SmsCouponHistory implements Serializable {
         this.useStatus = useStatus;
     }
 
-    public LocalDateTime getUseTime() {
+    public Date getUseTime() {
         return useTime;
     }
 
-    public void setUseTime(LocalDateTime useTime) {
+    public void setUseTime(Date useTime) {
         this.useTime = useTime;
     }
 
@@ -168,19 +168,19 @@ public class SmsCouponHistory implements Serializable {
         this.orderSn = orderSn;
     }
 
-    public LocalDateTime getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

@@ -3,6 +3,7 @@ package com.zscat.mallplus.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zscat.mallplus.sys.entity.*;
+import com.zscat.mallplus.sys.mapper.SysPermissionMapper;
 import com.zscat.mallplus.sys.mapper.SysUserMapper;
 import com.zscat.mallplus.sys.mapper.SysUserPermissionMapper;
 import com.zscat.mallplus.sys.mapper.SysUserRoleMapper;
@@ -54,14 +55,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysUserRoleMapper adminRoleRelationMapper;
     @Resource
     private SysUserPermissionMapper adminPermissionRelationMapper;
-
+    @Resource
+    private SysUserRoleMapper roleMapper;
     @Resource
     private ISysUserPermissionService userPermissionService;
     @Resource
     private ISysRolePermissionService rolePermissionService;
     @Resource
     private ISysUserRoleService userRoleService;
-
+    @Resource
+    private SysPermissionMapper permissionMapper;
     @Override
     public String refreshToken(String oldToken) {
         String token = oldToken.substring(tokenHead.length());
@@ -110,7 +113,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public List<SysRole> getRoleListByUserId(Long adminId) {
-        return adminRoleRelationMapper.getRoleList(adminId);
+        return roleMapper.getRoleListByUserid(adminId);
     }
 
     @Override
@@ -120,7 +123,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         userPermission.setAdminId(adminId);
         adminPermissionRelationMapper.delete(new QueryWrapper<>(userPermission));
         //获取用户所有角色权限
-        List<SysPermission> permissionList = adminRoleRelationMapper.getRolePermissionListByUserId(adminId);
+        List<SysPermission> permissionList = permissionMapper.listMenuByUserId(adminId);
         List<Long> rolePermissionList = permissionList.stream().map(SysPermission::getId).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(permissionIds)) {
             List<SysUserPermission> relationList = new ArrayList<>();
@@ -138,7 +141,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public List<SysPermission> getPermissionListByUserId(Long adminId) {
-        return adminRoleRelationMapper.getPermissionList(adminId);
+        return permissionMapper.listMenuByUserId(adminId);
     }
 
     /**

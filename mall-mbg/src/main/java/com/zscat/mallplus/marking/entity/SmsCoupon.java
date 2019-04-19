@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -59,10 +59,10 @@ public class SmsCoupon implements Serializable {
     private BigDecimal minPoint;
 
     @TableField("start_time")
-    private LocalDateTime startTime;
+    private Date startTime;
 
     @TableField("end_time")
-    private LocalDateTime endTime;
+    private Date endTime;
 
     /**
      * 使用类型：0->全场通用；1->指定分类；2->指定商品
@@ -97,7 +97,7 @@ public class SmsCoupon implements Serializable {
      * 可以领取的日期
      */
     @TableField("enable_time")
-    private LocalDateTime enableTime;
+    private Date enableTime;
 
     /**
      * 优惠码
@@ -175,19 +175,19 @@ public class SmsCoupon implements Serializable {
         this.minPoint = minPoint;
     }
 
-    public LocalDateTime getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -231,11 +231,11 @@ public class SmsCoupon implements Serializable {
         this.receiveCount = receiveCount;
     }
 
-    public LocalDateTime getEnableTime() {
+    public Date getEnableTime() {
         return enableTime;
     }
 
-    public void setEnableTime(LocalDateTime enableTime) {
+    public void setEnableTime(Date enableTime) {
         this.enableTime = enableTime;
     }
 

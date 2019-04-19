@@ -29,7 +29,7 @@ import java.util.List;
 @RestController
 @Api(tags = "SysPermissionController", description = "后台用户权限表管理")
 @RequestMapping("/sys/SysPermission")
-public class SysPermissionController {
+public class SysPermissionController extends BaseController{
     @Resource
     private ISysPermissionService ISysPermissionService;
 
@@ -131,5 +131,11 @@ public class SysPermissionController {
             return new CommonResult().failed();
         }
     }
-
+    @SysLog(MODULE = "sys", REMARK = "获取所有权限列表")
+    @ApiOperation("获取所有权限列表")
+    @RequestMapping(value = "/findPermissions", method = RequestMethod.GET)
+    @ResponseBody
+    public Object findPermissions() {
+        return new CommonResult().success(ISysPermissionService.getPermissionsByUserId(getCurrentUser().getId()));
+    }
 }

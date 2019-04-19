@@ -14,7 +14,7 @@ https://download.docker.com/linux/centos/docker-ce.repo
 yum install docker-ce
 4. 启动docker:
 systemctl start docker
-注：常见命令见macro/spring-cloud-demo中的docker.md
+注：常见命令见zscat/spring-cloud-demo中的docker.md
 5. 安装上传下载插件：
 yum -y install lrzsz
 ### docker compose安装

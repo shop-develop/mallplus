@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -94,7 +94,7 @@ public class UmsMemberStatisticsInfo implements Serializable {
      * 最后一次下订单时间
      */
     @TableField("recent_order_time")
-    private LocalDateTime recentOrderTime;
+    private Date recentOrderTime;
 
 
     public Long getId() {
@@ -217,11 +217,11 @@ public class UmsMemberStatisticsInfo implements Serializable {
         this.inviteFriendCount = inviteFriendCount;
     }
 
-    public LocalDateTime getRecentOrderTime() {
+    public Date getRecentOrderTime() {
         return recentOrderTime;
     }
 
-    public void setRecentOrderTime(LocalDateTime recentOrderTime) {
+    public void setRecentOrderTime(Date recentOrderTime) {
         this.recentOrderTime = recentOrderTime;
     }
 

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -194,13 +194,13 @@ public class PmsProduct implements Serializable {
      * 促销开始时间
      */
     @TableField("promotion_start_time")
-    private LocalDateTime promotionStartTime;
+    private Date promotionStartTime;
 
     /**
      * 促销结束时间
      */
     @TableField("promotion_end_time")
-    private LocalDateTime promotionEndTime;
+    private Date promotionEndTime;
 
     /**
      * 活动限购数量
@@ -230,7 +230,7 @@ public class PmsProduct implements Serializable {
     private Long supplyId;
 
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     @TableField("school_id")
     private Long schoolId;
@@ -524,19 +524,19 @@ public class PmsProduct implements Serializable {
         this.detailMobileHtml = detailMobileHtml;
     }
 
-    public LocalDateTime getPromotionStartTime() {
+    public Date getPromotionStartTime() {
         return promotionStartTime;
     }
 
-    public void setPromotionStartTime(LocalDateTime promotionStartTime) {
+    public void setPromotionStartTime(Date promotionStartTime) {
         this.promotionStartTime = promotionStartTime;
     }
 
-    public LocalDateTime getPromotionEndTime() {
+    public Date getPromotionEndTime() {
         return promotionEndTime;
     }
 
-    public void setPromotionEndTime(LocalDateTime promotionEndTime) {
+    public void setPromotionEndTime(Date promotionEndTime) {
         this.promotionEndTime = promotionEndTime;
     }
 
@@ -580,11 +580,11 @@ public class PmsProduct implements Serializable {
         this.supplyId = supplyId;
     }
 
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

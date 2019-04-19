@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -164,6 +165,31 @@ public class SysUserController extends ApiController {
         tokenMap.put("menus", permissionService.getPermissionsByUserId(UserUtils.getCurrentMember().getId()));
         return new CommonResult().success(tokenMap);
     }
+
+    @SysLog(MODULE = "sys", REMARK = "获取当前登录用户信息")
+    @ApiOperation(value = "获取当前登录用户信息")
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getAdminInfo(Principal principal) {
+        String username = principal.getName();
+        SysUser queryU = new SysUser();
+        queryU.setUsername(username);
+        SysUser umsAdmin = sysUserService.getOne(new QueryWrapper<>(queryU));
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", umsAdmin.getUsername());
+        data.put("roles", new String[]{"TEST"});
+        data.put("icon", umsAdmin.getIcon());
+        return new CommonResult().success(data);
+    }
+
+    @SysLog(MODULE = "sys", REMARK = "登出功能")
+    @ApiOperation(value = "登出功能")
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public Object logout() {
+        return new CommonResult().success(null);
+    }
+
 
     @SysLog(MODULE = "sys", REMARK = "给用户分配角色")
     @ApiOperation("给用户分配角色")
