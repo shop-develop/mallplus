@@ -51,7 +51,7 @@ public class SmsCouponProductCategoryRelationController {
 
     @SysLog(MODULE = "marking", REMARK = "保存优惠券和产品分类关系表")
     @ApiOperation("保存优惠券和产品分类关系表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsCouponProductCategoryRelation:create')")
     public Object saveSmsCouponProductCategoryRelation(@RequestBody SmsCouponProductCategoryRelation entity) {
         try {

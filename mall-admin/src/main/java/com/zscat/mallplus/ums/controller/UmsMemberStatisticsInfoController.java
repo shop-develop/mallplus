@@ -57,7 +57,7 @@ public class UmsMemberStatisticsInfoController {
 
     @SysLog(MODULE = "ums", REMARK = "保存会员统计信息")
     @ApiOperation("保存会员统计信息")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsMemberStatisticsInfo:create')")
     public Object saveUmsMemberStatisticsInfo(@RequestBody UmsMemberStatisticsInfo entity) {
         try {

@@ -51,7 +51,7 @@ public class SysWebLogController {
 
     @SysLog(MODULE = "sys", REMARK = "保存")
     @ApiOperation("保存")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('sys:SysWebLog:create')")
     public Object saveRole(@RequestBody SysWebLog entity) {
         try {

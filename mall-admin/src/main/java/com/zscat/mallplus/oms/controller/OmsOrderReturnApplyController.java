@@ -57,7 +57,7 @@ public class OmsOrderReturnApplyController {
 
     @SysLog(MODULE = "oms", REMARK = "保存订单退货申请")
     @ApiOperation("保存订单退货申请")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('oms:OmsOrderReturnApply:create')")
     public Object saveOmsOrderReturnApply(@RequestBody OmsOrderReturnApply entity) {
         try {

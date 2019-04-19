@@ -57,7 +57,7 @@ public class UmsMemberController {
 
     @SysLog(MODULE = "ums", REMARK = "保存会员表")
     @ApiOperation("保存会员表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsMember:create')")
     public Object saveUmsMember(@RequestBody UmsMember entity) {
         try {

@@ -51,7 +51,7 @@ public class OmsOrderReturnReasonController {
 
     @SysLog(MODULE = "oms", REMARK = "保存退货原因表")
     @ApiOperation("保存退货原因表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('oms:OmsOrderReturnReason:create')")
     public Object saveOmsOrderReturnReason(@RequestBody OmsOrderReturnReason entity) {
         try {

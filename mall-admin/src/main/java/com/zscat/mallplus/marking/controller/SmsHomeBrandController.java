@@ -57,7 +57,7 @@ public class SmsHomeBrandController {
 
     @SysLog(MODULE = "marking", REMARK = "保存首页推荐品牌表")
     @ApiOperation("保存首页推荐品牌表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsHomeBrand:create')")
     public Object saveSmsHomeBrand(@RequestBody SmsHomeBrand entity) {
         try {

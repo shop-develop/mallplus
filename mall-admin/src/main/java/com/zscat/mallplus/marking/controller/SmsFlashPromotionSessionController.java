@@ -57,7 +57,7 @@ public class SmsFlashPromotionSessionController {
 
     @SysLog(MODULE = "marking", REMARK = "保存限时购场次表")
     @ApiOperation("保存限时购场次表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsFlashPromotionSession:create')")
     public Object saveSmsFlashPromotionSession(@RequestBody SmsFlashPromotionSession entity) {
         try {

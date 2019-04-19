@@ -55,7 +55,7 @@ public class SysRoleController extends ApiController {
 
     @SysLog(MODULE = "sys", REMARK = "保存角色")
     @ApiOperation("保存角色")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('sys:role:create')")
     public Object saveRole(@RequestBody SysRole entity) {
         try {

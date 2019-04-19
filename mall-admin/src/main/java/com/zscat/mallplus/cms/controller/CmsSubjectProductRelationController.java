@@ -51,7 +51,7 @@ public class CmsSubjectProductRelationController {
 
     @SysLog(MODULE = "cms", REMARK = "保存专题商品关系表")
     @ApiOperation("保存专题商品关系表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsSubjectProductRelation:create')")
     public Object saveCmsSubjectProductRelation(@RequestBody CmsSubjectProductRelation entity) {
         try {

@@ -51,7 +51,7 @@ public class SmsUserRedPacketController {
 
     @SysLog(MODULE = "marking", REMARK = "保存用户红包")
     @ApiOperation("保存用户红包")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsUserRedPacket:create')")
     public Object saveSmsUserRedPacket(@RequestBody SmsUserRedPacket entity) {
         try {

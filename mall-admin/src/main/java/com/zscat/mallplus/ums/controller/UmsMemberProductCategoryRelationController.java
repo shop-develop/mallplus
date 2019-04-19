@@ -57,7 +57,7 @@ public class UmsMemberProductCategoryRelationController {
 
     @SysLog(MODULE = "ums", REMARK = "保存会员与产品分类关系表（用户喜欢的分类）")
     @ApiOperation("保存会员与产品分类关系表（用户喜欢的分类）")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsMemberProductCategoryRelation:create')")
     public Object saveUmsMemberProductCategoryRelation(@RequestBody UmsMemberProductCategoryRelation entity) {
         try {

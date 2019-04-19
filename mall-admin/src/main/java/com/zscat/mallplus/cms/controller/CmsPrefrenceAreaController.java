@@ -51,7 +51,7 @@ public class CmsPrefrenceAreaController {
 
     @SysLog(MODULE = "cms", REMARK = "保存优选专区")
     @ApiOperation("保存优选专区")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsPrefrenceArea:create')")
     public Object saveCmsPrefrenceArea(@RequestBody CmsPrefrenceArea entity) {
         try {

@@ -71,7 +71,7 @@ public class SysUserController extends ApiController {
 
     @SysLog(MODULE = "sys", REMARK = "保存用户")
     @ApiOperation("保存用户")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     public Object saveUser(@RequestBody SysUser entity) {
         try {
             if (sysUserService.save(entity)) {

@@ -51,7 +51,7 @@ public class PmsCommentReplayController {
 
     @SysLog(MODULE = "pms", REMARK = "保存产品评价回复表")
     @ApiOperation("保存产品评价回复表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsCommentReplay:create')")
     public Object savePmsCommentReplay(@RequestBody PmsCommentReplay entity) {
         try {

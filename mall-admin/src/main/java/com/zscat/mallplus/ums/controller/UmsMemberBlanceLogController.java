@@ -57,7 +57,7 @@ public class UmsMemberBlanceLogController {
 
     @SysLog(MODULE = "ums", REMARK = "保存")
     @ApiOperation("保存")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsMemberBlanceLog:create')")
     public Object saveUmsMemberBlanceLog(@RequestBody UmsMemberBlanceLog entity) {
         try {

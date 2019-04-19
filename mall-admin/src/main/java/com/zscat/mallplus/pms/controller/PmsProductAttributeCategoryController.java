@@ -57,7 +57,7 @@ public class PmsProductAttributeCategoryController {
 
     @SysLog(MODULE = "pms", REMARK = "保存产品属性分类表")
     @ApiOperation("保存产品属性分类表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsProductAttributeCategory:create')")
     public Object savePmsProductAttributeCategory(@RequestBody PmsProductAttributeCategory entity) {
         try {

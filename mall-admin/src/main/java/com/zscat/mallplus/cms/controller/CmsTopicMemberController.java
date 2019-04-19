@@ -51,7 +51,7 @@ public class CmsTopicMemberController {
 
     @SysLog(MODULE = "cms", REMARK = "保存")
     @ApiOperation("保存")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsTopicMember:create')")
     public Object saveCmsTopicMember(@RequestBody CmsTopicMember entity) {
         try {

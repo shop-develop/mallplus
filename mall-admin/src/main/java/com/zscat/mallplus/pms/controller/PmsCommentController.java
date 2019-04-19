@@ -51,7 +51,7 @@ public class PmsCommentController {
 
     @SysLog(MODULE = "pms", REMARK = "保存商品评价表")
     @ApiOperation("保存商品评价表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsComment:create')")
     public Object savePmsComment(@RequestBody PmsComment entity) {
         try {

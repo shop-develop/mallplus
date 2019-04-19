@@ -57,7 +57,7 @@ public class SmsCouponHistoryController {
 
     @SysLog(MODULE = "marking", REMARK = "保存优惠券使用、领取历史表")
     @ApiOperation("保存优惠券使用、领取历史表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsCouponHistory:create')")
     public Object saveSmsCouponHistory(@RequestBody SmsCouponHistory entity) {
         try {

@@ -57,7 +57,7 @@ public class PmsProductCategoryAttributeRelationController {
 
     @SysLog(MODULE = "pms", REMARK = "保存产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）")
     @ApiOperation("保存产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsProductCategoryAttributeRelation:create')")
     public Object savePmsProductCategoryAttributeRelation(@RequestBody PmsProductCategoryAttributeRelation entity) {
         try {

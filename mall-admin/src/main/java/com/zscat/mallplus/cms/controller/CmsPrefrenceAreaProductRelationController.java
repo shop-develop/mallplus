@@ -51,7 +51,7 @@ public class CmsPrefrenceAreaProductRelationController {
 
     @SysLog(MODULE = "cms", REMARK = "保存优选专区和产品关系表")
     @ApiOperation("保存优选专区和产品关系表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsPrefrenceAreaProductRelation:create')")
     public Object saveCmsPrefrenceAreaProductRelation(@RequestBody CmsPrefrenceAreaProductRelation entity) {
         try {

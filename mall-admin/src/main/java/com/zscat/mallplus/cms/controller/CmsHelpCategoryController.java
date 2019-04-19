@@ -51,7 +51,7 @@ public class CmsHelpCategoryController {
 
     @SysLog(MODULE = "cms", REMARK = "保存帮助分类表")
     @ApiOperation("保存帮助分类表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsHelpCategory:create')")
     public Object saveCmsHelpCategory(@RequestBody CmsHelpCategory entity) {
         try {

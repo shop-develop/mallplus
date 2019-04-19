@@ -57,7 +57,7 @@ public class OmsOrderOperateHistoryController {
 
     @SysLog(MODULE = "oms", REMARK = "保存订单操作历史记录")
     @ApiOperation("保存订单操作历史记录")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('oms:OmsOrderOperateHistory:create')")
     public Object saveOmsOrderOperateHistory(@RequestBody OmsOrderOperateHistory entity) {
         try {

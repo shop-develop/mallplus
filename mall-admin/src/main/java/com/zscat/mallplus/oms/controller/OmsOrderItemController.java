@@ -51,7 +51,7 @@ public class OmsOrderItemController {
 
     @SysLog(MODULE = "oms", REMARK = "保存订单中所包含的商品")
     @ApiOperation("保存订单中所包含的商品")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('oms:OmsOrderItem:create')")
     public Object saveOmsOrderItem(@RequestBody OmsOrderItem entity) {
         try {

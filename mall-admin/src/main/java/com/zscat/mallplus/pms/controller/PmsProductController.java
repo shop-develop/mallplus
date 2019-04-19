@@ -57,7 +57,7 @@ public class PmsProductController {
 
     @SysLog(MODULE = "pms", REMARK = "保存商品信息")
     @ApiOperation("保存商品信息")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsProduct:create')")
     public Object savePmsProduct(@RequestBody PmsProduct entity) {
         try {

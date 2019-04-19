@@ -57,7 +57,7 @@ public class UmsMemberLevelController {
 
     @SysLog(MODULE = "ums", REMARK = "保存会员等级表")
     @ApiOperation("保存会员等级表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsMemberLevel:create')")
     public Object saveUmsMemberLevel(@RequestBody UmsMemberLevel entity) {
         try {

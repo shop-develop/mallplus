@@ -57,7 +57,7 @@ public class SmsFlashPromotionProductRelationController {
 
     @SysLog(MODULE = "marking", REMARK = "保存商品限时购与商品关系表")
     @ApiOperation("保存商品限时购与商品关系表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsFlashPromotionProductRelation:create')")
     public Object saveSmsFlashPromotionProductRelation(@RequestBody SmsFlashPromotionProductRelation entity) {
         try {

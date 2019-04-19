@@ -57,7 +57,7 @@ public class SmsHomeAdvertiseController {
 
     @SysLog(MODULE = "marking", REMARK = "保存首页轮播广告表")
     @ApiOperation("保存首页轮播广告表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsHomeAdvertise:create')")
     public Object saveSmsHomeAdvertise(@RequestBody SmsHomeAdvertise entity) {
         try {

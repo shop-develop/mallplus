@@ -51,7 +51,7 @@ public class CmsMemberReportController {
 
     @SysLog(MODULE = "cms", REMARK = "保存用户举报表")
     @ApiOperation("保存用户举报表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsMemberReport:create')")
     public Object saveCmsMemberReport(@RequestBody CmsMemberReport entity) {
         try {

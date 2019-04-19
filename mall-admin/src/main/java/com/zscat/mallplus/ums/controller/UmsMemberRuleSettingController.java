@@ -57,7 +57,7 @@ public class UmsMemberRuleSettingController {
 
     @SysLog(MODULE = "ums", REMARK = "保存会员积分成长规则表")
     @ApiOperation("保存会员积分成长规则表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsMemberRuleSetting:create')")
     public Object saveUmsMemberRuleSetting(@RequestBody UmsMemberRuleSetting entity) {
         try {

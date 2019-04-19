@@ -51,7 +51,7 @@ public class PmsProductAttributeController {
 
     @SysLog(MODULE = "pms", REMARK = "保存商品属性参数表")
     @ApiOperation("保存商品属性参数表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsProductAttribute:create')")
     public Object savePmsProductAttribute(@RequestBody PmsProductAttribute entity) {
         try {

@@ -57,7 +57,7 @@ public class OmsCartItemController {
 
     @SysLog(MODULE = "oms", REMARK = "保存购物车表")
     @ApiOperation("保存购物车表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('oms:OmsCartItem:create')")
     public Object saveOmsCartItem(@RequestBody OmsCartItem entity) {
         try {

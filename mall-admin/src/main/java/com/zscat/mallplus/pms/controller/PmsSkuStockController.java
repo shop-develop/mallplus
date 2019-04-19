@@ -51,7 +51,7 @@ public class PmsSkuStockController {
 
     @SysLog(MODULE = "pms", REMARK = "保存sku的库存")
     @ApiOperation("保存sku的库存")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsSkuStock:create')")
     public Object savePmsSkuStock(@RequestBody PmsSkuStock entity) {
         try {

@@ -51,7 +51,7 @@ public class PmsBrandController {
 
     @SysLog(MODULE = "pms", REMARK = "保存品牌表")
     @ApiOperation("保存品牌表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsBrand:create')")
     public Object savePmsBrand(@RequestBody PmsBrand entity) {
         try {

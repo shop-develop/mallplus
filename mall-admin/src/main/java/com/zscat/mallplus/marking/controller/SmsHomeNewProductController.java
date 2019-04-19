@@ -57,7 +57,7 @@ public class SmsHomeNewProductController {
 
     @SysLog(MODULE = "marking", REMARK = "保存新鲜好物表")
     @ApiOperation("保存新鲜好物表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsHomeNewProduct:create')")
     public Object saveSmsHomeNewProduct(@RequestBody SmsHomeNewProduct entity) {
         try {

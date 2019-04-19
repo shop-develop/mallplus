@@ -51,7 +51,7 @@ public class PmsAlbumController {
 
     @SysLog(MODULE = "pms", REMARK = "保存相册表")
     @ApiOperation("保存相册表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsAlbum:create')")
     public Object savePmsAlbum(@RequestBody PmsAlbum entity) {
         try {

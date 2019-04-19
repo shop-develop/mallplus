@@ -51,7 +51,7 @@ public class CmsHelpController {
 
     @SysLog(MODULE = "cms", REMARK = "保存帮助表")
     @ApiOperation("保存帮助表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsHelp:create')")
     public Object saveCmsHelp(@RequestBody CmsHelp entity) {
         try {

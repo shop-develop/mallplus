@@ -51,7 +51,7 @@ public class PmsFeightTemplateController {
 
     @SysLog(MODULE = "pms", REMARK = "保存运费模版")
     @ApiOperation("保存运费模版")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsFeightTemplate:create')")
     public Object savePmsFeightTemplate(@RequestBody PmsFeightTemplate entity) {
         try {

@@ -51,7 +51,7 @@ public class UmsCollectController {
 
     @SysLog(MODULE = "ums", REMARK = "保存")
     @ApiOperation("保存")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsCollect:create')")
     public Object saveUmsCollect(@RequestBody UmsCollect entity) {
         try {

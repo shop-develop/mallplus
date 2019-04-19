@@ -51,7 +51,7 @@ public class SysAdminLogController {
 
     @SysLog(MODULE = "sys", REMARK = "保存")
     @ApiOperation("保存")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('sys:SysAdminLog:create')")
     public Object saveRole(@RequestBody SysAdminLog entity) {
         try {

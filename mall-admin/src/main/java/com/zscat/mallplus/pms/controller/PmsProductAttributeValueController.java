@@ -57,7 +57,7 @@ public class PmsProductAttributeValueController {
 
     @SysLog(MODULE = "pms", REMARK = "保存存储产品参数信息的表")
     @ApiOperation("保存存储产品参数信息的表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsProductAttributeValue:create')")
     public Object savePmsProductAttributeValue(@RequestBody PmsProductAttributeValue entity) {
         try {

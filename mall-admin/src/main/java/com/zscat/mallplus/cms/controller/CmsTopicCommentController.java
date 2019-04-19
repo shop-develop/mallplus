@@ -51,7 +51,7 @@ public class CmsTopicCommentController {
 
     @SysLog(MODULE = "cms", REMARK = "保存专题评论表")
     @ApiOperation("保存专题评论表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsTopicComment:create')")
     public Object saveCmsTopicComment(@RequestBody CmsTopicComment entity) {
         try {

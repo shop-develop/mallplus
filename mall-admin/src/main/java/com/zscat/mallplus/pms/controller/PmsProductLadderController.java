@@ -57,7 +57,7 @@ public class PmsProductLadderController {
 
     @SysLog(MODULE = "pms", REMARK = "保存产品阶梯价格表(只针对同商品)")
     @ApiOperation("保存产品阶梯价格表(只针对同商品)")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsProductLadder:create')")
     public Object savePmsProductLadder(@RequestBody PmsProductLadder entity) {
         try {

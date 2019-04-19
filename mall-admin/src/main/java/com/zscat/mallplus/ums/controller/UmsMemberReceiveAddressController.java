@@ -57,7 +57,7 @@ public class UmsMemberReceiveAddressController {
 
     @SysLog(MODULE = "ums", REMARK = "保存会员收货地址表")
     @ApiOperation("保存会员收货地址表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsMemberReceiveAddress:create')")
     public Object saveUmsMemberReceiveAddress(@RequestBody UmsMemberReceiveAddress entity) {
         try {

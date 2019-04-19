@@ -51,7 +51,7 @@ public class CmsTopicController {
 
     @SysLog(MODULE = "cms", REMARK = "保存话题表")
     @ApiOperation("保存话题表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsTopic:create')")
     public Object saveCmsTopic(@RequestBody CmsTopic entity) {
         try {

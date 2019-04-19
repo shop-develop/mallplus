@@ -51,7 +51,7 @@ public class SysSchoolController {
 
     @SysLog(MODULE = "sys", REMARK = "保存")
     @ApiOperation("保存")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('sys:SysSchool:create')")
     public Object saveRole(@RequestBody SysSchool entity) {
         try {

@@ -57,7 +57,7 @@ public class OmsCompanyAddressController {
 
     @SysLog(MODULE = "oms", REMARK = "保存公司收发货地址表")
     @ApiOperation("保存公司收发货地址表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('oms:OmsCompanyAddress:create')")
     public Object saveOmsCompanyAddress(@RequestBody OmsCompanyAddress entity) {
         try {

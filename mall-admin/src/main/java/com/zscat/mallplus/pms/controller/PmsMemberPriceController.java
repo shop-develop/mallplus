@@ -57,7 +57,7 @@ public class PmsMemberPriceController {
 
     @SysLog(MODULE = "pms", REMARK = "保存商品会员价格表")
     @ApiOperation("保存商品会员价格表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsMemberPrice:create')")
     public Object savePmsMemberPrice(@RequestBody PmsMemberPrice entity) {
         try {

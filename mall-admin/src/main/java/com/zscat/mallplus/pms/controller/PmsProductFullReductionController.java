@@ -57,7 +57,7 @@ public class PmsProductFullReductionController {
 
     @SysLog(MODULE = "pms", REMARK = "保存产品满减表(只针对同商品)")
     @ApiOperation("保存产品满减表(只针对同商品)")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsProductFullReduction:create')")
     public Object savePmsProductFullReduction(@RequestBody PmsProductFullReduction entity) {
         try {

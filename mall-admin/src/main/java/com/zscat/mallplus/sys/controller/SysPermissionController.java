@@ -51,7 +51,7 @@ public class SysPermissionController extends BaseController{
 
     @SysLog(MODULE = "sys", REMARK = "保存后台用户权限表")
     @ApiOperation("保存后台用户权限表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('sys:SysPermission:create')")
     public Object saveRole(@RequestBody SysPermission entity) {
         try {

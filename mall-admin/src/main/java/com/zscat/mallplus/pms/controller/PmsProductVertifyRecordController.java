@@ -51,7 +51,7 @@ public class PmsProductVertifyRecordController {
 
     @SysLog(MODULE = "pms", REMARK = "保存商品审核记录")
     @ApiOperation("保存商品审核记录")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsProductVertifyRecord:create')")
     public Object savePmsProductVertifyRecord(@RequestBody PmsProductVertifyRecord entity) {
         try {

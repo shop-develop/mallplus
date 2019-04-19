@@ -57,7 +57,7 @@ public class UmsIntegrationChangeHistoryController {
 
     @SysLog(MODULE = "ums", REMARK = "保存积分变化历史记录表")
     @ApiOperation("保存积分变化历史记录表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsIntegrationChangeHistory:create')")
     public Object saveUmsIntegrationChangeHistory(@RequestBody UmsIntegrationChangeHistory entity) {
         try {

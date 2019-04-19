@@ -51,7 +51,7 @@ public class CmsSubjectController {
 
     @SysLog(MODULE = "cms", REMARK = "保存专题表")
     @ApiOperation("保存专题表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('cms:CmsSubject:create')")
     public Object saveCmsSubject(@RequestBody CmsSubject entity) {
         try {

@@ -57,7 +57,7 @@ public class UmsGrowthChangeHistoryController {
 
     @SysLog(MODULE = "ums", REMARK = "保存成长值变化历史记录表")
     @ApiOperation("保存成长值变化历史记录表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsGrowthChangeHistory:create')")
     public Object saveUmsGrowthChangeHistory(@RequestBody UmsGrowthChangeHistory entity) {
         try {

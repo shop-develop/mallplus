@@ -51,7 +51,7 @@ public class SmsHomeRecommendSubjectController {
 
     @SysLog(MODULE = "marking", REMARK = "保存首页推荐专题表")
     @ApiOperation("保存首页推荐专题表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsHomeRecommendSubject:create')")
     public Object saveSmsHomeRecommendSubject(@RequestBody SmsHomeRecommendSubject entity) {
         try {

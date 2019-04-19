@@ -51,7 +51,7 @@ public class SysMemberAreaController {
 
     @SysLog(MODULE = "sys", REMARK = "保存")
     @ApiOperation("保存")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('sys:SysMemberArea:create')")
     public Object saveRole(@RequestBody SysMemberArea entity) {
         try {

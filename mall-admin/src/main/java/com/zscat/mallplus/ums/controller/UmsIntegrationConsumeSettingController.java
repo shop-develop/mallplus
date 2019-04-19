@@ -57,7 +57,7 @@ public class UmsIntegrationConsumeSettingController {
 
     @SysLog(MODULE = "ums", REMARK = "保存积分消费设置")
     @ApiOperation("保存积分消费设置")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsIntegrationConsumeSetting:create')")
     public Object saveUmsIntegrationConsumeSetting(@RequestBody UmsIntegrationConsumeSetting entity) {
         try {

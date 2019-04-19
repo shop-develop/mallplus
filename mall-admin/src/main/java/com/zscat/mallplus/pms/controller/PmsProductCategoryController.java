@@ -57,7 +57,7 @@ public class PmsProductCategoryController {
 
     @SysLog(MODULE = "pms", REMARK = "保存产品分类")
     @ApiOperation("保存产品分类")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('pms:PmsProductCategory:create')")
     public Object savePmsProductCategory(@RequestBody PmsProductCategory entity) {
         try {

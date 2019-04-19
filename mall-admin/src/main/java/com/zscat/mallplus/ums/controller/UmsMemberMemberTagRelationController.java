@@ -57,7 +57,7 @@ public class UmsMemberMemberTagRelationController {
 
     @SysLog(MODULE = "ums", REMARK = "保存用户和标签关系表")
     @ApiOperation("保存用户和标签关系表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsMemberMemberTagRelation:create')")
     public Object saveUmsMemberMemberTagRelation(@RequestBody UmsMemberMemberTagRelation entity) {
         try {

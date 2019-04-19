@@ -51,7 +51,7 @@ public class UmsMemberTagController {
 
     @SysLog(MODULE = "ums", REMARK = "保存用户标签表")
     @ApiOperation("保存用户标签表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('ums:UmsMemberTag:create')")
     public Object saveUmsMemberTag(@RequestBody UmsMemberTag entity) {
         try {

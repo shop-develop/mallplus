@@ -51,7 +51,7 @@ public class SmsHomeRecommendProductController {
 
     @SysLog(MODULE = "marking", REMARK = "保存人气推荐商品表")
     @ApiOperation("保存人气推荐商品表")
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsHomeRecommendProduct:create')")
     public Object saveSmsHomeRecommendProduct(@RequestBody SmsHomeRecommendProduct entity) {
         try {
