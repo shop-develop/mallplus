@@ -29,11 +29,11 @@ import java.util.List;
  * @since 2019-04-14
  */
 @Slf4j
-@Api(value="角色管理",description = "",tags={"角色管理"})
+@Api(value = "角色管理", description = "", tags = {"角色管理"})
 @RestController
 @RequestMapping("/sys/sysRole")
-public class SysRoleController  extends ApiController {
-    
+public class SysRoleController extends ApiController {
+
     @Resource
     private ISysRoleService sysRoleService;
 
@@ -47,11 +47,12 @@ public class SysRoleController  extends ApiController {
     ) {
         try {
             return new CommonResult().success(sysRoleService.page(new Page<SysRole>(pageNum, pageSize), new QueryWrapper<>(entity)));
-        }catch (Exception e){
-            log.error("根据条件查询所有角色列表：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("根据条件查询所有角色列表：%s", e.getMessage(), e);
         }
         return new CommonResult().failed();
     }
+
     @SysLog(MODULE = "sys", REMARK = "保存角色")
     @ApiOperation("保存角色")
     @PostMapping(value = "/save")
@@ -59,65 +60,69 @@ public class SysRoleController  extends ApiController {
     public Object saveRole(@RequestBody SysRole entity) {
         try {
             entity.setId(IdWorker.getId());
-            if (sysRoleService.save(entity)){
+            if (sysRoleService.save(entity)) {
                 return new CommonResult().success();
             }
-        }catch (Exception e){
-            log.error("保存角色：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("保存角色：%s", e.getMessage(), e);
             return new CommonResult().failed();
         }
         return new CommonResult().failed();
     }
+
     @SysLog(MODULE = "sys", REMARK = "更新角色")
     @ApiOperation("更新角色")
     @PutMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('sys:role:update')")
     public Object updateRole(@RequestBody SysRole entity) {
         try {
-            if (sysRoleService.updateById(entity)){
+            if (sysRoleService.updateById(entity)) {
                 return new CommonResult().success();
             }
-        }catch (Exception e){
-            log.error("更新角色：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("更新角色：%s", e.getMessage(), e);
             return new CommonResult().failed();
         }
         return new CommonResult().failed();
     }
+
     @SysLog(MODULE = "sys", REMARK = "删除角色")
     @ApiOperation("删除角色")
     @DeleteMapping(value = "/delete/{id}")
     @PreAuthorize("hasAuthority('sys:role:delete')")
     public Object deleteRole(@ApiParam("角色id") @PathVariable Long id) {
         try {
-            if (ValidatorUtils.empty(id)){
+            if (ValidatorUtils.empty(id)) {
                 return new CommonResult().paramFailed("角色id");
             }
-            if (sysRoleService.removeById(id)){
+            if (sysRoleService.removeById(id)) {
                 return new CommonResult().success();
             }
-        }catch (Exception e){
-            log.error("删除角色：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("删除角色：%s", e.getMessage(), e);
             return new CommonResult().failed();
         }
         return new CommonResult().failed();
     }
+
     @SysLog(MODULE = "sys", REMARK = "给角色分配角色")
     @ApiOperation("查询角色明细")
     @GetMapping(value = "/{id}")
     @PreAuthorize("hasAuthority('sys:role:read')")
-    public Object getRoleById(@ApiParam("角色id")@PathVariable Long id) {
+    public Object getRoleById(@ApiParam("角色id") @PathVariable Long id) {
         try {
-            if (ValidatorUtils.empty(id)){
+            if (ValidatorUtils.empty(id)) {
                 return new CommonResult().paramFailed("角色id");
             }
             SysRole coupon = sysRoleService.getById(id);
             return new CommonResult().success(coupon);
-        }catch (Exception e){
-            log.error("查询角色明细：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("查询角色明细：%s", e.getMessage(), e);
             return new CommonResult().failed();
         }
 
     }
+
     @ApiOperation(value = "批量删除角色")
     @RequestMapping(value = "/delete/batch", method = RequestMethod.POST)
     @ResponseBody
@@ -131,6 +136,6 @@ public class SysRoleController  extends ApiController {
             return new CommonResult().failed();
         }
     }
-    
+
 }
 

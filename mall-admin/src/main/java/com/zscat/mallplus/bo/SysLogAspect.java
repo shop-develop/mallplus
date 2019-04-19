@@ -42,6 +42,7 @@ public class SysLogAspect {
     public ISysAdminLogService fopSystemOperationLogService;
     @Resource
     public ISysUserService adminService;
+
     @Pointcut("@annotation(com.zscat.mallplus.annotation.SysLog)")
     public void logPointCut() {
 
@@ -76,8 +77,8 @@ public class SysLogAspect {
                 sb = new StringBuilder();
                 for (int i = 0; i < parameterNames.length; i++) {
                     Object param = joinPoint.getArgs()[i] != null ? joinPoint.getArgs()[i] : "";
-                    if(StringUtils.isNotEmpty(param.toString()) && !"request".equals(parameterNames[i])&& !"response".equals(parameterNames[i])
-                            && !"modelMap".equals(parameterNames[i])){
+                    if (StringUtils.isNotEmpty(param.toString()) && !"request".equals(parameterNames[i]) && !"response".equals(parameterNames[i])
+                            && !"modelMap".equals(parameterNames[i])) {
                         if (param instanceof Integer) {
                             sb.append(parameterNames[i] + ":" + param + "; ");
                         } else if (param instanceof String) {
@@ -92,9 +93,9 @@ public class SysLogAspect {
                             sb.append(parameterNames[i] + ":" + param + "; ");
                         } else if (param instanceof Date) {
                             sb.append(parameterNames[i] + ":" + param + "; ");
-                        }else if (param instanceof Timestamp) {
+                        } else if (param instanceof Timestamp) {
                             sb.append(parameterNames[i] + ":" + param + "; ");
-                        }else{
+                        } else {
                             sb.append(parameterNames[i] + ":" + getString(param) + "; ");
                         }
                     }
@@ -131,7 +132,7 @@ public class SysLogAspect {
         for (Field field : farr) {
             try {
                 field.setAccessible(true);
-                if(!ValidatorUtils.empty(field.get(o))){
+                if (!ValidatorUtils.empty(field.get(o))) {
                     sb.append(field.getName());
                     sb.append("=");
                     if (field.get(o) instanceof Date) {

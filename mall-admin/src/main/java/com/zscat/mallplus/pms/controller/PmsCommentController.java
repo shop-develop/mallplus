@@ -1,135 +1,135 @@
 package com.zscat.mallplus.pms.controller;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
-import com.zscat.mallplus.sys.entity.SysRole;
-import com.zscat.mallplus.sys.service.ISysRoleService;
+import com.zscat.mallplus.pms.entity.PmsComment;
+import com.zscat.mallplus.pms.service.IPmsCommentService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-
 /**
  * <p>
- * 商品评价表 前端控制器
+ * 商品评价表
  * </p>
  *
  * @author zscat
  * @since 2019-04-19
  */
 @Slf4j
-@Controller
-@RequestMapping("/pms/pmsComment")
-    public class PmsCommentController {
+@RestController
+@Api(tags = "PmsCommentController", description = "商品评价表管理")
+@RequestMapping("/pms/PmsComment")
+public class PmsCommentController {
+    @Resource
+    private IPmsCommentService IPmsCommentService;
 
-@Resource
-private ISysRoleService sysRoleService;
+    @SysLog(MODULE = "pms", REMARK = "根据条件查询所有商品评价表列表")
+    @ApiOperation("根据条件查询所有商品评价表列表")
+    @GetMapping(value = "/list")
+    @PreAuthorize("hasAuthority('pms:PmsComment:read')")
+    public Object getPmsCommentByPage(PmsComment entity,
+                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
+    ) {
+        try {
+            return new CommonResult().success(IPmsCommentService.page(new Page<PmsComment>(pageNum, pageSize), new QueryWrapper<>(entity)));
+        } catch (Exception e) {
+            log.error("根据条件查询所有商品评价表列表：%s", e.getMessage(), e);
+        }
+        return new CommonResult().failed();
+    }
 
-@SysLog(MODULE = "sys", REMARK = "根据条件查询所有商品评价表列表")
-@ApiOperation("根据条件查询所有商品评价表列表")
-@GetMapping(value = "/list")
-@PreAuthorize("hasAuthority('sys:role:read')")
-public Object getRoleByPage(SysRole entity,
-@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-@RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
-        ){
-        try{
-        return new CommonResult().success(sysRoleService.page(new Page<SysRole>(pageNum,pageSize),new QueryWrapper<>(entity)));
-        }catch(Exception e){
-        log.error("根据条件查询所有商品评价表列表：%s",e.getMessage(),e);
+    @SysLog(MODULE = "pms", REMARK = "保存商品评价表")
+    @ApiOperation("保存商品评价表")
+    @PostMapping(value = "/save")
+    @PreAuthorize("hasAuthority('pms:PmsComment:create')")
+    public Object savePmsComment(@RequestBody PmsComment entity) {
+        try {
+            if (IPmsCommentService.save(entity)) {
+                return new CommonResult().success();
+            }
+        } catch (Exception e) {
+            log.error("保存商品评价表：%s", e.getMessage(), e);
+            return new CommonResult().failed();
         }
         return new CommonResult().failed();
-        }
-@SysLog(MODULE = "sys", REMARK = "保存商品评价表")
-@ApiOperation("保存商品评价表")
-@PostMapping(value = "/save")
-@PreAuthorize("hasAuthority('sys:role:create')")
-public Object saveRole(@RequestBody SysRole entity){
-        try{
-        entity.setId(IdWorker.getId());
-        if(sysRoleService.save(entity)){
-        return new CommonResult().success();
-        }
-        }catch(Exception e){
-        log.error("保存商品评价表：%s",e.getMessage(),e);
-        return new CommonResult().failed();
-        }
-        return new CommonResult().failed();
-        }
-@SysLog(MODULE = "sys", REMARK = "更新商品评价表")
-@ApiOperation("更新商品评价表")
-@PutMapping(value = "/update/{id}")
-@PreAuthorize("hasAuthority('sys:role:update')")
-public Object updateRole(@RequestBody SysRole entity){
-        try{
-        if(sysRoleService.updateById(entity)){
-        return new CommonResult().success();
-        }
-        }catch(Exception e){
-        log.error("更新商品评价表：%s",e.getMessage(),e);
-        return new CommonResult().failed();
-        }
-        return new CommonResult().failed();
-        }
-@SysLog(MODULE = "sys", REMARK = "删除商品评价表")
-@ApiOperation("删除商品评价表")
-@DeleteMapping(value = "/delete/{id}")
-@PreAuthorize("hasAuthority('sys:role:delete')")
-public Object deleteRole(@ApiParam("商品评价表id") @PathVariable Long id){
-        try{
-        if(ValidatorUtils.empty(id)){
-        return new CommonResult().paramFailed("商品评价表id");
-        }
-        if(sysRoleService.removeById(id)){
-        return new CommonResult().success();
-        }
-        }catch(Exception e){
-        log.error("删除商品评价表：%s",e.getMessage(),e);
-        return new CommonResult().failed();
-        }
-        return new CommonResult().failed();
-        }
-@SysLog(MODULE = "sys", REMARK = "给商品评价表分配商品评价表")
-@ApiOperation("查询商品评价表明细")
-@GetMapping(value = "/{id}")
-@PreAuthorize("hasAuthority('sys:role:read')")
-public Object getRoleById(@ApiParam("商品评价表id") @PathVariable Long id){
-        try{
-        if(ValidatorUtils.empty(id)){
-        return new CommonResult().paramFailed("商品评价表id");
-        }
-        SysRole coupon=sysRoleService.getById(id);
-        return new CommonResult().success(coupon);
-        }catch(Exception e){
-        log.error("查询商品评价表明细：%s",e.getMessage(),e);
-        return new CommonResult().failed();
-        }
+    }
 
+    @SysLog(MODULE = "pms", REMARK = "更新商品评价表")
+    @ApiOperation("更新商品评价表")
+    @PutMapping(value = "/update/{id}")
+    @PreAuthorize("hasAuthority('pms:PmsComment:update')")
+    public Object updatePmsComment(@RequestBody PmsComment entity) {
+        try {
+            if (IPmsCommentService.updateById(entity)) {
+                return new CommonResult().success();
+            }
+        } catch (Exception e) {
+            log.error("更新商品评价表：%s", e.getMessage(), e);
+            return new CommonResult().failed();
         }
-@ApiOperation(value = "批量删除商品评价表")
-@RequestMapping(value = "/delete/batch", method = RequestMethod.POST)
-@ResponseBody
-@SysLog(MODULE = "pms", REMARK = "批量删除商品评价表")
-@PreAuthorize("hasAuthority('sys:role:delete')")
-public Object deleteBatch(@RequestParam("ids") List<Long> ids){
-        boolean count=sysRoleService.removeByIds(ids);
-        if(count){
-        return new CommonResult().success(count);
-        }else{
         return new CommonResult().failed();
+    }
+
+    @SysLog(MODULE = "pms", REMARK = "删除商品评价表")
+    @ApiOperation("删除商品评价表")
+    @DeleteMapping(value = "/delete/{id}")
+    @PreAuthorize("hasAuthority('pms:PmsComment:delete')")
+    public Object deletePmsComment(@ApiParam("商品评价表id") @PathVariable Long id) {
+        try {
+            if (ValidatorUtils.empty(id)) {
+                return new CommonResult().paramFailed("商品评价表id");
+            }
+            if (IPmsCommentService.removeById(id)) {
+                return new CommonResult().success();
+            }
+        } catch (Exception e) {
+            log.error("删除商品评价表：%s", e.getMessage(), e);
+            return new CommonResult().failed();
         }
-        }
+        return new CommonResult().failed();
+    }
+
+    @SysLog(MODULE = "pms", REMARK = "给商品评价表分配商品评价表")
+    @ApiOperation("查询商品评价表明细")
+    @GetMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('pms:PmsComment:read')")
+    public Object getPmsCommentById(@ApiParam("商品评价表id") @PathVariable Long id) {
+        try {
+            if (ValidatorUtils.empty(id)) {
+                return new CommonResult().paramFailed("商品评价表id");
+            }
+            PmsComment coupon = IPmsCommentService.getById(id);
+            return new CommonResult().success(coupon);
+        } catch (Exception e) {
+            log.error("查询商品评价表明细：%s", e.getMessage(), e);
+            return new CommonResult().failed();
         }
 
+    }
+
+    @ApiOperation(value = "批量删除商品评价表")
+    @RequestMapping(value = "/delete/batch", method = RequestMethod.POST)
+    @ResponseBody
+    @SysLog(MODULE = "pms", REMARK = "批量删除商品评价表")
+    @PreAuthorize("hasAuthority('pms:PmsComment:delete')")
+    public Object deleteBatch(@RequestParam("ids") List<Long> ids) {
+        boolean count = IPmsCommentService.removeByIds(ids);
+        if (count) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
+
+}

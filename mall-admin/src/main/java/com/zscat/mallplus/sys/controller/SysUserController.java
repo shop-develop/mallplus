@@ -37,10 +37,10 @@ import java.util.Map;
  * @since 2019-04-14
  */
 @Slf4j
-@Api(value="用户管理",description = "",tags={"用户管理"})
+@Api(value = "用户管理", description = "", tags = {"用户管理"})
 @RestController
 @RequestMapping("/sys/sysUser")
-public class SysUserController  extends ApiController {
+public class SysUserController extends ApiController {
 
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
@@ -57,77 +57,82 @@ public class SysUserController  extends ApiController {
     @ApiOperation("根据条件查询所有用户列表")
     @GetMapping(value = "/list")
     public Object getUserByPage(SysUser entity,
-                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                  @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
+                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
     ) {
         try {
             return new CommonResult().success(sysUserService.page(new Page<SysUser>(pageNum, pageSize), new QueryWrapper<>(entity)));
-        }catch (Exception e){
-            log.error("根据条件查询所有用户列表：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("根据条件查询所有用户列表：%s", e.getMessage(), e);
         }
         return new CommonResult().failed();
     }
+
     @SysLog(MODULE = "sys", REMARK = "保存用户")
     @ApiOperation("保存用户")
     @PostMapping(value = "/save")
     public Object saveUser(@RequestBody SysUser entity) {
         try {
-            if (sysUserService.save(entity)){
+            if (sysUserService.save(entity)) {
                 return new CommonResult().success();
             }
-        }catch (Exception e){
-            log.error("保存用户：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("保存用户：%s", e.getMessage(), e);
             return new CommonResult().failed();
         }
         return new CommonResult().failed();
     }
+
     @SysLog(MODULE = "sys", REMARK = "更新用户")
     @ApiOperation("更新用户")
     @PutMapping(value = "/update/{id}")
     public Object updateUser(@RequestBody SysUser entity) {
         try {
-            if (sysUserService.updateById(entity)){
+            if (sysUserService.updateById(entity)) {
                 return new CommonResult().success();
             }
-        }catch (Exception e){
-            log.error("更新用户：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("更新用户：%s", e.getMessage(), e);
             return new CommonResult().failed();
         }
         return new CommonResult().failed();
     }
+
     @SysLog(MODULE = "sys", REMARK = "删除用户")
     @ApiOperation("删除用户")
     @DeleteMapping(value = "/delete/{id}")
     public Object deleteUser(@ApiParam("用户id") @PathVariable Long id) {
         try {
-            if (ValidatorUtils.empty(id)){
+            if (ValidatorUtils.empty(id)) {
                 return new CommonResult().paramFailed("用户id");
             }
-            if (sysUserService.removeById(id)){
+            if (sysUserService.removeById(id)) {
                 return new CommonResult().success();
             }
-        }catch (Exception e){
-            log.error("删除用户：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("删除用户：%s", e.getMessage(), e);
             return new CommonResult().failed();
         }
         return new CommonResult().failed();
     }
+
     @SysLog(MODULE = "sys", REMARK = "给用户分配角色")
     @ApiOperation("查询用户明细")
     @GetMapping(value = "/{id}")
-    public Object getUserById(@ApiParam("用户id")@PathVariable Long id) {
+    public Object getUserById(@ApiParam("用户id") @PathVariable Long id) {
         try {
-            if (ValidatorUtils.empty(id)){
+            if (ValidatorUtils.empty(id)) {
                 return new CommonResult().paramFailed("用户id");
             }
             SysUser coupon = sysUserService.getById(id);
             return new CommonResult().success(coupon);
-        }catch (Exception e){
-            log.error("查询用户明细：%s",e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("查询用户明细：%s", e.getMessage(), e);
             return new CommonResult().failed();
         }
 
     }
+
     @SysLog(MODULE = "sys", REMARK = "刷新token")
     @ApiOperation(value = "刷新token")
     @RequestMapping(value = "/token/refresh", method = RequestMethod.GET)
@@ -156,7 +161,7 @@ public class SysUserController  extends ApiController {
         Map<String, Object> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-        tokenMap.put("menus",permissionService.getPermissionsByUserId(UserUtils.getCurrentMember().getId()));
+        tokenMap.put("menus", permissionService.getPermissionsByUserId(UserUtils.getCurrentMember().getId()));
         return new CommonResult().success(tokenMap);
     }
 
@@ -189,15 +194,16 @@ public class SysUserController  extends ApiController {
     public Object userRoleCheck(@RequestParam("adminId") Long adminId) {
         List<SysRole> roleList = sysUserService.getRoleListByUserId(adminId);
         List<SysRole> allroleList = roleService.list(new QueryWrapper<>());
-        for (SysRole a : allroleList){
-            for (SysRole u : roleList){
-                if(a.getId().equals(u.getId())){
+        for (SysRole a : allroleList) {
+            for (SysRole u : roleList) {
+                if (a.getId().equals(u.getId())) {
                     a.setChecked(true);
                 }
             }
         }
         return new CommonResult().success(allroleList);
     }
+
     @SysLog(MODULE = "sys", REMARK = "给用户分配+-权限")
     @ApiOperation("给用户分配+-权限")
     @RequestMapping(value = "/permission/update", method = RequestMethod.POST)

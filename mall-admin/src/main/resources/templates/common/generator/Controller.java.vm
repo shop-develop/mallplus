@@ -1,9 +1,9 @@
-package ${package}.${module}.controller;
+package ${package.Controller};
 
 import com.zscat.mallplus.dto.CommonResult;
-import ${package}.${module}.model.${Module}${className};
+import ${package.Entity};
 
-import ${package}.${module}.service.${className}Service;
+import ${package.Service};
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.zscat.mallplus.annotation.SysLog;
@@ -16,27 +16,29 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * ${comments}
+ * <p>
+ * $!{table.comment}
+ * </p>
  *
  * @author ${author}
- * @email ${email}
- * @date ${datetime}
+ * @since ${date}
  */
-@Controller
-@Api(tags = "${className}Controller", description = "${comments}管理")
-@RequestMapping("/${module}/${classname}")
-public class ${className}Controller {
+@Slf4j
+@RestController
+@Api(tags = "${entity}Controller", description = "$!{table.comment}管理")
+@RequestMapping("/${package.ModuleName}/${classname}")
+public class ${table.controllerName} {
     @Resource
-    private ${className}Service ${classname}Service;
+    private ${table.serviceName} ${table.serviceName};
 
-    @SysLog(MODULE = "${module}", REMARK = "添加${comments}")
-    @ApiOperation(value = "添加${comments}")
+    @SysLog(MODULE = "${package.ModuleName}", REMARK = "添加$!{table.comment}")
+    @ApiOperation(value = "添加$!{table.comment}")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    @PreAuthorize("hasAuthority('${module}:${classname}:create')")
-    public Object create(@Validated @RequestBody ${Module}${className} ${module}${className}, BindingResult result) {
+    @PreAuthorize("hasAuthority('${package.ModuleName}:${classname}:create')")
+    public Object create(@Validated @RequestBody ${Module}${entity} ${package.ModuleName}${entity}, BindingResult result) {
         CommonResult commonResult;
-        int count = ${classname}Service.create${className}(${module}${className});
+        int count = ${table.serviceName}.create${entity}(${package.ModuleName}${entity});
         if (count == 1) {
             commonResult = new CommonResult().success(count);
         } else {
@@ -44,16 +46,16 @@ public class ${className}Controller {
         }
         return commonResult;
     }
-    @SysLog(MODULE = "${module}", REMARK = "更新${comments}")
-    @ApiOperation(value = "更新${comments}")
+    @SysLog(MODULE = "${package.ModuleName}", REMARK = "更新$!{table.comment}")
+    @ApiOperation(value = "更新$!{table.comment}")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    @PreAuthorize("hasAuthority('${module}:${classname}:update')")
+    @PreAuthorize("hasAuthority('${package.ModuleName}:${classname}:update')")
     public Object update(@PathVariable("id") Long id,
-                         @Validated @RequestBody ${Module}${className} ${module}${className},
+                         @Validated @RequestBody ${Module}${entity} ${package.ModuleName}${entity},
                          BindingResult result) {
         CommonResult commonResult;
-        int count = ${classname}Service.update${className}(id, ${module}${className});
+        int count = ${table.serviceName}.update${entity}(id, ${package.ModuleName}${entity});
         if (count == 1) {
             commonResult = new CommonResult().success(count);
         } else {
@@ -61,36 +63,36 @@ public class ${className}Controller {
         }
         return commonResult;
     }
-    @SysLog(MODULE = "${module}", REMARK = "删除${comments}")
-    @ApiOperation(value = "删除${comments}")
+    @SysLog(MODULE = "${package.ModuleName}", REMARK = "删除$!{table.comment}")
+    @ApiOperation(value = "删除$!{table.comment}")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('${module}:${classname}:delete')")
+    @PreAuthorize("hasAuthority('${package.ModuleName}:${classname}:delete')")
     public Object delete(@PathVariable("id") Long id) {
-        int count = ${classname}Service.delete${className}(id);
+        int count = ${table.serviceName}.delete${entity}(id);
         if (count == 1) {
             return new CommonResult().success(null);
         } else {
             return new CommonResult().failed();
         }
     }
-    @SysLog(MODULE = "${module}", REMARK = "根据${comments}分页获取${comments}列表")
-    @ApiOperation(value = "根据${comments}名称分页获取${comments}列表")
+    @SysLog(MODULE = "${package.ModuleName}", REMARK = "根据$!{table.comment}分页获取$!{table.comment}列表")
+    @ApiOperation(value = "根据$!{table.comment}名称分页获取$!{table.comment}列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('${module}:${classname}:read')")
-    public Object getList(${Module}${className} ${classname},
+    @PreAuthorize("hasAuthority('${package.ModuleName}:${classname}:read')")
+    public Object getList(${Module}${entity} ${classname},
                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                           @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-        return new CommonResult().pageSuccess(${classname}Service.list${className}(${classname}, pageNum, pageSize));
+        return new CommonResult().pageSuccess(${table.serviceName}.list${entity}(${classname}, pageNum, pageSize));
     }
-    @SysLog(MODULE = "${module}", REMARK = "根据编号查询${comments}信息")
-    @ApiOperation(value = "根据编号查询${comments}信息")
+    @SysLog(MODULE = "${package.ModuleName}", REMARK = "根据编号查询$!{table.comment}信息")
+    @ApiOperation(value = "根据编号查询$!{table.comment}信息")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('${module}:${classname}:read')")
+    @PreAuthorize("hasAuthority('${package.ModuleName}:${classname}:read')")
     public Object getItem(@PathVariable("id") Long id) {
-        return new CommonResult().success(${classname}Service.get${className}(id));
+        return new CommonResult().success(${table.serviceName}.get${entity}(id));
     }
 
 }

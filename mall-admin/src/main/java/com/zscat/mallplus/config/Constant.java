@@ -16,9 +16,9 @@ public class Constant {
     //部门根节点id
     public static Long DEPT_ROOT_ID = 0l;
     //缓存方式
-    public static String CACHE_TYPE_REDIS ="redis";
+    public static String CACHE_TYPE_REDIS = "redis";
 
     public static String LOG_ERROR = "error";
 
-    
+
 }

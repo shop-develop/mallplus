@@ -18,7 +18,7 @@ public class UserUtils {
             Authentication auth = ctx.getAuthentication();
             AdminUserDetails memberDetails = (AdminUserDetails) auth.getPrincipal();
             return memberDetails.getUmsAdmin();
-        }catch (Exception e){
+        } catch (Exception e) {
             return new SysUser();
         }
     }

@@ -74,47 +74,59 @@ public class MpGenerator {
         };
         List<FileOutConfig> focList = new ArrayList<>();
         // 调整 xml 生成目录演示
-        focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
+       /* focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Mapper.xml";
+            }
+        });*/
+
+        cfg.setFileOutConfigList(focList);
+        mpg.setCfg(cfg);
+
+        focList.add(new FileOutConfig("/templates/Controller.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Controller.java";
             }
         });
 
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
+
         mpg.setTemplate(new TemplateConfig().setXml(null));
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
+        strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
     // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
      //   strategy.setTablePrefix(new String[] { "tlog_", "tsys_" });// 此处可以修改为您的表前缀
-        strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-         /*strategy.setInclude(new String[] { "sys_user_permission","sys_area","sys_member_area","sys_permission",
+       /* strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
+         strategy.setInclude(new String[] { "sys_user_permission","sys_area","sys_member_area","sys_permission",
                  "sys_role","sys_role_permission","sys_school", "sys_user","sys_user_permission",
                  "sys_user_role","sys_web_log", "sys_admin_log"}); // 需要生成的表*/
 
-       /* strategy.setInclude(new String[] { "cms_help","cms_help_category","cms_member_report","cms_prefrence_area",
+        /*strategy.setInclude(new String[] { "cms_help","cms_help_category","cms_member_report","cms_prefrence_area",
                 "cms_prefrence_area_product_relation","cms_subject","cms_subject_category", "cms_subject_comment",
                 "cms_subject_product_relation",
-                "cms_topic","cms_topic_category", "cms_topic_comment","cms_topic_member"}); // 需要生成的表*/
+                "cms_topic","cms_topic_category", "cms_topic_comment","cms_topic_member"});*/
 
       /*  strategy.setInclude(new String[] { "oms_cart_item","oms_company_address","oms_order","oms_order_item",
                 "oms_order_operate_history","oms_order_return_apply","oms_order_setting", "oms_order_return_reason"}); // 需要生成的表
 */
 
-      /*  strategy.setInclude(new String[] { "pms_album","pms_album_pic","pms_brand","pms_comment",
+    /*    strategy.setInclude(new String[] { "pms_album","pms_album_pic","pms_brand","pms_comment",
                 "pms_comment_replay","pms_feight_template","pms_member_price", "pms_product",
                 "pms_product_attribute","pms_product_consult","pms_product_full_reduction","pms_product_ladder",
                 "pms_product_attribute_category","pms_product_attribute_value", "pms_product_category",
                 "pms_product_category_attribute_relation","pms_product_operate_log","pms_product_vertify_record"
-                ,"pms_sku_stock"}); // 需要生成的表*/
+                ,"pms_sku_stock"}); */
 
-      /*  strategy.setInclude(new String[] { "sms_coupon","sms_coupon_history","sms_coupon_product_category_relation","sms_coupon_product_relation",
+        /*strategy.setInclude(new String[] { "sms_coupon","sms_coupon_history","sms_coupon_product_category_relation","sms_coupon_product_relation",
                 "sms_flash_promotion","sms_flash_promotion_log","sms_flash_promotion_product_relation", "sms_flash_promotion_session",
                 "sms_group","sms_group_member","sms_home_advertise",
                 "sms_home_brand","sms_home_new_product", "sms_home_recommend_product",
                 "sms_home_recommend_subject","sms_red_packet","sms_user_red_packet"
-                }); // 需要生成的表*/
+                }); */
 
             strategy.setInclude(new String[] { "ums_collect","ums_member","ums_member_blance_log","ums_member_level",
                     "ums_member_member_tag_relation","ums_member_product_category_relation",
@@ -139,7 +151,7 @@ public class MpGenerator {
         // strategy.setEntityColumnConstant(true);
         // 【实体】是否为构建者模型（默认 false）
         // public User setName(String name) {this.name = name; return this;}
-        // strategy.setEntityBuilderModel(true);
+       //  strategy.setEntityBuilderModel(true);
         mpg.setStrategy(strategy);
 
         // 包配置

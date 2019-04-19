@@ -48,7 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
 
-
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf()// 由于使用的是JWT，我们这里不需要csrf
@@ -111,7 +110,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             throw new UsernameNotFoundException("用户名或密码错误");
         };
     }
-
 
 
     @Bean

@@ -38,8 +38,8 @@ import java.util.stream.Collectors;
 @Service("sysUserService")
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
-   /* @Resource
-    private AuthenticationManager authenticationManager;*/
+    /* @Resource
+     private AuthenticationManager authenticationManager;*/
     @Resource
     private UserDetailsService userDetailsService;
     @Resource
@@ -61,6 +61,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private ISysRolePermissionService rolePermissionService;
     @Resource
     private ISysUserRoleService userRoleService;
+
     @Override
     public String refreshToken(String oldToken) {
         String token = oldToken.substring(tokenHead.length());
@@ -139,6 +140,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public List<SysPermission> getPermissionListByUserId(Long adminId) {
         return adminRoleRelationMapper.getPermissionList(adminId);
     }
+
     /**
      * 将+-权限关系转化为对象
      */

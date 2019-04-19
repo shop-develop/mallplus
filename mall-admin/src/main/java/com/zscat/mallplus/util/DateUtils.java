@@ -170,6 +170,7 @@ public class DateUtils {
         c.set(Calendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
         return FORMATER_DATE_YMD.format(c.getTime());
     }
+
     /**
      * 获取当月的第一天
      *
@@ -181,6 +182,7 @@ public class DateUtils {
         c.set(Calendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
         return c.getTime();
     }
+
     /**
      * 获取当月的最后一天
      *
@@ -194,6 +196,7 @@ public class DateUtils {
 
     /**
      * 获取当前周的第一天：
+     *
      * @return
      */
     public static Date getFirstDayOfWeek() {
@@ -210,6 +213,7 @@ public class DateUtils {
 
     /**
      * 获取当前周最后一天
+     *
      * @return
      */
     public static Date getLastDayOfWeek() {
@@ -219,12 +223,13 @@ public class DateUtils {
             cal.setTime(new Date());
             cal.set(Calendar.DAY_OF_WEEK, 1);
             cal.set(Calendar.DATE, cal.get(Calendar.DATE) + 6);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return cal.getTime();
     }
+
     public static void main(String[] args) throws Exception {
         System.out.println(DateUtils.addDay(new Date(), -7));
         System.out.println(DateUtils.calculateDaysNew(DateUtils.toDate(DateUtils.addDay(new Date(), -7)), new Date()));

@@ -40,7 +40,7 @@ public class GenUtils {
         templates.add("templates/common/generator/index.vue.vm");
         templates.add("templates/common/generator/api.js.vm");
         templates.add("templates/common/generator/update.vue.vm");
-        
+
         templates.add("templates/common/generator/BrandDetail.vue.vm");
         templates.add("templates/common/generator/menu.sql.vm");
         return templates;
@@ -101,8 +101,8 @@ public class GenUtils {
         prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         Velocity.init(prop);
 
-        String packages="com.zscat.mallplus";
-        String Module=tableDO.getTableName().split("_")[0].substring(0,1).toUpperCase()+tableDO.getTableName().split("_")[0].substring(1).toLowerCase();
+        String packages = "com.zscat.mallplus";
+        String Module = tableDO.getTableName().split("_")[0].substring(0, 1).toUpperCase() + tableDO.getTableName().split("_")[0].substring(1).toLowerCase();
         //封装模板数据
         Map<String, Object> map = new HashMap<>(16);
         map.put("tableName", tableDO.getTableName());
@@ -131,7 +131,7 @@ public class GenUtils {
             try {
                 //添加到zip
                 zip.putNextEntry(new ZipEntry(getFileName(
-                        tableDO.getTableName().split("_")[0],template, tableDO.getClassname(),tableDO.getClassName(), packages.substring(packages.lastIndexOf(".") + 1),Module)));
+                        tableDO.getTableName().split("_")[0], template, tableDO.getClassname(), tableDO.getClassName(), packages.substring(packages.lastIndexOf(".") + 1), Module)));
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
@@ -177,7 +177,7 @@ public class GenUtils {
     /**
      * 获取文件名
      */
-    public static String getFileName(String module,String template, String classname, String className,  String packageName,String Nodule) {
+    public static String getFileName(String module, String template, String classname, String className, String packageName, String Nodule) {
         String packagePath = "main" + File.separator + "java" + File.separator;
         //String modulesname=config.getString("packageName");
         if (StringUtils.isNotBlank(packageName)) {
@@ -185,50 +185,50 @@ public class GenUtils {
         }
 
         if (template.contains("domain.java.vm")) {
-            return  Nodule+className + ".java";
+            return Nodule + className + ".java";
         }
 
         if (template.contains("Dao.java.vm")) {
-            return  className + "Mapper.java";
+            return className + "Mapper.java";
         }
 
 //		if(template.contains("Mapper.java.vm")){
 //			return packagePath + "dao" + File.separator + className + "Mapper.java";
 //		}
-       // templates.add("templates/common/generator/menu.sql.vm");
+        // templates.add("templates/common/generator/menu.sql.vm");
         if (template.contains("menu.sql.vm")) {
-            return  className + "menu.sql";
+            return className + "menu.sql";
         }
         if (template.contains("Service.java.vm")) {
-            return  className + "Service.java";
+            return className + "Service.java";
         }
 
         if (template.contains("ServiceImpl.java.vm")) {
-            return  className + "ServiceImpl.java";
+            return className + "ServiceImpl.java";
         }
 
         if (template.contains("Controller.java.vm")) {
-            return  className + "Controller.java";
+            return className + "Controller.java";
         }
 
         if (template.contains("Mapper.xml.vm")) {
-            return  className + "Mapper.xml";
+            return className + "Mapper.xml";
         }
         if (template.contains("api.js.vm")) {
-            return  classname +".js";
+            return classname + ".js";
         }
         if (template.contains("add.vue.vm")) {
-            return classname + File.separator+ "add.vue";
+            return classname + File.separator + "add.vue";
         }
 
         if (template.contains("index.vue.vm")) {
-            return classname + File.separator+ "index.vue";
+            return classname + File.separator + "index.vue";
         }
         if (template.contains("update.vue.vm")) {
-            return classname + File.separator+ "update.vue";
+            return classname + File.separator + "update.vue";
         }
         if (template.contains("BrandDetail.vue.vm")) {
-            return classname + File.separator +"components"+ File.separator +className +"Detail.vue";
+            return classname + File.separator + "components" + File.separator + className + "Detail.vue";
         }
 
         return null;

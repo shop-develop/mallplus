@@ -1,10 +1,10 @@
-package com.zscat.mallplus.ums.controller;
+package com.zscat.mallplus.sys.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
-import com.zscat.mallplus.ums.entity.UmsCollect;
-import com.zscat.mallplus.ums.service.IUmsCollectService;
+import com.zscat.mallplus.sys.entity.SysMemberArea;
+import com.zscat.mallplus.sys.service.ISysMemberAreaService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
@@ -27,35 +27,35 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@Api(tags = "UmsCollectController", description = "管理")
-@RequestMapping("/ums/UmsCollect")
-public class UmsCollectController {
+@Api(tags = "SysMemberAreaController", description = "管理")
+@RequestMapping("/sys/SysMemberArea")
+public class SysMemberAreaController {
     @Resource
-    private IUmsCollectService IUmsCollectService;
+    private ISysMemberAreaService ISysMemberAreaService;
 
-    @SysLog(MODULE = "ums", REMARK = "根据条件查询所有列表")
+    @SysLog(MODULE = "sys", REMARK = "根据条件查询所有列表")
     @ApiOperation("根据条件查询所有列表")
     @GetMapping(value = "/list")
-    @PreAuthorize("hasAuthority('ums:UmsCollect:read')")
-    public Object getUmsCollectByPage(UmsCollect entity,
-                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
+    @PreAuthorize("hasAuthority('sys:SysMemberArea:read')")
+    public Object getRoleByPage(SysMemberArea entity,
+                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
     ) {
         try {
-            return new CommonResult().success(IUmsCollectService.page(new Page<UmsCollect>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return new CommonResult().success(ISysMemberAreaService.page(new Page<SysMemberArea>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有列表：%s", e.getMessage(), e);
         }
         return new CommonResult().failed();
     }
 
-    @SysLog(MODULE = "ums", REMARK = "保存")
+    @SysLog(MODULE = "sys", REMARK = "保存")
     @ApiOperation("保存")
     @PostMapping(value = "/save")
-    @PreAuthorize("hasAuthority('ums:UmsCollect:create')")
-    public Object saveUmsCollect(@RequestBody UmsCollect entity) {
+    @PreAuthorize("hasAuthority('sys:SysMemberArea:create')")
+    public Object saveRole(@RequestBody SysMemberArea entity) {
         try {
-            if (IUmsCollectService.save(entity)) {
+            if (ISysMemberAreaService.save(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -65,13 +65,13 @@ public class UmsCollectController {
         return new CommonResult().failed();
     }
 
-    @SysLog(MODULE = "ums", REMARK = "更新")
+    @SysLog(MODULE = "sys", REMARK = "更新")
     @ApiOperation("更新")
     @PutMapping(value = "/update/{id}")
-    @PreAuthorize("hasAuthority('ums:UmsCollect:update')")
-    public Object updateUmsCollect(@RequestBody UmsCollect entity) {
+    @PreAuthorize("hasAuthority('sys:SysMemberArea:update')")
+    public Object updateRole(@RequestBody SysMemberArea entity) {
         try {
-            if (IUmsCollectService.updateById(entity)) {
+            if (ISysMemberAreaService.updateById(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -81,16 +81,16 @@ public class UmsCollectController {
         return new CommonResult().failed();
     }
 
-    @SysLog(MODULE = "ums", REMARK = "删除")
+    @SysLog(MODULE = "sys", REMARK = "删除")
     @ApiOperation("删除")
     @DeleteMapping(value = "/delete/{id}")
-    @PreAuthorize("hasAuthority('ums:UmsCollect:delete')")
-    public Object deleteUmsCollect(@ApiParam("id") @PathVariable Long id) {
+    @PreAuthorize("hasAuthority('sys:SysMemberArea:delete')")
+    public Object deleteRole(@ApiParam("id") @PathVariable Long id) {
         try {
             if (ValidatorUtils.empty(id)) {
                 return new CommonResult().paramFailed("id");
             }
-            if (IUmsCollectService.removeById(id)) {
+            if (ISysMemberAreaService.removeById(id)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -100,16 +100,16 @@ public class UmsCollectController {
         return new CommonResult().failed();
     }
 
-    @SysLog(MODULE = "ums", REMARK = "给分配")
+    @SysLog(MODULE = "sys", REMARK = "给分配")
     @ApiOperation("查询明细")
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasAuthority('ums:UmsCollect:read')")
-    public Object getUmsCollectById(@ApiParam("id") @PathVariable Long id) {
+    @PreAuthorize("hasAuthority('sys:SysMemberArea:read')")
+    public Object getRoleById(@ApiParam("id") @PathVariable Long id) {
         try {
             if (ValidatorUtils.empty(id)) {
                 return new CommonResult().paramFailed("id");
             }
-            UmsCollect coupon = IUmsCollectService.getById(id);
+            SysMemberArea coupon = ISysMemberAreaService.getById(id);
             return new CommonResult().success(coupon);
         } catch (Exception e) {
             log.error("查询明细：%s", e.getMessage(), e);
@@ -122,9 +122,9 @@ public class UmsCollectController {
     @RequestMapping(value = "/delete/batch", method = RequestMethod.POST)
     @ResponseBody
     @SysLog(MODULE = "pms", REMARK = "批量删除")
-    @PreAuthorize("hasAuthority('ums:UmsCollect:delete')")
+    @PreAuthorize("hasAuthority('sys:SysMemberArea:delete')")
     public Object deleteBatch(@RequestParam("ids") List<Long> ids) {
-        boolean count = IUmsCollectService.removeByIds(ids);
+        boolean count = ISysMemberAreaService.removeByIds(ids);
         if (count) {
             return new CommonResult().success(count);
         } else {
