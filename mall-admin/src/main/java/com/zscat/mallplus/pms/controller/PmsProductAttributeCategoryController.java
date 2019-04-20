@@ -1,23 +1,18 @@
 package com.zscat.mallplus.pms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.pms.entity.PmsProductAttributeCategory;
+import com.zscat.mallplus.pms.service.IPmsProductAttributeCategoryService;
+import com.zscat.mallplus.pms.vo.PmsProductAttributeCategoryItem;
 import com.zscat.mallplus.utils.CommonResult;
-
-
-
+import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import com.zscat.mallplus.pms.entity.PmsProductAttributeCategory;
-import com.zscat.mallplus.pms.service.IPmsProductAttributeCategoryService;
-import com.zscat.mallplus.utils.ValidatorUtils;
-import com.zscat.mallplus.annotation.SysLog;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -138,4 +133,12 @@ public class PmsProductAttributeCategoryController {
         }
     }
 
+    @SysLog(MODULE = "pms", REMARK = "获取所有商品属性分类及其下属性")
+    @ApiOperation("获取所有商品属性分类及其下属性")
+    @RequestMapping(value = "/list/withAttr", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getListWithAttr() {
+        List<PmsProductAttributeCategoryItem> productAttributeCategoryResultList = IPmsProductAttributeCategoryService.getListWithAttr();
+        return new CommonResult().success(productAttributeCategoryResultList);
+    }
 }

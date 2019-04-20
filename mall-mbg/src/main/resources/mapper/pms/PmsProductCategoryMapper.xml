@@ -18,9 +18,23 @@
         <result column="description" property="description" />
     </resultMap>
 
+    <resultMap id="listWithChildrenMap" type="com.zscat.mallplus.pms.vo.PmsProductCategoryWithChildrenItem"
+               extends="BaseResultMap">
+        <collection property="children" resultMap="BaseResultMap"
+                    columnPrefix="child_"></collection>
+    </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, parent_id, name, level, product_count, product_unit, nav_status, show_status, sort, icon, keywords, description
     </sql>
 
+    <select id="listWithChildren" resultMap="listWithChildrenMap">
+        select
+        c1.id,
+        c1.name,
+        c2.id child_id,
+        c2.name child_name
+        from pms_product_category c1 left join pms_product_category c2 on c1.id = c2.parent_id
+        where c1.parent_id = 0
+    </select>
 </mapper>

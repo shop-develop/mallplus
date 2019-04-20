@@ -1,23 +1,18 @@
 package com.zscat.mallplus.pms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.pms.entity.PmsProductCategory;
+import com.zscat.mallplus.pms.service.IPmsProductCategoryService;
+import com.zscat.mallplus.pms.vo.PmsProductCategoryWithChildrenItem;
 import com.zscat.mallplus.utils.CommonResult;
-
-
-
+import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import com.zscat.mallplus.pms.entity.PmsProductCategory;
-import com.zscat.mallplus.pms.service.IPmsProductCategoryService;
-import com.zscat.mallplus.utils.ValidatorUtils;
-import com.zscat.mallplus.annotation.SysLog;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -55,6 +50,16 @@ public class PmsProductCategoryController {
         return new CommonResult().failed();
     }
 
+    @ApiOperation("分页查询商品分类")
+    @RequestMapping(value = "/list/{parentId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getList(@PathVariable Long parentId,
+                          @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        PmsProductCategory entity = new PmsProductCategory();
+        entity.setParentId(parentId);
+        return new CommonResult().success(IPmsProductCategoryService.page(new Page<PmsProductCategory>(pageNum, pageSize), new QueryWrapper<>(entity)));
+    }
     @SysLog(MODULE = "pms", REMARK = "保存产品分类")
     @ApiOperation("保存产品分类")
     @PostMapping(value = "/create")
@@ -137,5 +142,11 @@ public class PmsProductCategoryController {
             return new CommonResult().failed();
         }
     }
-
+    @ApiOperation("查询所有一级分类及子分类")
+    @RequestMapping(value = "/list/withChildren", method = RequestMethod.GET)
+    @ResponseBody
+    public Object listWithChildren() {
+        List<PmsProductCategoryWithChildrenItem> list = IPmsProductCategoryService.listWithChildren();
+        return new CommonResult().success(list);
+    }
 }

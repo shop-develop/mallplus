@@ -2,6 +2,9 @@ package com.zscat.mallplus.pms.service;
 
 import com.zscat.mallplus.pms.entity.PmsProductAttributeCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.pms.vo.PmsProductAttributeCategoryItem;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IPmsProductAttributeCategoryService extends IService<PmsProductAttributeCategory> {
 
+    List<PmsProductAttributeCategoryItem> getListWithAttr();
 }

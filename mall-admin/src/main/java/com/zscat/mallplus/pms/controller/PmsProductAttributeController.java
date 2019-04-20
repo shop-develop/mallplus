@@ -7,9 +7,7 @@ import com.zscat.mallplus.pms.entity.PmsProductAttribute;
 import com.zscat.mallplus.pms.service.IPmsProductAttributeService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +39,26 @@ public class PmsProductAttributeController {
                                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
     ) {
+        try {
+            return new CommonResult().success(IPmsProductAttributeService.page(new Page<PmsProductAttribute>(pageNum, pageSize), new QueryWrapper<>(entity)));
+        } catch (Exception e) {
+            log.error("根据条件查询所有商品属性参数表列表：%s", e.getMessage(), e);
+        }
+        return new CommonResult().failed();
+    }
+
+    @SysLog(MODULE = "pms", REMARK = "根据分类查询属性列表或参数列表")
+    @ApiOperation("根据分类查询属性列表或参数列表")
+    @ApiImplicitParams({@ApiImplicitParam(name = "type", value = "0表示属性，1表示参数", required = true, paramType = "query", dataType = "integer")})
+    @RequestMapping(value = "/list/{cid}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getList(@PathVariable Long cid,
+                          @RequestParam(value = "type") Integer type,
+                          @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        PmsProductAttribute entity = new PmsProductAttribute();
+        entity.setProductAttributeCategoryId(cid);
+
         try {
             return new CommonResult().success(IPmsProductAttributeService.page(new Page<PmsProductAttribute>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {

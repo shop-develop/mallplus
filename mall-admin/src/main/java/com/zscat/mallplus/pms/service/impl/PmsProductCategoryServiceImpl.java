@@ -4,7 +4,11 @@ import com.zscat.mallplus.pms.entity.PmsProductCategory;
 import com.zscat.mallplus.pms.mapper.PmsProductCategoryMapper;
 import com.zscat.mallplus.pms.service.IPmsProductCategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zscat.mallplus.pms.vo.PmsProductCategoryWithChildrenItem;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +21,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategoryMapper, PmsProductCategory> implements IPmsProductCategoryService {
 
+    @Resource
+    private PmsProductCategoryMapper categoryMapper;
+
+    @Override
+    public List<PmsProductCategoryWithChildrenItem> listWithChildren() {
+        return categoryMapper.listWithChildren();
+    }
 }

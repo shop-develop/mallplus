@@ -10,6 +10,23 @@
         <result column="param_count" property="paramCount" />
     </resultMap>
 
+    <resultMap id="getListWithAttrMap" type="com.zscat.mallplus.pms.vo.PmsProductAttributeCategoryItem"
+               extends="BaseResultMap">
+        <collection property="productAttributeList" columnPrefix="attr_"
+                    resultMap="BaseResultMap">
+        </collection>
+    </resultMap>
+    <select id="getListWithAttr" resultMap="getListWithAttrMap">
+        SELECT
+        pac.id,
+        pac.name,
+        pa.id attr_id,
+        pa.name attr_name
+        FROM
+        pms_product_attribute_category pac
+        LEFT JOIN pms_product_attribute pa ON pac.id = pa.product_attribute_category_id
+        AND pa.type=1;
+    </select>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, name, attribute_count, param_count
