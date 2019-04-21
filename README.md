@@ -2,7 +2,7 @@
 
 ## 说明
 
-> 基于SpringBoot+MyBatis的电商系统，包括前台商城系统及后台管理系统。
+> 基于SpringBoot+MyBatis-plus的电商系统，包括前台商城系统及后台管理系统。
 
 > 如果该项目对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！
 
@@ -15,11 +15,11 @@
 
 ## 前言
 
-`mall`项目致力于打造一个完整的电商系统，采用现阶段流行技术实现。
+`mallplus`项目致力于打造一个完整的电商系统，采用现阶段流行技术实现。
 
 ## 项目介绍
 
-`mall`项目是一套电商系统，包括前台商城系统及后台管理系统，小程序，h5，基于SpringBoot+MyBatis实现。
+`mallplus`项目是一套电商系统，包括前台商城系统及后台管理系统，小程序，h5，基于SpringBoot+MyBatis实现。
 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。
 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、代码生成设置等模块。
 
@@ -230,6 +230,9 @@ nginx | 1.10 | http://nginx.org/en/download.html
 - [Elasticsearch 技术解析与实战](https://book.douban.com/subject/26967826/)
 - [MongoDB实战(第二版)](https://book.douban.com/subject/27061123/)
 - [Kubernetes权威指南](https://book.douban.com/subject/26902153/)
+- [mall商城](https://gitee.com/zscat-platform/mall)
+- [mybatis-plus](https://gitee.com/baomidou/mybatis-plus)
+
 
 ## 许可证
 
