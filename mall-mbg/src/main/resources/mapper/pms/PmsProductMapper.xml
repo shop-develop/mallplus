@@ -60,7 +60,7 @@
                     resultMap="com.zscat.mallplus.pms.mapper.PmsSkuStockMapper.BaseResultMap">
         </collection>
     </resultMap>
-    <resultMap id="promotionProductMap" type="com.macro.mall.portal.domain.PromotionProduct"
+    <resultMap id="promotionProductMap" type="com.zscat.mallplus.pms.vo.PromotionProduct"
                extends="BaseResultMap">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <collection property="skuStockList" columnPrefix="sku_"

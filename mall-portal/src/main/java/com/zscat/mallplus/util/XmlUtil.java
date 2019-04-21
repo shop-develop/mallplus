@@ -1,6 +1,7 @@
 package com.zscat.mallplus.util;
 
-import com.mysql.jdbc.StringUtils;
+
+import com.mysql.cj.util.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;

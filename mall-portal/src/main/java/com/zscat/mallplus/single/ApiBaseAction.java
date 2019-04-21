@@ -1,8 +1,8 @@
 package com.zscat.mallplus.single;
 
 
-import com.zscat.mallplus.config.MemberDetails;
 import com.zscat.mallplus.ums.entity.UmsMember;
+import com.zscat.mallplus.vo.MemberDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;

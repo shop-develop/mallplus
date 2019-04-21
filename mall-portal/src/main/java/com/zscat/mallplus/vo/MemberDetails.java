@@ -1,4 +1,4 @@
-package com.zscat.mallplus.config;
+package com.zscat.mallplus.vo;
 
 
 import com.zscat.mallplus.ums.entity.UmsMember;

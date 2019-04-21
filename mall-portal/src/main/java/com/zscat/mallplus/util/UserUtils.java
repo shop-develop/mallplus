@@ -1,8 +1,8 @@
 package com.zscat.mallplus.util;
 
 
-import com.zscat.mallplus.config.MemberDetails;
 import com.zscat.mallplus.ums.entity.UmsMember;
+import com.zscat.mallplus.vo.MemberDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;

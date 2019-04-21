@@ -2,7 +2,6 @@ package com.zscat.mallplus.ums.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zscat.mallplus.config.MemberDetails;
 import com.zscat.mallplus.config.WxAppletProperties;
 import com.zscat.mallplus.exception.ApiRRException;
 import com.zscat.mallplus.single.ApiBaseAction;
@@ -17,12 +16,12 @@ import com.zscat.mallplus.util.CommonUtil;
 import com.zscat.mallplus.util.JsonUtils;
 import com.zscat.mallplus.util.JwtTokenUtil;
 import com.zscat.mallplus.utils.CommonResult;
+import com.zscat.mallplus.vo.MemberDetails;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -62,8 +61,8 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     @Resource
     private RedisService redisService;
     private static final Logger LOGGER = LoggerFactory.getLogger(UmsMemberServiceImpl.class);
-    @Resource
-    private AuthenticationManager authenticationManager;
+   /* @Resource
+    private AuthenticationManager authenticationManager;*/
     @Resource
     private UserDetailsService userDetailsService;
 
@@ -291,8 +290,8 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         //密码需要客户端加密后传递
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, passwordEncoder.encode(password));
         try {
-            Authentication authentication = authenticationManager.authenticate(authenticationToken);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+           /* Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);*/
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             UmsMember member = this.getByUsername(username);
             token = jwtTokenUtil.generateToken(userDetails);

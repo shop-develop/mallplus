@@ -1,6 +1,7 @@
 package com.zscat.mallplus.util;
 
-import com.mysql.jdbc.StringUtils;
+
+import com.mysql.cj.util.StringUtils;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.lang.ArrayUtils;
 import org.springframework.util.Assert;
