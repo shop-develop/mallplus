@@ -17,5 +17,14 @@
     <sql id="Base_Column_List">
         id, red_packet_id, admin_id, user_id, amount, grab_time, note
     </sql>
+    <select id="countOne" resultType="int">
+        select  count(*) from sms_user_red_packet
+        where red_packet_id = #{redPacketId} and user_id =${userId}
+    </select>
+
+    <select id="listUserRedOne" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"/> from sms_user_red_packet
+        where red_packet_id = #{value} and user_id is null limit 1
+    </select>
 
 </mapper>

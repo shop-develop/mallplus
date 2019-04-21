@@ -21,4 +21,7 @@
         id, member_id, name, phone_number, default_status, post_code, province, city, region, detail_address
     </sql>
 
+    <update id="updateStatusByMember">
+        update ums_member_receive_address set default_status = 0  where   member_id = #{memberId}
+    </update>
 </mapper>

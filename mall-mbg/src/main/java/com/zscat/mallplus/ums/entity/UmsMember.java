@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -18,6 +18,7 @@ import java.util.Date;
  * @author zscat
  * @since 2019-04-19
  */
+@Data
 @TableName("ums_member")
 public class UmsMember implements Serializable {
 
@@ -73,7 +74,7 @@ public class UmsMember implements Serializable {
     /**
      * 生日
      */
-    private LocalDate birthday;
+    private Date birthday;
 
     /**
      * 所做城市
@@ -133,227 +134,6 @@ public class UmsMember implements Serializable {
 
     @TableField("school_id")
     private Long schoolId;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getMemberLevelId() {
-        return memberLevelId;
-    }
-
-    public void setMemberLevelId(Long memberLevelId) {
-        this.memberLevelId = memberLevelId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public Integer getGender() {
-        return gender;
-    }
-
-    public void setGender(Integer gender) {
-        this.gender = gender;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public String getPersonalizedSignature() {
-        return personalizedSignature;
-    }
-
-    public void setPersonalizedSignature(String personalizedSignature) {
-        this.personalizedSignature = personalizedSignature;
-    }
-
-    public Integer getSourceType() {
-        return sourceType;
-    }
-
-    public void setSourceType(Integer sourceType) {
-        this.sourceType = sourceType;
-    }
-
-    public Integer getIntegration() {
-        return integration;
-    }
-
-    public void setIntegration(Integer integration) {
-        this.integration = integration;
-    }
-
-    public Integer getGrowth() {
-        return growth;
-    }
-
-    public void setGrowth(Integer growth) {
-        this.growth = growth;
-    }
-
-    public Integer getLuckeyCount() {
-        return luckeyCount;
-    }
-
-    public void setLuckeyCount(Integer luckeyCount) {
-        this.luckeyCount = luckeyCount;
-    }
-
-    public Integer getHistoryIntegration() {
-        return historyIntegration;
-    }
-
-    public void setHistoryIntegration(Integer historyIntegration) {
-        this.historyIntegration = historyIntegration;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getWeixinOpenid() {
-        return weixinOpenid;
-    }
-
-    public void setWeixinOpenid(String weixinOpenid) {
-        this.weixinOpenid = weixinOpenid;
-    }
-
-    public Long getInvitecode() {
-        return invitecode;
-    }
-
-    public void setInvitecode(Long invitecode) {
-        this.invitecode = invitecode;
-    }
-
-    public BigDecimal getBlance() {
-        return blance;
-    }
-
-    public void setBlance(BigDecimal blance) {
-        this.blance = blance;
-    }
-
-    public Long getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(Long schoolId) {
-        this.schoolId = schoolId;
-    }
-
-    @Override
-    public String toString() {
-        return "UmsMember{" +
-        ", id=" + id +
-        ", memberLevelId=" + memberLevelId +
-        ", username=" + username +
-        ", password=" + password +
-        ", nickname=" + nickname +
-        ", phone=" + phone +
-        ", status=" + status +
-        ", createTime=" + createTime +
-        ", icon=" + icon +
-        ", gender=" + gender +
-        ", birthday=" + birthday +
-        ", city=" + city +
-        ", job=" + job +
-        ", personalizedSignature=" + personalizedSignature +
-        ", sourceType=" + sourceType +
-        ", integration=" + integration +
-        ", growth=" + growth +
-        ", luckeyCount=" + luckeyCount +
-        ", historyIntegration=" + historyIntegration +
-        ", avatar=" + avatar +
-        ", weixinOpenid=" + weixinOpenid +
-        ", invitecode=" + invitecode +
-        ", blance=" + blance +
-        ", schoolId=" + schoolId +
-        "}";
-    }
+    @TableField(exist = false)
+    private String confimpassword;
 }

@@ -1,7 +1,8 @@
 package com.zscat.mallplus.marking.mapper;
 
-import com.zscat.mallplus.marking.entity.SmsUserRedPacket;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zscat.mallplus.marking.entity.SmsUserRedPacket;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface SmsUserRedPacketMapper extends BaseMapper<SmsUserRedPacket> {
 
+    int countOne(@Param("redPacketId") Integer redPacketId, @Param("userId") Long userId);
+
+    SmsUserRedPacket listUserRedOne(Integer id);
 }

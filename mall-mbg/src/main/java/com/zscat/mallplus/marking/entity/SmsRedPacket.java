@@ -1,12 +1,14 @@
 package com.zscat.mallplus.marking.entity;
 
-import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.time.LocalDate;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,6 +18,7 @@ import java.io.Serializable;
  * @author zscat
  * @since 2019-04-19
  */
+@Data
 @TableName("sms_red_packet")
 public class SmsRedPacket implements Serializable {
 
@@ -42,7 +45,7 @@ public class SmsRedPacket implements Serializable {
      * 发红包日期
      */
     @TableField("send_date")
-    private LocalDate sendDate;
+    private Date sendDate;
 
     /**
      * 红包总数
@@ -70,91 +73,9 @@ public class SmsRedPacket implements Serializable {
      */
     private String note;
 
+    @TableField(exist = false)
+    private Integer status; // 1 已领取 2 未领取
+    @TableField(exist = false)
+    private BigDecimal reciveAmount;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public LocalDate getSendDate() {
-        return sendDate;
-    }
-
-    public void setSendDate(LocalDate sendDate) {
-        this.sendDate = sendDate;
-    }
-
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
-    public BigDecimal getUnitAmount() {
-        return unitAmount;
-    }
-
-    public void setUnitAmount(BigDecimal unitAmount) {
-        this.unitAmount = unitAmount;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    @Override
-    public String toString() {
-        return "SmsRedPacket{" +
-        ", id=" + id +
-        ", userId=" + userId +
-        ", amount=" + amount +
-        ", sendDate=" + sendDate +
-        ", total=" + total +
-        ", unitAmount=" + unitAmount +
-        ", stock=" + stock +
-        ", type=" + type +
-        ", note=" + note +
-        "}";
-    }
 }

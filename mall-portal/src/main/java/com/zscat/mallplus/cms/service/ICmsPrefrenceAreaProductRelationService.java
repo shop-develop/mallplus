@@ -1,7 +1,7 @@
 package com.zscat.mallplus.cms.service;
 
-import com.zscat.mallplus.cms.entity.CmsPrefrenceAreaProductRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.cms.entity.CmsPrefrenceAreaProductRelation;
 
 /**
  * <p>

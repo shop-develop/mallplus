@@ -3,6 +3,8 @@ package com.zscat.mallplus.marking.mapper;
 import com.zscat.mallplus.marking.entity.SmsCoupon;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 优惠卷表 Mapper 接口
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface SmsCouponMapper extends BaseMapper<SmsCoupon> {
 
+    List<SmsCoupon> selectNotRecive(Long memberId);
+
+    List<SmsCoupon> selectRecive(Long memberId);
 }

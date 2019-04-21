@@ -1,12 +1,12 @@
 package com.zscat.mallplus.marking.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.time.LocalDate;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -30,13 +30,13 @@ public class SmsFlashPromotion implements Serializable {
      * 开始日期
      */
     @TableField("start_date")
-    private LocalDate startDate;
+    private Date startDate;
 
     /**
      * 结束日期
      */
     @TableField("end_date")
-    private LocalDate endDate;
+    private Date endDate;
 
     /**
      * 上下线状态
@@ -66,19 +66,19 @@ public class SmsFlashPromotion implements Serializable {
         this.title = title;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

@@ -1,11 +1,11 @@
 package com.zscat.mallplus.cms.service;
 
-import com.zscat.mallplus.cms.entity.CmsTopicMember;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.cms.entity.CmsTopicMember;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author zscat

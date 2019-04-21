@@ -1,11 +1,12 @@
 package com.zscat.mallplus.pms.entity;
 
-import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -75,6 +76,8 @@ public class PmsSkuStock implements Serializable {
      */
     @TableField("lock_stock")
     private Integer lockStock;
+
+    private String meno;
 
 
     public Long getId() {
@@ -181,22 +184,52 @@ public class PmsSkuStock implements Serializable {
         this.lockStock = lockStock;
     }
 
+    public String getMeno() {
+        int sstock = (this.stock-this.lockStock)>0?(this.stock-this.lockStock):0;
+        StringBuffer sb = new StringBuffer("价格:" + this.price + "元,库存:" + sstock + ",规格:" + this.sp1);
+        if (this.sp2 != null) {
+            sb.append("," + this.sp2);
+        }
+        if (this.sp3 != null) {
+            sb.append("," + this.sp3);
+        }
+        return sb.toString();
+    }
+    public String getMeno1() {
+        StringBuffer sb = new StringBuffer("规格:" + this.sp1);
+        if (this.sp2 != null) {
+            sb.append("," + this.sp2);
+        }
+        if (this.sp3 != null) {
+            sb.append("," + this.sp3);
+        }
+        return sb.toString();
+    }
+    public void setMeno(String meno) {
+        this.meno = meno;
+    }
+
     @Override
     public String toString() {
-        return "PmsSkuStock{" +
-        ", id=" + id +
-        ", productId=" + productId +
-        ", skuCode=" + skuCode +
-        ", price=" + price +
-        ", stock=" + stock +
-        ", lowStock=" + lowStock +
-        ", sp1=" + sp1 +
-        ", sp2=" + sp2 +
-        ", sp3=" + sp3 +
-        ", pic=" + pic +
-        ", sale=" + sale +
-        ", promotionPrice=" + promotionPrice +
-        ", lockStock=" + lockStock +
-        "}";
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", productId=").append(productId);
+        sb.append(", skuCode=").append(skuCode);
+        sb.append(", price=").append(price);
+        sb.append(", stock=").append(stock);
+        sb.append(", lowStock=").append(lowStock);
+        sb.append(", sp1=").append(sp1);
+        sb.append(", sp2=").append(sp2);
+        sb.append(", sp3=").append(sp3);
+        sb.append(", pic=").append(pic);
+        sb.append(", sale=").append(sale);
+        sb.append(", promotionPrice=").append(promotionPrice);
+        sb.append(", lockStock=").append(lockStock);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

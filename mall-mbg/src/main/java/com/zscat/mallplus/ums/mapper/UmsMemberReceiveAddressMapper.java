@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UmsMemberReceiveAddressMapper extends BaseMapper<UmsMemberReceiveAddress> {
 
+    void updateStatusByMember(Long memberId);
 }

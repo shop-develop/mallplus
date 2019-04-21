@@ -3,7 +3,7 @@ package com.zscat.mallplus.marking.entity;
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.time.LocalDate;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -54,7 +54,7 @@ public class SmsUserRedPacket implements Serializable {
      * 抢红包时间
      */
     @TableField("grab_time")
-    private LocalDate grabTime;
+    private Date grabTime;
 
     /**
      * 备注
@@ -102,11 +102,11 @@ public class SmsUserRedPacket implements Serializable {
         this.amount = amount;
     }
 
-    public LocalDate getGrabTime() {
+    public Date getGrabTime() {
         return grabTime;
     }
 
-    public void setGrabTime(LocalDate grabTime) {
+    public void setGrabTime(Date grabTime) {
         this.grabTime = grabTime;
     }
 

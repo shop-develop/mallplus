@@ -51,6 +51,87 @@
         <result column="school_id" property="schoolId" />
     </resultMap>
 
+    <resultMap id="cartProductMap" type="com.zscat.mallplus.oms.vo.CartProduct" autoMapping="true">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <collection property="productAttributeList" columnPrefix="attr_"
+                    resultMap="com.zscat.mallplus.pms.mapper.PmsProductAttributeMapper.BaseResultMap">
+        </collection>
+        <collection property="skuStockList" columnPrefix="sku_"
+                    resultMap="com.zscat.mallplus.pms.mapper.PmsSkuStockMapper.BaseResultMap">
+        </collection>
+    </resultMap>
+    <resultMap id="promotionProductMap" type="com.macro.mall.portal.domain.PromotionProduct"
+               extends="BaseResultMap">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <collection property="skuStockList" columnPrefix="sku_"
+                    resultMap="com.zscat.mallplus.pms.mapper.PmsSkuStockMapper.BaseResultMap">
+        </collection>
+        <collection property="productLadderList" columnPrefix="ladder_"
+                    resultMap="com.zscat.mallplus.pms.mapper.PmsProductLadderMapper.BaseResultMap">
+        </collection>
+        <collection property="productFullReductionList" columnPrefix="full_"
+                    resultMap="com.zscat.mallplus.pms.mapper.PmsProductFullReductionMapper.BaseResultMap">
+        </collection>
+    </resultMap>
+
+    <select id="getCartProduct" resultMap="cartProductMap">
+        SELECT
+        p.id id,
+        p.`name` name,
+        p.sub_title subTitle,
+        p.price price,
+        p.pic pic,
+        p.product_attribute_category_id productAttributeCategoryId,
+        p.stock stock,
+        pa.id attr_id,
+        pa.`name` attr_name,
+        ps.id sku_id,
+        ps.sku_code sku_code,
+        ps.price sku_price,
+        ps.sp1 sku_sp1,
+        ps.sp2 sku_sp2,
+        ps.sp3 sku_sp3,
+        ps.stock sku_stock,
+        ps.pic sku_pic
+        FROM
+        pms_product p
+        LEFT JOIN pms_product_attribute pa ON p.product_attribute_category_id = pa.product_attribute_category_id
+        LEFT JOIN pms_sku_stock ps ON p.id=ps.product_id
+        WHERE
+        p.id = #{id}
+        AND pa.type = 0
+        ORDER BY pa.sort desc
+    </select>
+    <select id="getPromotionProductList" resultMap="promotionProductMap">
+        SELECT
+        p.id,
+        p.`name`,
+        p.promotion_type,
+        p.gift_growth,
+        p.gift_point,
+        sku.id sku_id,
+        sku.price sku_price,
+        sku.sku_code sku_sku_code,
+        sku.promotion_price sku_promotion_price,
+        sku.stock sku_stock,
+        sku.lock_stock sku_lock_stock,
+        ladder.id ladder_id,
+        ladder.count ladder_count,
+        ladder.discount ladder_discount,
+        full_re.id full_id,
+        full_re.full_price full_full_price,
+        full_re.reduce_price full_reduce_price
+        FROM
+        pms_product p
+        LEFT JOIN pms_sku_stock sku ON p.id = sku.product_id
+        LEFT JOIN pms_product_ladder ladder ON p.id = ladder.product_id
+        LEFT JOIN pms_product_full_reduction full_re ON p.id = full_re.product_id
+        WHERE
+        p.id IN
+        <foreach collection="ids" open="(" close=")" item="id" separator=",">
+            #{id}
+        </foreach>
+    </select>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, brand_id, product_category_id, feight_template_id, product_attribute_category_id, name, pic, product_sn, delete_status, publish_status, new_status, recommand_status, verify_status, sort, sale, price, promotion_price, gift_growth, gift_point, use_point_limit, sub_title, description, original_price, stock, low_stock, unit, weight, preview_status, service_ids, keywords, note, album_pics, detail_title, detail_desc, detail_html, detail_mobile_html, promotion_start_time, promotion_end_time, promotion_per_limit, promotion_type, brand_name, product_category_name, supply_id, create_time, school_id

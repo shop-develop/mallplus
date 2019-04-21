@@ -2,6 +2,9 @@ package com.zscat.mallplus.marking.mapper;
 
 import com.zscat.mallplus.marking.entity.SmsCouponHistory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zscat.mallplus.marking.vo.SmsCouponHistoryDetail;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface SmsCouponHistoryMapper extends BaseMapper<SmsCouponHistory> {
 
+    List<SmsCouponHistoryDetail> getDetailList(Long memberId);
 }

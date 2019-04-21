@@ -1,7 +1,7 @@
 package com.zscat.mallplus.cms.service;
 
-import com.zscat.mallplus.cms.entity.CmsSubjectCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.cms.entity.CmsSubjectCategory;
 
 /**
  * <p>

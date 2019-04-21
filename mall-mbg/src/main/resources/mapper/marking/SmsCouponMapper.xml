@@ -29,4 +29,12 @@
         id, type, name, platform, count, amount, per_limit, min_point, start_time, end_time, use_type, note, publish_count, use_count, receive_count, enable_time, code, member_level
     </sql>
 
+    <select id="selectNotRecive"  resultMap="BaseResultMap">
+        SELECT sms_coupon.* from sms_coupon where id not in (SELECT coupon_id from sms_coupon_history where member_id = #{memberId})
+
+    </select>
+    <select id="selectRecive"  resultMap="BaseResultMap">
+
+        SELECT sms_coupon.* from sms_coupon where id  in (SELECT coupon_id from sms_coupon_history where member_id = #{memberId})
+    </select>
 </mapper>
