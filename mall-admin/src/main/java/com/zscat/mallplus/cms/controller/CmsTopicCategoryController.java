@@ -67,7 +67,7 @@ public class CmsTopicCategoryController {
 
     @SysLog(MODULE = "cms", REMARK = "更新话题分类表")
     @ApiOperation("更新话题分类表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('cms:CmsTopicCategory:update')")
     public Object updateCmsTopicCategory(@RequestBody CmsTopicCategory entity) {
         try {

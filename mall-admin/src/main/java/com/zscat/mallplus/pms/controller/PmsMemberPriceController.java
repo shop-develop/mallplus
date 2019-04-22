@@ -73,7 +73,7 @@ public class PmsMemberPriceController {
 
     @SysLog(MODULE = "pms", REMARK = "更新商品会员价格表")
     @ApiOperation("更新商品会员价格表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsMemberPrice:update')")
     public Object updatePmsMemberPrice(@RequestBody PmsMemberPrice entity) {
         try {

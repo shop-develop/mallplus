@@ -67,7 +67,7 @@ public class PmsCommentReplayController {
 
     @SysLog(MODULE = "pms", REMARK = "更新产品评价回复表")
     @ApiOperation("更新产品评价回复表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsCommentReplay:update')")
     public Object updatePmsCommentReplay(@RequestBody PmsCommentReplay entity) {
         try {

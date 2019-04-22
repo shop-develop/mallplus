@@ -67,7 +67,7 @@ public class CmsTopicCommentController {
 
     @SysLog(MODULE = "cms", REMARK = "更新专题评论表")
     @ApiOperation("更新专题评论表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('cms:CmsTopicComment:update')")
     public Object updateCmsTopicComment(@RequestBody CmsTopicComment entity) {
         try {

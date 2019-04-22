@@ -67,7 +67,7 @@ public class CmsMemberReportController {
 
     @SysLog(MODULE = "cms", REMARK = "更新用户举报表")
     @ApiOperation("更新用户举报表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('cms:CmsMemberReport:update')")
     public Object updateCmsMemberReport(@RequestBody CmsMemberReport entity) {
         try {

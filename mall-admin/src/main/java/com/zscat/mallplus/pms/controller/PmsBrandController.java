@@ -67,7 +67,7 @@ public class PmsBrandController {
 
     @SysLog(MODULE = "pms", REMARK = "更新品牌表")
     @ApiOperation("更新品牌表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsBrand:update')")
     public Object updatePmsBrand(@RequestBody PmsBrand entity) {
         try {

@@ -73,7 +73,7 @@ public class SmsFlashPromotionSessionController {
 
     @SysLog(MODULE = "marking", REMARK = "更新限时购场次表")
     @ApiOperation("更新限时购场次表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsFlashPromotionSession:update')")
     public Object updateSmsFlashPromotionSession(@RequestBody SmsFlashPromotionSession entity) {
         try {

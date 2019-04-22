@@ -67,7 +67,7 @@ public class SysWebLogController {
 
     @SysLog(MODULE = "sys", REMARK = "更新")
     @ApiOperation("更新")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('sys:SysWebLog:update')")
     public Object updateRole(@RequestBody SysWebLog entity) {
         try {

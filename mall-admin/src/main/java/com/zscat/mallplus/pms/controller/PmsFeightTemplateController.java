@@ -67,7 +67,7 @@ public class PmsFeightTemplateController {
 
     @SysLog(MODULE = "pms", REMARK = "更新运费模版")
     @ApiOperation("更新运费模版")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsFeightTemplate:update')")
     public Object updatePmsFeightTemplate(@RequestBody PmsFeightTemplate entity) {
         try {

@@ -67,7 +67,7 @@ public class SysPermissionController extends BaseController{
 
     @SysLog(MODULE = "sys", REMARK = "更新后台用户权限表")
     @ApiOperation("更新后台用户权限表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('sys:SysPermission:update')")
     public Object updateRole(@RequestBody SysPermission entity) {
         try {

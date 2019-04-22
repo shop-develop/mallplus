@@ -73,7 +73,7 @@ public class UmsMemberProductCategoryRelationController {
 
     @SysLog(MODULE = "ums", REMARK = "更新会员与产品分类关系表（用户喜欢的分类）")
     @ApiOperation("更新会员与产品分类关系表（用户喜欢的分类）")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('ums:UmsMemberProductCategoryRelation:update')")
     public Object updateUmsMemberProductCategoryRelation(@RequestBody UmsMemberProductCategoryRelation entity) {
         try {

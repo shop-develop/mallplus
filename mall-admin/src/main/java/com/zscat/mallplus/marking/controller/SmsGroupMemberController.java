@@ -73,7 +73,7 @@ public class SmsGroupMemberController {
 
     @SysLog(MODULE = "marking", REMARK = "更新")
     @ApiOperation("更新")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsGroupMember:update')")
     public Object updateSmsGroupMember(@RequestBody SmsGroupMember entity) {
         try {

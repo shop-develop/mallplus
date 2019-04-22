@@ -67,7 +67,7 @@ public class PmsSkuStockController {
 
     @SysLog(MODULE = "pms", REMARK = "更新sku的库存")
     @ApiOperation("更新sku的库存")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsSkuStock:update')")
     public Object updatePmsSkuStock(@RequestBody PmsSkuStock entity) {
         try {

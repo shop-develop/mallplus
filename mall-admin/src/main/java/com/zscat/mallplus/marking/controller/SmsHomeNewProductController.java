@@ -73,7 +73,7 @@ public class SmsHomeNewProductController {
 
     @SysLog(MODULE = "marking", REMARK = "更新新鲜好物表")
     @ApiOperation("更新新鲜好物表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsHomeNewProduct:update')")
     public Object updateSmsHomeNewProduct(@RequestBody SmsHomeNewProduct entity) {
         try {

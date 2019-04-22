@@ -67,7 +67,7 @@ public class SmsHomeRecommendSubjectController {
 
     @SysLog(MODULE = "marking", REMARK = "更新首页推荐专题表")
     @ApiOperation("更新首页推荐专题表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsHomeRecommendSubject:update')")
     public Object updateSmsHomeRecommendSubject(@RequestBody SmsHomeRecommendSubject entity) {
         try {

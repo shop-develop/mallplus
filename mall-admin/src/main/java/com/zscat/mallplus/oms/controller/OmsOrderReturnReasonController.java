@@ -67,7 +67,7 @@ public class OmsOrderReturnReasonController {
 
     @SysLog(MODULE = "oms", REMARK = "更新退货原因表")
     @ApiOperation("更新退货原因表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('oms:OmsOrderReturnReason:update')")
     public Object updateOmsOrderReturnReason(@RequestBody OmsOrderReturnReason entity) {
         try {

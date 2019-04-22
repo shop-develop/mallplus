@@ -73,7 +73,7 @@ public class OmsOrderController {
 
     @SysLog(MODULE = "oms", REMARK = "更新订单表")
     @ApiOperation("更新订单表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('oms:OmsOrder:update')")
     public Object updateOmsOrder(@RequestBody OmsOrder entity) {
         try {

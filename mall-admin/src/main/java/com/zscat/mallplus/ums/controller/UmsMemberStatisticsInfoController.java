@@ -73,7 +73,7 @@ public class UmsMemberStatisticsInfoController {
 
     @SysLog(MODULE = "ums", REMARK = "更新会员统计信息")
     @ApiOperation("更新会员统计信息")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('ums:UmsMemberStatisticsInfo:update')")
     public Object updateUmsMemberStatisticsInfo(@RequestBody UmsMemberStatisticsInfo entity) {
         try {

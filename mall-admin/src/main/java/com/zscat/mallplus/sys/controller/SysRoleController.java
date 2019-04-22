@@ -72,7 +72,7 @@ public class SysRoleController extends ApiController {
 
     @SysLog(MODULE = "sys", REMARK = "更新角色")
     @ApiOperation("更新角色")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('sys:role:update')")
     public Object updateRole(@RequestBody SysRole entity) {
         try {

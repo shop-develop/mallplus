@@ -73,7 +73,7 @@ public class UmsIntegrationChangeHistoryController {
 
     @SysLog(MODULE = "ums", REMARK = "更新积分变化历史记录表")
     @ApiOperation("更新积分变化历史记录表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('ums:UmsIntegrationChangeHistory:update')")
     public Object updateUmsIntegrationChangeHistory(@RequestBody UmsIntegrationChangeHistory entity) {
         try {

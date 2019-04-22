@@ -73,7 +73,7 @@ public class PmsProductLadderController {
 
     @SysLog(MODULE = "pms", REMARK = "更新产品阶梯价格表(只针对同商品)")
     @ApiOperation("更新产品阶梯价格表(只针对同商品)")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsProductLadder:update')")
     public Object updatePmsProductLadder(@RequestBody PmsProductLadder entity) {
         try {

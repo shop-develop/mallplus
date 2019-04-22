@@ -68,7 +68,7 @@ public class PmsProductAttributeCategoryController {
 
     @SysLog(MODULE = "pms", REMARK = "更新产品属性分类表")
     @ApiOperation("更新产品属性分类表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsProductAttributeCategory:update')")
     public Object updatePmsProductAttributeCategory(@RequestBody PmsProductAttributeCategory entity) {
         try {

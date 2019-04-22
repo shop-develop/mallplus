@@ -67,7 +67,7 @@ public class CmsSubjectProductRelationController {
 
     @SysLog(MODULE = "cms", REMARK = "更新专题商品关系表")
     @ApiOperation("更新专题商品关系表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('cms:CmsSubjectProductRelation:update')")
     public Object updateCmsSubjectProductRelation(@RequestBody CmsSubjectProductRelation entity) {
         try {

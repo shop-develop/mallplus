@@ -73,7 +73,7 @@ public class UmsMemberReceiveAddressController {
 
     @SysLog(MODULE = "ums", REMARK = "更新会员收货地址表")
     @ApiOperation("更新会员收货地址表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('ums:UmsMemberReceiveAddress:update')")
     public Object updateUmsMemberReceiveAddress(@RequestBody UmsMemberReceiveAddress entity) {
         try {

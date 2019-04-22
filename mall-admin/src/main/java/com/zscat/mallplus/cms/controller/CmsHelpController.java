@@ -67,7 +67,7 @@ public class CmsHelpController {
 
     @SysLog(MODULE = "cms", REMARK = "更新帮助表")
     @ApiOperation("更新帮助表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('cms:CmsHelp:update')")
     public Object updateCmsHelp(@RequestBody CmsHelp entity) {
         try {

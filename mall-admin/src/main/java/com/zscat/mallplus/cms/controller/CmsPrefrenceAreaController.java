@@ -67,7 +67,7 @@ public class CmsPrefrenceAreaController {
 
     @SysLog(MODULE = "cms", REMARK = "更新优选专区")
     @ApiOperation("更新优选专区")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('cms:CmsPrefrenceArea:update')")
     public Object updateCmsPrefrenceArea(@RequestBody CmsPrefrenceArea entity) {
         try {

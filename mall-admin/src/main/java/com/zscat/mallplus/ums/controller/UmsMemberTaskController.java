@@ -67,7 +67,7 @@ public class UmsMemberTaskController {
 
     @SysLog(MODULE = "ums", REMARK = "更新会员任务表")
     @ApiOperation("更新会员任务表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('ums:UmsMemberTask:update')")
     public Object updateUmsMemberTask(@RequestBody UmsMemberTask entity) {
         try {

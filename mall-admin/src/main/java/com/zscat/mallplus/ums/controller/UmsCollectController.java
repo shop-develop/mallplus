@@ -67,7 +67,7 @@ public class UmsCollectController {
 
     @SysLog(MODULE = "ums", REMARK = "更新")
     @ApiOperation("更新")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('ums:UmsCollect:update')")
     public Object updateUmsCollect(@RequestBody UmsCollect entity) {
         try {

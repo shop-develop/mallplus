@@ -73,7 +73,7 @@ public class OmsOrderReturnApplyController {
 
     @SysLog(MODULE = "oms", REMARK = "更新订单退货申请")
     @ApiOperation("更新订单退货申请")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('oms:OmsOrderReturnApply:update')")
     public Object updateOmsOrderReturnApply(@RequestBody OmsOrderReturnApply entity) {
         try {

@@ -73,7 +73,7 @@ public class OmsCompanyAddressController {
 
     @SysLog(MODULE = "oms", REMARK = "更新公司收发货地址表")
     @ApiOperation("更新公司收发货地址表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('oms:OmsCompanyAddress:update')")
     public Object updateOmsCompanyAddress(@RequestBody OmsCompanyAddress entity) {
         try {

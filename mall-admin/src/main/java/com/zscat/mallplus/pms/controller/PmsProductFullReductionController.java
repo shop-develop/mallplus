@@ -73,7 +73,7 @@ public class PmsProductFullReductionController {
 
     @SysLog(MODULE = "pms", REMARK = "更新产品满减表(只针对同商品)")
     @ApiOperation("更新产品满减表(只针对同商品)")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsProductFullReduction:update')")
     public Object updatePmsProductFullReduction(@RequestBody PmsProductFullReduction entity) {
         try {

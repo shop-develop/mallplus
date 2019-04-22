@@ -73,7 +73,7 @@ public class OmsCartItemController {
 
     @SysLog(MODULE = "oms", REMARK = "更新购物车表")
     @ApiOperation("更新购物车表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('oms:OmsCartItem:update')")
     public Object updateOmsCartItem(@RequestBody OmsCartItem entity) {
         try {

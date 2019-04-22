@@ -73,7 +73,7 @@ public class OmsOrderOperateHistoryController {
 
     @SysLog(MODULE = "oms", REMARK = "更新订单操作历史记录")
     @ApiOperation("更新订单操作历史记录")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('oms:OmsOrderOperateHistory:update')")
     public Object updateOmsOrderOperateHistory(@RequestBody OmsOrderOperateHistory entity) {
         try {

@@ -78,7 +78,7 @@ public class PmsProductCategoryController {
 
     @SysLog(MODULE = "pms", REMARK = "更新产品分类")
     @ApiOperation("更新产品分类")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsProductCategory:update')")
     public Object updatePmsProductCategory(@RequestBody PmsProductCategory entity) {
         try {

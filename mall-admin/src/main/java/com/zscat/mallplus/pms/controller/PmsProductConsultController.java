@@ -73,7 +73,7 @@ public class PmsProductConsultController {
 
     @SysLog(MODULE = "pms", REMARK = "更新产品咨询表")
     @ApiOperation("更新产品咨询表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsProductConsult:update')")
     public Object updatePmsProductConsult(@RequestBody PmsProductConsult entity) {
         try {

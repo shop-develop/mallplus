@@ -67,7 +67,7 @@ public class SmsUserRedPacketController {
 
     @SysLog(MODULE = "marking", REMARK = "更新用户红包")
     @ApiOperation("更新用户红包")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsUserRedPacket:update')")
     public Object updateSmsUserRedPacket(@RequestBody SmsUserRedPacket entity) {
         try {

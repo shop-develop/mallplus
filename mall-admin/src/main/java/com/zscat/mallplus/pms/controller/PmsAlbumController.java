@@ -67,7 +67,7 @@ public class PmsAlbumController {
 
     @SysLog(MODULE = "pms", REMARK = "更新相册表")
     @ApiOperation("更新相册表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsAlbum:update')")
     public Object updatePmsAlbum(@RequestBody PmsAlbum entity) {
         try {

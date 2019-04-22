@@ -85,7 +85,7 @@ public class PmsProductAttributeController {
 
     @SysLog(MODULE = "pms", REMARK = "更新商品属性参数表")
     @ApiOperation("更新商品属性参数表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsProductAttribute:update')")
     public Object updatePmsProductAttribute(@RequestBody PmsProductAttribute entity) {
         try {

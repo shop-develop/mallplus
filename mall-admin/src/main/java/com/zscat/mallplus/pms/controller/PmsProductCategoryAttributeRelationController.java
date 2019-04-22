@@ -73,7 +73,7 @@ public class PmsProductCategoryAttributeRelationController {
 
     @SysLog(MODULE = "pms", REMARK = "更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）")
     @ApiOperation("更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsProductCategoryAttributeRelation:update')")
     public Object updatePmsProductCategoryAttributeRelation(@RequestBody PmsProductCategoryAttributeRelation entity) {
         try {

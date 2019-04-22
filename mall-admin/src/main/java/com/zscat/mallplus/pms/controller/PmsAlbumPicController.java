@@ -67,7 +67,7 @@ public class PmsAlbumPicController {
 
     @SysLog(MODULE = "pms", REMARK = "更新画册图片表")
     @ApiOperation("更新画册图片表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsAlbumPic:update')")
     public Object updatePmsAlbumPic(@RequestBody PmsAlbumPic entity) {
         try {

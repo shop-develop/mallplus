@@ -73,7 +73,7 @@ public class SmsHomeBrandController {
 
     @SysLog(MODULE = "marking", REMARK = "更新首页推荐品牌表")
     @ApiOperation("更新首页推荐品牌表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsHomeBrand:update')")
     public Object updateSmsHomeBrand(@RequestBody SmsHomeBrand entity) {
         try {

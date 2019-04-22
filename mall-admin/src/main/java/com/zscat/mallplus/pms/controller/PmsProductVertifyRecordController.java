@@ -67,7 +67,7 @@ public class PmsProductVertifyRecordController {
 
     @SysLog(MODULE = "pms", REMARK = "更新商品审核记录")
     @ApiOperation("更新商品审核记录")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsProductVertifyRecord:update')")
     public Object updatePmsProductVertifyRecord(@RequestBody PmsProductVertifyRecord entity) {
         try {

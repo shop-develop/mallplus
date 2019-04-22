@@ -73,7 +73,7 @@ public class SmsHomeAdvertiseController {
 
     @SysLog(MODULE = "marking", REMARK = "更新首页轮播广告表")
     @ApiOperation("更新首页轮播广告表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsHomeAdvertise:update')")
     public Object updateSmsHomeAdvertise(@RequestBody SmsHomeAdvertise entity) {
         try {

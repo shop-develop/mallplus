@@ -73,7 +73,7 @@ public class UmsMemberRuleSettingController {
 
     @SysLog(MODULE = "ums", REMARK = "更新会员积分成长规则表")
     @ApiOperation("更新会员积分成长规则表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('ums:UmsMemberRuleSetting:update')")
     public Object updateUmsMemberRuleSetting(@RequestBody UmsMemberRuleSetting entity) {
         try {

@@ -67,7 +67,7 @@ public class PmsCommentController {
 
     @SysLog(MODULE = "pms", REMARK = "更新商品评价表")
     @ApiOperation("更新商品评价表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('pms:PmsComment:update')")
     public Object updatePmsComment(@RequestBody PmsComment entity) {
         try {

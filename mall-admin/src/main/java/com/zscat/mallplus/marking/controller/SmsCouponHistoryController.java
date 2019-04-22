@@ -73,7 +73,7 @@ public class SmsCouponHistoryController {
 
     @SysLog(MODULE = "marking", REMARK = "更新优惠券使用、领取历史表")
     @ApiOperation("更新优惠券使用、领取历史表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsCouponHistory:update')")
     public Object updateSmsCouponHistory(@RequestBody SmsCouponHistory entity) {
         try {

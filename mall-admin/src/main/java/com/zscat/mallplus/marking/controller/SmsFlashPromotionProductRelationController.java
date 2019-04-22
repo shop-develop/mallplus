@@ -73,7 +73,7 @@ public class SmsFlashPromotionProductRelationController {
 
     @SysLog(MODULE = "marking", REMARK = "更新商品限时购与商品关系表")
     @ApiOperation("更新商品限时购与商品关系表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsFlashPromotionProductRelation:update')")
     public Object updateSmsFlashPromotionProductRelation(@RequestBody SmsFlashPromotionProductRelation entity) {
         try {

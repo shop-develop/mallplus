@@ -73,7 +73,7 @@ public class SmsCouponProductRelationController {
 
     @SysLog(MODULE = "marking", REMARK = "更新优惠券和产品的关系表")
     @ApiOperation("更新优惠券和产品的关系表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsCouponProductRelation:update')")
     public Object updateSmsCouponProductRelation(@RequestBody SmsCouponProductRelation entity) {
         try {

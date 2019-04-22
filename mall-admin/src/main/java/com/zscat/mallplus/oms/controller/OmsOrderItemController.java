@@ -67,7 +67,7 @@ public class OmsOrderItemController {
 
     @SysLog(MODULE = "oms", REMARK = "更新订单中所包含的商品")
     @ApiOperation("更新订单中所包含的商品")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('oms:OmsOrderItem:update')")
     public Object updateOmsOrderItem(@RequestBody OmsOrderItem entity) {
         try {

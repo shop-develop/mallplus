@@ -67,7 +67,7 @@ public class UmsMemberTagController {
 
     @SysLog(MODULE = "ums", REMARK = "更新用户标签表")
     @ApiOperation("更新用户标签表")
-    @PutMapping(value = "/update/{id}")
+    @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('ums:UmsMemberTag:update')")
     public Object updateUmsMemberTag(@RequestBody UmsMemberTag entity) {
         try {
