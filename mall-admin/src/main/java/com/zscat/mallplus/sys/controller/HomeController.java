@@ -148,7 +148,7 @@ public class HomeController extends BaseController {
     @SysLog(MODULE = "home", REMARK = "首页商品统计")
     @RequestMapping(value = "/goodsStatic", method = RequestMethod.GET)
     public Object goodsStatic() throws Exception {
-        List<PmsProduct> goodsList = productService.list(null);
+        List<PmsProduct> goodsList = productService.list(new QueryWrapper<>(new PmsProduct()));
         int onCount = 0;
         int offCount = 0;
         int nowCount = 0;
