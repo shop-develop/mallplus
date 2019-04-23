@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
 import com.zscat.mallplus.marking.entity.SmsCoupon;
 import com.zscat.mallplus.marking.service.ISmsCouponService;
+import com.zscat.mallplus.marking.vo.SmsCouponParam;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
@@ -15,7 +16,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * <p>
@@ -53,9 +53,9 @@ public class SmsCouponController {
     @ApiOperation("保存优惠卷表")
     @PostMapping(value = "/create")
     @PreAuthorize("hasAuthority('marking:SmsCoupon:create')")
-    public Object saveSmsCoupon(@RequestBody SmsCoupon entity) {
+    public Object saveSmsCoupon(@RequestBody SmsCouponParam entity) {
         try {
-            if (ISmsCouponService.save(entity)) {
+            if (ISmsCouponService.saves(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -69,9 +69,9 @@ public class SmsCouponController {
     @ApiOperation("更新优惠卷表")
     @PostMapping(value = "/update/{id}")
     @PreAuthorize("hasAuthority('marking:SmsCoupon:update')")
-    public Object updateSmsCoupon(@RequestBody SmsCoupon entity) {
+    public Object updateSmsCoupon(@RequestBody SmsCouponParam entity) {
         try {
-            if (ISmsCouponService.updateById(entity)) {
+            if (ISmsCouponService.updateByIds(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -90,7 +90,7 @@ public class SmsCouponController {
             if (ValidatorUtils.empty(id)) {
                 return new CommonResult().paramFailed("优惠卷表id");
             }
-            if (ISmsCouponService.removeById(id)) {
+            if (ISmsCouponService.delete(id)>0) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -109,7 +109,7 @@ public class SmsCouponController {
             if (ValidatorUtils.empty(id)) {
                 return new CommonResult().paramFailed("优惠卷表id");
             }
-            SmsCoupon coupon = ISmsCouponService.getById(id);
+            SmsCouponParam coupon = ISmsCouponService.getItem(id);
             return new CommonResult().success(coupon);
         } catch (Exception e) {
             log.error("查询优惠卷表明细：%s", e.getMessage(), e);
@@ -118,18 +118,6 @@ public class SmsCouponController {
 
     }
 
-    @ApiOperation(value = "批量删除优惠卷表")
-    @RequestMapping(value = "/delete/batch", method = RequestMethod.POST)
-    @ResponseBody
-    @SysLog(MODULE = "pms", REMARK = "批量删除优惠卷表")
-    @PreAuthorize("hasAuthority('marking:SmsCoupon:delete')")
-    public Object deleteBatch(@RequestParam("ids") List<Long> ids) {
-        boolean count = ISmsCouponService.removeByIds(ids);
-        if (count) {
-            return new CommonResult().success(count);
-        } else {
-            return new CommonResult().failed();
-        }
-    }
+
 
 }

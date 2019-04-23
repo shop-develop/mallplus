@@ -1,23 +1,17 @@
 package com.zscat.mallplus.marking.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.marking.entity.SmsHomeBrand;
+import com.zscat.mallplus.marking.service.ISmsHomeBrandService;
 import com.zscat.mallplus.utils.CommonResult;
-
-
-
+import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import com.zscat.mallplus.marking.entity.SmsHomeBrand;
-import com.zscat.mallplus.marking.service.ISmsHomeBrandService;
-import com.zscat.mallplus.utils.ValidatorUtils;
-import com.zscat.mallplus.annotation.SysLog;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -137,5 +131,37 @@ public class SmsHomeBrandController {
             return new CommonResult().failed();
         }
     }
-
+    @SysLog(MODULE = "sms", REMARK = "添加首页推荐品牌")
+    @ApiOperation("添加首页推荐品牌")
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
+    public Object batchCreate(@RequestBody List<SmsHomeBrand> homeBrandList) {
+        boolean count = ISmsHomeBrandService.saveBatch(homeBrandList);
+        if (count) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+    @SysLog(MODULE = "sms", REMARK = "修改品牌排序")
+    @ApiOperation("修改品牌排序")
+    @RequestMapping(value = "/update/sort/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateSort(@PathVariable Long id, Integer sort) {
+        int count = ISmsHomeBrandService.updateSort(id, sort);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+    @SysLog(MODULE = "sms", REMARK = "批量修改推荐状态")
+    @ApiOperation("批量修改推荐状态")
+    @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateRecommendStatus(@RequestParam("ids") List<Long> ids, @RequestParam Integer recommendStatus) {
+        int count = ISmsHomeBrandService.updateRecommendStatus(ids, recommendStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
 }

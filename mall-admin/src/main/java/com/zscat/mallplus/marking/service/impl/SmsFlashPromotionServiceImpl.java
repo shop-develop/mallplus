@@ -16,5 +16,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SmsFlashPromotionServiceImpl extends ServiceImpl<SmsFlashPromotionMapper, SmsFlashPromotion> implements ISmsFlashPromotionService {
-
+    @Override
+    public int updateStatus(Long id, Integer status) {
+        SmsFlashPromotion flashPromotion = new SmsFlashPromotion();
+        flashPromotion.setId(id);
+        flashPromotion.setStatus(status);
+         this.updateById(flashPromotion);
+        return 1;
+    }
 }

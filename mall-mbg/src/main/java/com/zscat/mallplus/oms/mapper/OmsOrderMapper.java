@@ -3,6 +3,7 @@ package com.zscat.mallplus.oms.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zscat.mallplus.oms.entity.OmsOrder;
 import com.zscat.mallplus.oms.entity.OmsOrderItem;
+import com.zscat.mallplus.oms.vo.OmsOrderDeliveryParam;
 import com.zscat.mallplus.oms.vo.OmsOrderDetail;
 import org.apache.ibatis.annotations.Param;
 
@@ -39,4 +40,9 @@ public interface OmsOrderMapper extends BaseMapper<OmsOrder> {
      * 解除取消订单的库存锁定
      */
     int releaseSkuStockLock(@Param("itemList") List<OmsOrderItem> orderItemList);
+
+    /**
+     * 批量发货
+     */
+    int delivery(@Param("list") List<OmsOrderDeliveryParam> deliveryParamList);
 }

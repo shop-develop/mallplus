@@ -1,7 +1,7 @@
 package com.zscat.mallplus.marking.service;
 
-import com.zscat.mallplus.marking.entity.SmsFlashPromotionProductRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.marking.entity.SmsFlashPromotionProductRelation;
 
 /**
  * <p>
@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISmsFlashPromotionProductRelationService extends IService<SmsFlashPromotionProductRelation> {
 
+
+    int getCount(Long flashPromotionId, Long id);
 }

@@ -1,7 +1,13 @@
 package com.zscat.mallplus.oms.service;
 
-import com.zscat.mallplus.oms.entity.OmsOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.oms.entity.OmsOrder;
+import com.zscat.mallplus.oms.vo.OmsMoneyInfoParam;
+import com.zscat.mallplus.oms.vo.OmsOrderDeliveryParam;
+import com.zscat.mallplus.oms.vo.OmsReceiverInfoParam;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +18,34 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-04-17
  */
 public interface IOmsOrderService extends IService<OmsOrder> {
+    /**
+     * 修改订单收货人信息
+     */
+    @Transactional
+    int updateReceiverInfo(OmsReceiverInfoParam receiverInfoParam);
 
+    /**
+     * 修改订单费用信息
+     */
+    @Transactional
+    int updateMoneyInfo(OmsMoneyInfoParam moneyInfoParam);
+
+    /**
+     * 修改订单备注
+     */
+    @Transactional
+    int updateNote(Long id, String note, Integer status);
+
+
+    /**
+     * 批量发货
+     */
+    @Transactional
+    int delivery(List<OmsOrderDeliveryParam> deliveryParamList);
+
+    /**
+     * 批量关闭订单
+     */
+    @Transactional
+    int close(List<Long> ids, String note);
 }

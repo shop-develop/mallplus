@@ -131,5 +131,16 @@ public class OmsOrderReturnReasonController {
             return new CommonResult().failed();
         }
     }
-
+    @SysLog(MODULE = "oms", REMARK = "获取所有收货地址")
+    @ApiOperation("修改退货原因启用状态")
+    @RequestMapping(value = "/update/status", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateStatus(@RequestParam(value = "status") Integer status,
+                               @RequestParam("ids") List<Long> ids) {
+        int count = IOmsOrderReturnReasonService.updateStatus(ids, status);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
 }

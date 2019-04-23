@@ -12,5 +12,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-04-19
  */
 public interface ISmsFlashPromotionService extends IService<SmsFlashPromotion> {
-
+    /**
+     * 修改上下线状态
+     */
+    int updateStatus(Long id, Integer status);
 }

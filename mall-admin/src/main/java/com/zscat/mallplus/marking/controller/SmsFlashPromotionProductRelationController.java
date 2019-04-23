@@ -1,23 +1,18 @@
 package com.zscat.mallplus.marking.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.marking.entity.SmsFlashPromotionProductRelation;
+import com.zscat.mallplus.marking.service.ISmsFlashPromotionProductRelationService;
+import com.zscat.mallplus.marking.vo.SmsFlashPromotionSessionDetail;
 import com.zscat.mallplus.utils.CommonResult;
-
-
-
+import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import com.zscat.mallplus.marking.entity.SmsFlashPromotionProductRelation;
-import com.zscat.mallplus.marking.service.ISmsFlashPromotionProductRelationService;
-import com.zscat.mallplus.utils.ValidatorUtils;
-import com.zscat.mallplus.annotation.SysLog;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -51,6 +46,18 @@ public class SmsFlashPromotionProductRelationController {
             return new CommonResult().success(ISmsFlashPromotionProductRelationService.page(new Page<SmsFlashPromotionProductRelation>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有商品限时购与商品关系表列表：%s", e.getMessage(), e);
+        }
+        return new CommonResult().failed();
+    }
+
+    @SysLog(MODULE = "sms", REMARK = "批量选择商品添加关联")
+    @ApiOperation("批量选择商品添加关联")
+    @RequestMapping(value = "/batchCreate", method = RequestMethod.POST)
+    @ResponseBody
+    public Object create(@RequestBody List<SmsFlashPromotionProductRelation> relationList) {
+        boolean count = ISmsFlashPromotionProductRelationService.saveBatch(relationList);
+        if (count) {
+            return new CommonResult().success(count);
         }
         return new CommonResult().failed();
     }
@@ -137,5 +144,6 @@ public class SmsFlashPromotionProductRelationController {
             return new CommonResult().failed();
         }
     }
+
 
 }

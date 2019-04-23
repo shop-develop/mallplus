@@ -1,23 +1,19 @@
 package com.zscat.mallplus.marking.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.marking.entity.SmsFlashPromotionSession;
+import com.zscat.mallplus.marking.service.ISmsFlashPromotionProductRelationService;
+import com.zscat.mallplus.marking.service.ISmsFlashPromotionSessionService;
+import com.zscat.mallplus.marking.vo.SmsFlashPromotionSessionDetail;
 import com.zscat.mallplus.utils.CommonResult;
-
-
-
+import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import com.zscat.mallplus.marking.entity.SmsFlashPromotionSession;
-import com.zscat.mallplus.marking.service.ISmsFlashPromotionSessionService;
-import com.zscat.mallplus.utils.ValidatorUtils;
-import com.zscat.mallplus.annotation.SysLog;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -137,5 +133,24 @@ public class SmsFlashPromotionSessionController {
             return new CommonResult().failed();
         }
     }
+    @SysLog(MODULE = "sms", REMARK = "修改启用状态")
+    @ApiOperation("修改启用状态")
+    @RequestMapping(value = "/update/status/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateStatus(@PathVariable Long id, Integer status) {
+        int count = ISmsFlashPromotionSessionService.updateStatus(id, status);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
 
+    @SysLog(MODULE = "sms", REMARK = "获取全部可选场次及其数量")
+    @ApiOperation("获取全部可选场次及其数量")
+    @RequestMapping(value = "/selectList", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectList(Long flashPromotionId) {
+        List<SmsFlashPromotionSessionDetail> promotionSessionList = ISmsFlashPromotionSessionService.selectList(flashPromotionId);
+        return new CommonResult().success(promotionSessionList);
+    }
 }

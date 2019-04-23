@@ -1,10 +1,14 @@
 package com.zscat.mallplus.marking.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zscat.mallplus.marking.entity.SmsHomeRecommendSubject;
 import com.zscat.mallplus.marking.mapper.SmsHomeRecommendSubjectMapper;
 import com.zscat.mallplus.marking.service.ISmsHomeRecommendSubjectService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +20,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SmsHomeRecommendSubjectServiceImpl extends ServiceImpl<SmsHomeRecommendSubjectMapper, SmsHomeRecommendSubject> implements ISmsHomeRecommendSubjectService {
+    @Resource
+    private SmsHomeRecommendSubjectMapper recommendProductMapper;
+    @Override
+    public int updateSort(Long id, Integer sort) {
+        SmsHomeRecommendSubject recommendProduct = new SmsHomeRecommendSubject();
+        recommendProduct.setId(id);
+        recommendProduct.setSort(sort);
+        return recommendProductMapper.updateById(recommendProduct);
+    }
 
+    @Override
+    public int updateRecommendStatus(List<Long> ids, Integer recommendStatus) {
+
+        SmsHomeRecommendSubject record = new SmsHomeRecommendSubject();
+        record.setRecommendStatus(recommendStatus);
+        return recommendProductMapper.update(record, new QueryWrapper<>(record).in("id",ids));
+    }
 }

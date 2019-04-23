@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
 import com.zscat.mallplus.marking.entity.SmsHomeRecommendSubject;
+import com.zscat.mallplus.marking.service.ISmsHomeRecommendProductService;
 import com.zscat.mallplus.marking.service.ISmsHomeRecommendSubjectService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
@@ -131,5 +132,35 @@ public class SmsHomeRecommendSubjectController {
             return new CommonResult().failed();
         }
     }
+    @ApiOperation("添加首页推荐专题")
+    @RequestMapping(value = "/batchCreate", method = RequestMethod.POST)
+    @ResponseBody
+    public Object create(@RequestBody List<SmsHomeRecommendSubject> homeBrandList) {
+        boolean count = ISmsHomeRecommendSubjectService.saveBatch(homeBrandList);
+        if (count ) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
 
+    @ApiOperation("修改推荐排序")
+    @RequestMapping(value = "/update/sort/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateSort(@PathVariable Long id, Integer sort) {
+        int count = ISmsHomeRecommendSubjectService.updateSort(id, sort);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+    @ApiOperation("批量修改推荐状态")
+    @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateRecommendStatus(@RequestParam("ids") List<Long> ids, @RequestParam Integer recommendStatus) {
+        int count = ISmsHomeRecommendSubjectService.updateRecommendStatus(ids, recommendStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
 }

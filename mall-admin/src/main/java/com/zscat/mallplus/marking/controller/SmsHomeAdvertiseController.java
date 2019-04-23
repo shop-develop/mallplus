@@ -1,23 +1,18 @@
 package com.zscat.mallplus.marking.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.marking.entity.SmsHomeAdvertise;
+import com.zscat.mallplus.marking.entity.SmsHomeNewProduct;
+import com.zscat.mallplus.marking.service.ISmsHomeAdvertiseService;
 import com.zscat.mallplus.utils.CommonResult;
-
-
-
+import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import com.zscat.mallplus.marking.entity.SmsHomeAdvertise;
-import com.zscat.mallplus.marking.service.ISmsHomeAdvertiseService;
-import com.zscat.mallplus.utils.ValidatorUtils;
-import com.zscat.mallplus.annotation.SysLog;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -61,6 +56,8 @@ public class SmsHomeAdvertiseController {
     @PreAuthorize("hasAuthority('marking:SmsHomeAdvertise:create')")
     public Object saveSmsHomeAdvertise(@RequestBody SmsHomeAdvertise entity) {
         try {
+            entity.setClickCount(0);
+            entity.setOrderCount(0);
             if (ISmsHomeAdvertiseService.save(entity)) {
                 return new CommonResult().success();
             }
@@ -137,5 +134,39 @@ public class SmsHomeAdvertiseController {
             return new CommonResult().failed();
         }
     }
+    @SysLog(MODULE = "sms", REMARK = "修改上下线状态")
+    @ApiOperation("修改上下线状态")
+    @RequestMapping(value = "/update/status/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateStatus(@PathVariable Long id, Integer status) {
+        SmsHomeAdvertise record = new SmsHomeAdvertise();
+        record.setId(id);
+        record.setStatus(status);
+        return ISmsHomeAdvertiseService.updateById(record);
 
+    }
+
+
+
+    @ApiOperation("修改推荐排序")
+    @RequestMapping(value = "/update/sort/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateSort(@PathVariable Long id, Integer sort) {
+        int count = ISmsHomeAdvertiseService.updateSort(id, sort);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+
+    @ApiOperation("批量修改推荐状态")
+    @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateRecommendStatus(@RequestParam("ids") List<Long> ids, @RequestParam Integer recommendStatus) {
+        int count = ISmsHomeAdvertiseService.updateRecommendStatus(ids, recommendStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
 }

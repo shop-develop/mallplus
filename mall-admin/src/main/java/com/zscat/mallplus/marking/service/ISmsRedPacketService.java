@@ -12,5 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-04-19
  */
 public interface ISmsRedPacketService extends IService<SmsRedPacket> {
+    int acceptRedPacket(Integer id);
 
+    int createRedPacket(SmsRedPacket redPacket);
 }

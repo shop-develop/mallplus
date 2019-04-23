@@ -1,23 +1,18 @@
 package com.zscat.mallplus.marking.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.marking.entity.SmsHomeNewProduct;
+import com.zscat.mallplus.marking.service.ISmsHomeAdvertiseService;
+import com.zscat.mallplus.marking.service.ISmsHomeNewProductService;
 import com.zscat.mallplus.utils.CommonResult;
-
-
-
+import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import com.zscat.mallplus.marking.entity.SmsHomeNewProduct;
-import com.zscat.mallplus.marking.service.ISmsHomeNewProductService;
-import com.zscat.mallplus.utils.ValidatorUtils;
-import com.zscat.mallplus.annotation.SysLog;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -137,5 +132,34 @@ public class SmsHomeNewProductController {
             return new CommonResult().failed();
         }
     }
-
+    @ApiOperation("添加首页推荐品牌")
+    @RequestMapping(value = "/batchCreate", method = RequestMethod.POST)
+    @ResponseBody
+    public Object create(@RequestBody List<SmsHomeNewProduct> homeBrandList) {
+        boolean count = ISmsHomeNewProductService.saveBatch(homeBrandList);
+        if (count) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+    @ApiOperation("批量修改推荐状态")
+    @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateRecommendStatus(@RequestParam("ids") List<Long> ids, @RequestParam Integer recommendStatus) {
+        int count = ISmsHomeNewProductService.updateRecommendStatus(ids, recommendStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+    @ApiOperation("修改推荐排序")
+    @RequestMapping(value = "/update/sort/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateSort(@PathVariable Long id, Integer sort) {
+        int count = ISmsHomeNewProductService.updateSort(id, sort);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
 }

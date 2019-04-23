@@ -1,26 +1,21 @@
 package com.zscat.mallplus.marking.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.marking.entity.SmsFlashPromotion;
+import com.zscat.mallplus.marking.service.ISmsFlashPromotionService;
 import com.zscat.mallplus.utils.CommonResult;
-
-
-
+import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import com.zscat.mallplus.marking.entity.SmsFlashPromotion;
-import com.zscat.mallplus.marking.service.ISmsFlashPromotionService;
-import com.zscat.mallplus.utils.ValidatorUtils;
-import com.zscat.mallplus.annotation.SysLog;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,6 +56,7 @@ public class SmsFlashPromotionController {
     @PreAuthorize("hasAuthority('marking:SmsFlashPromotion:create')")
     public Object saveSmsFlashPromotion(@RequestBody SmsFlashPromotion entity) {
         try {
+            entity.setCreateTime(new Date());
             if (ISmsFlashPromotionService.save(entity)) {
                 return new CommonResult().success();
             }
@@ -138,4 +134,15 @@ public class SmsFlashPromotionController {
         }
     }
 
+    @SysLog(MODULE = "sms", REMARK = "修改上下线状态")
+    @ApiOperation("修改上下线状态")
+    @RequestMapping(value = "/update/status/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object update(@PathVariable Long id, Integer status) {
+        int count = ISmsFlashPromotionService.updateStatus(id, status);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
 }

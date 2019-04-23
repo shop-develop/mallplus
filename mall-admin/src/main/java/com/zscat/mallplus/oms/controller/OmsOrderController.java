@@ -1,23 +1,20 @@
 package com.zscat.mallplus.oms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.oms.entity.OmsOrder;
+import com.zscat.mallplus.oms.service.IOmsOrderService;
+import com.zscat.mallplus.oms.vo.OmsMoneyInfoParam;
+import com.zscat.mallplus.oms.vo.OmsOrderDeliveryParam;
+import com.zscat.mallplus.oms.vo.OmsReceiverInfoParam;
 import com.zscat.mallplus.utils.CommonResult;
-
-
-
+import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import com.zscat.mallplus.oms.entity.OmsOrder;
-import com.zscat.mallplus.oms.service.IOmsOrderService;
-import com.zscat.mallplus.utils.ValidatorUtils;
-import com.zscat.mallplus.annotation.SysLog;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -138,4 +135,64 @@ public class OmsOrderController {
         }
     }
 
+    @SysLog(MODULE = "oms", REMARK = "批量发货")
+    @ApiOperation("批量发货")
+    @RequestMapping(value = "/update/delivery", method = RequestMethod.POST)
+    @ResponseBody
+    public Object delivery(@RequestBody List<OmsOrderDeliveryParam> deliveryParamList) {
+        int count = IOmsOrderService.delivery(deliveryParamList);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+
+    @SysLog(MODULE = "oms", REMARK = "批量关闭订单")
+    @ApiOperation("批量关闭订单")
+    @RequestMapping(value = "/update/close", method = RequestMethod.POST)
+    @ResponseBody
+    public Object close(@RequestParam("ids") List<Long> ids, @RequestParam String note) {
+        int count = IOmsOrderService.close(ids, note);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+    @SysLog(MODULE = "oms", REMARK = "修改收货人信息")
+    @ApiOperation("修改收货人信息")
+    @RequestMapping(value = "/update/receiverInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateReceiverInfo(@RequestBody OmsReceiverInfoParam receiverInfoParam) {
+        int count = IOmsOrderService.updateReceiverInfo(receiverInfoParam);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+
+    @SysLog(MODULE = "oms", REMARK = "修改订单费用信息")
+    @ApiOperation("修改订单费用信息")
+    @RequestMapping(value = "/update/moneyInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateReceiverInfo(@RequestBody OmsMoneyInfoParam moneyInfoParam) {
+        int count = IOmsOrderService.updateMoneyInfo(moneyInfoParam);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
+
+    @SysLog(MODULE = "oms", REMARK = "备注订单")
+    @ApiOperation("备注订单")
+    @RequestMapping(value = "/update/note", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateNote(@RequestParam("id") Long id,
+                             @RequestParam("note") String note,
+                             @RequestParam("status") Integer status) {
+        int count = IOmsOrderService.updateNote(id, note, status);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        }
+        return new CommonResult().failed();
+    }
 }
