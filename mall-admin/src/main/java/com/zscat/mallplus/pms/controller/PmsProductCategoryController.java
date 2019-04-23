@@ -66,7 +66,7 @@ public class PmsProductCategoryController {
     @PreAuthorize("hasAuthority('pms:PmsProductCategory:create')")
     public Object savePmsProductCategory(@RequestBody PmsProductCategory entity) {
         try {
-            if (IPmsProductCategoryService.save(entity)) {
+            if (IPmsProductCategoryService.saveAnd(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class PmsProductCategoryController {
     @PreAuthorize("hasAuthority('pms:PmsProductCategory:update')")
     public Object updatePmsProductCategory(@RequestBody PmsProductCategory entity) {
         try {
-            if (IPmsProductCategoryService.updateById(entity)) {
+            if (IPmsProductCategoryService.updateAnd(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -148,5 +148,31 @@ public class PmsProductCategoryController {
     public Object listWithChildren() {
         List<PmsProductCategoryWithChildrenItem> list = IPmsProductCategoryService.listWithChildren();
         return new CommonResult().success(list);
+    }
+
+    @ApiOperation("修改导航栏显示状态")
+    @RequestMapping(value = "/update/navStatus", method = RequestMethod.POST)
+    @ResponseBody
+    @PreAuthorize("hasAuthority('pms:productCategory:update')")
+    public Object updateNavStatus(@RequestParam("ids") List<Long> ids, @RequestParam("navStatus") Integer navStatus) {
+        int count = IPmsProductCategoryService.updateNavStatus(ids, navStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
+
+    @ApiOperation("修改显示状态")
+    @RequestMapping(value = "/update/showStatus", method = RequestMethod.POST)
+    @ResponseBody
+    @PreAuthorize("hasAuthority('pms:productCategory:update')")
+    public Object updateShowStatus(@RequestParam("ids") List<Long> ids, @RequestParam("showStatus") Integer showStatus) {
+        int count = IPmsProductCategoryService.updateShowStatus(ids, showStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
     }
 }

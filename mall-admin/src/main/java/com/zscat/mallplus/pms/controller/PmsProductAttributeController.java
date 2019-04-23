@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
 import com.zscat.mallplus.pms.entity.PmsProductAttribute;
 import com.zscat.mallplus.pms.service.IPmsProductAttributeService;
+import com.zscat.mallplus.pms.vo.ProductAttrInfo;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.*;
@@ -73,7 +74,7 @@ public class PmsProductAttributeController {
     @PreAuthorize("hasAuthority('pms:PmsProductAttribute:create')")
     public Object savePmsProductAttribute(@RequestBody PmsProductAttribute entity) {
         try {
-            if (IPmsProductAttributeService.save(entity)) {
+            if (IPmsProductAttributeService.saveAndUpdate(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -150,4 +151,12 @@ public class PmsProductAttributeController {
         }
     }
 
+    @SysLog(MODULE = "pms", REMARK = "根据商品分类的id获取商品属性及属性分类")
+    @ApiOperation("根据商品分类的id获取商品属性及属性分类")
+    @RequestMapping(value = "/attrInfo/{productCategoryId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getAttrInfo(@PathVariable Long productCategoryId) {
+        List<ProductAttrInfo> productAttrInfoList = IPmsProductAttributeService.getProductAttrInfo(productCategoryId);
+        return new CommonResult().success(productAttrInfoList);
+    }
 }

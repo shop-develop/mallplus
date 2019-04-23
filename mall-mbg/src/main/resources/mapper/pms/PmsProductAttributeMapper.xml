@@ -23,4 +23,15 @@
         id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type
     </sql>
 
+    <select id="getProductAttrInfo" resultType="com.zscat.mallplus.pms.vo.ProductAttrInfo">
+        SELECT
+        pa.id attributeId,
+        pac.id attributeCategoryId
+        FROM
+        pms_product_category_attribute_relation pcar
+        LEFT JOIN pms_product_attribute pa ON pa.id = pcar.product_attribute_id
+        LEFT JOIN pms_product_attribute_category pac ON pa.product_attribute_category_id = pac.id
+        WHERE
+        pcar.product_category_id = #{productCategoryId}
+    </select>
 </mapper>

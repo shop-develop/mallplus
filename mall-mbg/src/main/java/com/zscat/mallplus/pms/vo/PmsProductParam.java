@@ -1,8 +1,8 @@
 package com.zscat.mallplus.pms.vo;
 
 
-import com.zscat.mallplus.cms.entity.CmsPrefrenceAreaProductRelation;
-import com.zscat.mallplus.cms.entity.CmsSubjectProductRelation;
+import com.zscat.mallplus.pms.entity.CmsPrefrenceAreaProductRelation;
+import com.zscat.mallplus.pms.entity.CmsSubjectProductRelation;
 import com.zscat.mallplus.pms.entity.*;
 import io.swagger.annotations.ApiModelProperty;
 

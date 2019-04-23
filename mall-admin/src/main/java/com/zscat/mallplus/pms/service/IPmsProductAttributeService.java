@@ -1,7 +1,10 @@
 package com.zscat.mallplus.pms.service;
 
-import com.zscat.mallplus.pms.entity.PmsProductAttribute;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.pms.entity.PmsProductAttribute;
+import com.zscat.mallplus.pms.vo.ProductAttrInfo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IPmsProductAttributeService extends IService<PmsProductAttribute> {
 
+    List<ProductAttrInfo> getProductAttrInfo(Long productCategoryId);
+
+    boolean saveAndUpdate(PmsProductAttribute entity);
 }

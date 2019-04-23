@@ -1,10 +1,14 @@
 package com.zscat.mallplus.pms.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zscat.mallplus.pms.entity.PmsBrand;
 import com.zscat.mallplus.pms.mapper.PmsBrandMapper;
 import com.zscat.mallplus.pms.service.IPmsBrandService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +20,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> implements IPmsBrandService {
+   @Resource
+   private PmsBrandMapper brandMapper;
 
+    @Override
+    public int updateShowStatus(List<Long> ids, Integer showStatus) {
+        PmsBrand pmsBrand = new PmsBrand();
+        pmsBrand.setShowStatus(showStatus);
+        return brandMapper.update(pmsBrand,new QueryWrapper<>(pmsBrand).in("id",ids));
+
+    }
+
+    @Override
+    public int updateFactoryStatus(List<Long> ids, Integer factoryStatus) {
+        PmsBrand pmsBrand = new PmsBrand();
+        pmsBrand.setFactoryStatus(factoryStatus);
+        return brandMapper.update(pmsBrand,new QueryWrapper<>(pmsBrand).in("id",ids));
+    }
 }

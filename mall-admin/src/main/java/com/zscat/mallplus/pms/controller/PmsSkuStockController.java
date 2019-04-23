@@ -131,5 +131,25 @@ public class PmsSkuStockController {
             return new CommonResult().failed();
         }
     }
+    @SysLog(MODULE = "pms", REMARK = "根据商品编号及编号模糊搜索sku库存")
+    @ApiOperation("根据商品编号及编号模糊搜索sku库存")
+    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getList(@PathVariable Long pid, @RequestParam(value = "keyword", required = false) String keyword) {
+        List<PmsSkuStock> skuStockList = IPmsSkuStockService.getList(pid, keyword);
+        return new CommonResult().success(skuStockList);
+    }
 
+    @SysLog(MODULE = "pms", REMARK = "批量更新库存信息")
+    @ApiOperation("批量更新库存信息")
+    @RequestMapping(value = "/update/{pid}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object update(@PathVariable Long pid, @RequestBody List<PmsSkuStock> skuStockList) {
+        int count = IPmsSkuStockService.update(pid, skuStockList);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
 }

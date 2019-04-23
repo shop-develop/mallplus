@@ -1,6 +1,6 @@
-package com.zscat.mallplus.cms.mapper;
+package com.zscat.mallplus.pms.mapper;
 
-import com.zscat.mallplus.cms.entity.CmsPrefrenceAreaProductRelation;
+import com.zscat.mallplus.pms.entity.CmsPrefrenceAreaProductRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

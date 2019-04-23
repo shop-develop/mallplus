@@ -1,4 +1,4 @@
-package com.zscat.mallplus.cms.entity;
+package com.zscat.mallplus.pms.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -8,22 +8,22 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 专题商品关系表
+ * 优选专区和产品关系表
  * </p>
  *
  * @author zscat
  * @since 2019-04-17
  */
-@TableName("cms_subject_product_relation")
-public class CmsSubjectProductRelation implements Serializable {
+@TableName("cms_prefrence_area_product_relation")
+public class CmsPrefrenceAreaProductRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @TableField("subject_id")
-    private Long subjectId;
+    @TableField("prefrence_area_id")
+    private Long prefrenceAreaId;
 
     @TableField("product_id")
     private Long productId;
@@ -37,12 +37,12 @@ public class CmsSubjectProductRelation implements Serializable {
         this.id = id;
     }
 
-    public Long getSubjectId() {
-        return subjectId;
+    public Long getPrefrenceAreaId() {
+        return prefrenceAreaId;
     }
 
-    public void setSubjectId(Long subjectId) {
-        this.subjectId = subjectId;
+    public void setPrefrenceAreaId(Long prefrenceAreaId) {
+        this.prefrenceAreaId = prefrenceAreaId;
     }
 
     public Long getProductId() {
@@ -55,9 +55,9 @@ public class CmsSubjectProductRelation implements Serializable {
 
     @Override
     public String toString() {
-        return "CmsSubjectProductRelation{" +
+        return "CmsPrefrenceAreaProductRelation{" +
         ", id=" + id +
-        ", subjectId=" + subjectId +
+        ", prefrenceAreaId=" + prefrenceAreaId +
         ", productId=" + productId +
         "}";
     }

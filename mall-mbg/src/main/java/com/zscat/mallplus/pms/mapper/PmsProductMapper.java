@@ -3,6 +3,7 @@ package com.zscat.mallplus.pms.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zscat.mallplus.oms.vo.CartProduct;
 import com.zscat.mallplus.pms.entity.PmsProduct;
+import com.zscat.mallplus.pms.vo.PmsProductResult;
 import com.zscat.mallplus.pms.vo.PromotionProduct;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,4 +22,6 @@ public interface PmsProductMapper extends BaseMapper<PmsProduct> {
     CartProduct getCartProduct(@Param("id") Long id);
 
     List<PromotionProduct> getPromotionProductList(@Param("ids") List<Long> ids);
+
+    PmsProductResult getUpdateInfo(Long id);
 }

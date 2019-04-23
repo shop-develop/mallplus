@@ -3,7 +3,7 @@ package com.zscat.mallplus.cms.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
-import com.zscat.mallplus.cms.entity.CmsSubjectProductRelation;
+import com.zscat.mallplus.pms.entity.CmsSubjectProductRelation;
 import com.zscat.mallplus.cms.service.ICmsSubjectProductRelationService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;

@@ -1,7 +1,10 @@
 package com.zscat.mallplus.pms.mapper;
 
-import com.zscat.mallplus.pms.entity.PmsSkuStock;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zscat.mallplus.pms.entity.PmsSkuStock;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2019-04-19
  */
 public interface PmsSkuStockMapper extends BaseMapper<PmsSkuStock> {
-
+    /**
+     * 批量插入或替换操作
+     */
+    int replaceList(@Param("list") List<PmsSkuStock> skuStockList);
 }

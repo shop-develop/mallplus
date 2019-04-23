@@ -131,5 +131,33 @@ public class PmsBrandController {
             return new CommonResult().failed();
         }
     }
+    @ApiOperation(value = "批量更新显示状态")
+    @RequestMapping(value = "/update/showStatus", method = RequestMethod.POST)
+    @ResponseBody
+    @SysLog(MODULE = "pms", REMARK = "批量更新显示状态")
+    @PreAuthorize("hasAuthority('pms:brand:update')")
+    public Object updateShowStatus(@RequestParam("ids") List<Long> ids,
+                                   @RequestParam("showStatus") Integer showStatus) {
+        int count = IPmsBrandService.updateShowStatus(ids, showStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
 
+    @ApiOperation(value = "批量更新厂家制造商状态")
+    @RequestMapping(value = "/update/factoryStatus", method = RequestMethod.POST)
+    @ResponseBody
+    @SysLog(MODULE = "pms", REMARK = "批量更新厂家制造商状态")
+    @PreAuthorize("hasAuthority('pms:brand:update')")
+    public Object updateFactoryStatus(@RequestParam("ids") List<Long> ids,
+                                      @RequestParam("factoryStatus") Integer factoryStatus) {
+        int count = IPmsBrandService.updateFactoryStatus(ids, factoryStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
 }

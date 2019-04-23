@@ -2,6 +2,9 @@ package com.zscat.mallplus.pms.mapper;
 
 import com.zscat.mallplus.pms.entity.PmsProductAttribute;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zscat.mallplus.pms.vo.ProductAttrInfo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface PmsProductAttributeMapper extends BaseMapper<PmsProductAttribute> {
 
+    List<ProductAttrInfo> getProductAttrInfo(Long productCategoryId);
 }

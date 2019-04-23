@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zscat.mallplus.cms.mapper.CmsPrefrenceAreaProductRelationMapper">
+<mapper namespace="com.zscat.mallplus.pms.mapper.CmsPrefrenceAreaProductRelationMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.zscat.mallplus.cms.entity.CmsPrefrenceAreaProductRelation">
+    <resultMap id="BaseResultMap" type="com.zscat.mallplus.pms.entity.CmsPrefrenceAreaProductRelation">
         <id column="id" property="id" />
         <result column="prefrence_area_id" property="prefrenceAreaId" />
         <result column="product_id" property="productId" />
