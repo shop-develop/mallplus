@@ -48,14 +48,14 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
     public int updateNavStatus(List<Long> ids, Integer navStatus) {
         PmsProductCategory productCategory = new PmsProductCategory();
         productCategory.setNavStatus(navStatus);
-        return categoryMapper.update(productCategory, new QueryWrapper<>(productCategory).eq("id",ids));
+        return categoryMapper.update(productCategory, new QueryWrapper<PmsProductCategory>().eq("id",ids));
     }
 
     @Override
     public int updateShowStatus(List<Long> ids, Integer showStatus) {
         PmsProductCategory productCategory = new PmsProductCategory();
         productCategory.setShowStatus(showStatus);
-        return categoryMapper.update(productCategory, new QueryWrapper<>(productCategory).eq("id",ids));
+        return categoryMapper.update(productCategory, new QueryWrapper<PmsProductCategory>().eq("id",ids));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
         PmsProduct product = new PmsProduct();
         product.setProductCategoryName(productCategory.getName());
 
-        productMapper.update(product, new QueryWrapper<>(product).eq("product_category_id",entity.getId()));
+        productMapper.update(product, new QueryWrapper<PmsProduct>().eq("product_category_id",entity.getId()));
         //同时更新筛选属性的信息
         if (!CollectionUtils.isEmpty(entity.getProductAttributeIdList())) {
 

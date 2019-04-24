@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -89,9 +90,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         //密码需要客户端加密后传递
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, passwordEncoder.encode(password));
         try {
-            Authentication authentication = authenticationManager.authenticate(authenticationToken);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            if(!passwordEncoder.matches(password,userDetails.getPassword())){
+                throw new BadCredentialsException("密码不正确");
+            }
+         //   Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                    userDetails,null,userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
         } catch (AuthenticationException e) {
             log.warn("登录异常:{}", e.getMessage());
@@ -188,6 +194,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         updateRole(id,admin.getRoleIds());
          adminMapper.updateById(admin);
         return true;
+    }
+
+    @Override
+    public List<SysPermission> listUserPerms(Long id) {
+        return permissionMapper.listUserPerms(id);
     }
 
     /**

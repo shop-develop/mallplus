@@ -27,7 +27,7 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
     public int updateShowStatus(List<Long> ids, Integer showStatus) {
         PmsBrand pmsBrand = new PmsBrand();
         pmsBrand.setShowStatus(showStatus);
-        return brandMapper.update(pmsBrand,new QueryWrapper<>(pmsBrand).in("id",ids));
+        return brandMapper.update(pmsBrand,new QueryWrapper<PmsBrand>().in("id",ids));
 
     }
 
@@ -35,6 +35,6 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
     public int updateFactoryStatus(List<Long> ids, Integer factoryStatus) {
         PmsBrand pmsBrand = new PmsBrand();
         pmsBrand.setFactoryStatus(factoryStatus);
-        return brandMapper.update(pmsBrand,new QueryWrapper<>(pmsBrand).in("id",ids));
+        return brandMapper.update(pmsBrand,new QueryWrapper<PmsBrand>().in("id",ids));
     }
 }

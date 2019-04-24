@@ -19,5 +19,5 @@ public interface SysPermissionMapper extends BaseMapper<SysPermission> {
 
     List<SysPermission> getPermissionList(Long roleId);
 
-    List<String> listUserPerms(Long id);
+    List<SysPermission> listUserPerms(Long id);
 }

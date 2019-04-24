@@ -35,6 +35,6 @@ public class SmsHomeBrandServiceImpl extends ServiceImpl<SmsHomeBrandMapper, Sms
     public int updateRecommendStatus(List<Long> ids, Integer recommendStatus) {
         SmsHomeBrand record = new SmsHomeBrand();
         record.setRecommendStatus(recommendStatus);
-        return homeBrandMapper.update(record, new QueryWrapper<>(record).in("id",ids));
+        return homeBrandMapper.update(record, new QueryWrapper<SmsHomeBrand>().in("id",ids));
     }
 }

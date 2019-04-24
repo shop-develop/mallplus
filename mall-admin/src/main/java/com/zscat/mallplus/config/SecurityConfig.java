@@ -86,10 +86,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected  void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService())
                 .passwordEncoder(passwordEncoder());
     }
+
 
 
     @Bean
@@ -105,7 +106,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             user.setUsername(username);
             SysUser admin = sysUserService.getOne(new QueryWrapper<>(user));
             if (admin != null) {
-                List<SysPermission> permissionList = sysUserService.getPermissionListByUserId(admin.getId());
+                List<SysPermission> permissionList = sysUserService.listUserPerms(admin.getId());
                 return new AdminUserDetails(admin, permissionList);
             }
             throw new UsernameNotFoundException("用户名或密码错误");

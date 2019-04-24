@@ -167,7 +167,7 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
     public int updateVerifyStatus(Long ids, Integer verifyStatus, String detail) {
         PmsProduct product = new PmsProduct();
         product.setVerifyStatus(verifyStatus);
-        int count = productMapper.update(product, new QueryWrapper<>(product).eq("id",ids) );
+        int count = productMapper.update(product, new QueryWrapper<PmsProduct>().eq("id",ids) );
         //修改完审核状态后插入审核记录
 
         PmsProductVertifyRecord record = new PmsProductVertifyRecord();
@@ -185,7 +185,7 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
         PmsProduct record = new PmsProduct();
         record.setPublishStatus(publishStatus);
 
-        return productMapper.update(record, new QueryWrapper<>(record).eq("id",ids));
+        return productMapper.update(record, new QueryWrapper<PmsProduct>().eq("id",ids));
     }
 
     @Override
@@ -193,7 +193,7 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
         PmsProduct record = new PmsProduct();
         record.setRecommandStatus(recommendStatus);
 
-        return productMapper.update(record, new QueryWrapper<>(record).eq("id",ids));
+        return productMapper.update(record, new QueryWrapper<PmsProduct>().eq("id",ids));
     }
 
     @Override
@@ -201,7 +201,7 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
         PmsProduct record = new PmsProduct();
         record.setNewStatus(newStatus);
 
-        return productMapper.update(record, new QueryWrapper<>(record).eq("id",ids));
+        return productMapper.update(record, new QueryWrapper<PmsProduct>().eq("id",ids));
     }
 
     @Override
@@ -209,7 +209,7 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
         PmsProduct record = new PmsProduct();
         record.setDeleteStatus(deleteStatus);
 
-        return productMapper.update(record, new QueryWrapper<>(record).eq("id",ids));
+        return productMapper.update(record, new QueryWrapper<PmsProduct>().eq("id",ids));
     }
 
     @Override

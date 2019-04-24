@@ -35,6 +35,6 @@ public class SmsHomeAdvertiseServiceImpl extends ServiceImpl<SmsHomeAdvertiseMap
     public int updateRecommendStatus(List<Long> ids, Integer recommendStatus) {
         SmsHomeNewProduct record = new SmsHomeNewProduct();
         record.setRecommendStatus(recommendStatus);
-        return homeNewProductMapper.update(record, new QueryWrapper<>(record).in("id",ids));
+        return homeNewProductMapper.update(record, new QueryWrapper<SmsHomeNewProduct>().in("id",ids));
     }
 }

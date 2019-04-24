@@ -44,13 +44,16 @@
         order by
         m.sort
     </select>
+    <select id="listUserPerms" resultType="com.zscat.mallplus.sys.entity.SysPermission">
+        select distinct
+        m.id , pid, name, uri,
+        `value`,`type`,icon,sort,create_time
+        from sys_permission m
+        left
+        join sys_role_permission rm on m.id = rm.permission_id left join
+        sys_user_role ur
+        on rm.role_id =ur.role_id where ur.admin_id =  #{id}
 
-    <select id="listUserPerms" resultType="string">
-        select distinct m.value
-        from sys_permission m left join
-        sys_role_permission rm on m.id = rm.permission_id
-        left join sys_user_role ur
-        on rm.role_id = ur.role_id where ur.admin_id
-        = #{id}
     </select>
+
 </mapper>

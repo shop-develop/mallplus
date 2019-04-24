@@ -45,13 +45,13 @@ public class CmsSubjectServiceImpl extends ServiceImpl<CmsSubjectMapper, CmsSubj
     public int updateRecommendStatus(Long ids, Integer recommendStatus) {
         CmsSubject record = new CmsSubject();
         record.setRecommendStatus(recommendStatus);
-        return subjectMapper.update(record, new QueryWrapper<>(record).eq("id",ids));
+        return subjectMapper.update(record, new QueryWrapper<CmsSubject>().eq("id",ids));
     }
 
     @Override
     public int updateShowStatus(Long ids, Integer showStatus) {
         CmsSubject record = new CmsSubject();
         record.setShowStatus(showStatus);
-        return subjectMapper.update(record, new QueryWrapper<>(record).eq("id",ids));
+        return subjectMapper.update(record, new QueryWrapper<CmsSubject>().eq("id",ids));
     }
 }

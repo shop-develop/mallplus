@@ -33,6 +33,6 @@ public class SmsHomeRecommendProductServiceImpl extends ServiceImpl<SmsHomeRecom
     public int updateRecommendStatus(List<Long> ids, Integer recommendStatus) {
         SmsHomeRecommendProduct record = new SmsHomeRecommendProduct();
         record.setRecommendStatus(recommendStatus);
-        return recommendProductMapper.update(record, new QueryWrapper<>(record).in("id",ids));
+        return recommendProductMapper.update(record, new QueryWrapper<SmsHomeRecommendProduct>().in("id",ids));
     }
 }

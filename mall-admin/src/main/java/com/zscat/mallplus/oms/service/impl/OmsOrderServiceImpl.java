@@ -60,7 +60,7 @@ public class OmsOrderServiceImpl extends ServiceImpl<OmsOrderMapper, OmsOrder> i
     public int close(List<Long> ids, String note) {
         OmsOrder record = new OmsOrder();
         record.setStatus(4);
-        int count = orderMapper.update(record, new QueryWrapper<>(record).eq("delete_status",0).in("id",ids));
+        int count = orderMapper.update(record, new QueryWrapper<OmsOrder>().eq("delete_status",0).in("id",ids));
         List<OmsOrderOperateHistory> historyList = ids.stream().map(orderId -> {
             OmsOrderOperateHistory history = new OmsOrderOperateHistory();
             history.setOrderId(orderId);
