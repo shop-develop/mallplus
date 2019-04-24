@@ -3,10 +3,7 @@ package com.zscat.mallplus.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zscat.mallplus.sys.entity.*;
-import com.zscat.mallplus.sys.mapper.SysPermissionMapper;
-import com.zscat.mallplus.sys.mapper.SysUserMapper;
-import com.zscat.mallplus.sys.mapper.SysUserPermissionMapper;
-import com.zscat.mallplus.sys.mapper.SysUserRoleMapper;
+import com.zscat.mallplus.sys.mapper.*;
 import com.zscat.mallplus.sys.service.ISysRolePermissionService;
 import com.zscat.mallplus.sys.service.ISysUserPermissionService;
 import com.zscat.mallplus.sys.service.ISysUserRoleService;
@@ -66,7 +63,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Resource
     private SysUserPermissionMapper adminPermissionRelationMapper;
     @Resource
-    private SysUserRoleMapper roleMapper;
+    private SysRoleMapper roleMapper;
     @Resource
     private ISysUserPermissionService userPermissionService;
     @Resource
@@ -128,7 +125,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public List<SysRole> getRoleListByUserId(Long adminId) {
-        return roleMapper.getRoleListByUserid(adminId);
+        return roleMapper.getRoleListByUserId(adminId);
     }
 
     @Override
@@ -177,17 +174,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         umsAdmin.setPassword(md5Password);
         adminMapper.insert(umsAdmin);
         updateRole(umsAdmin.getId(),umsAdmin.getRoleIds());
+
         return true;
     }
 
     @Override
     @Transactional
     public boolean updates(Long id, SysUser admin) {
-        //查询是否有相同用户名的用户
-        List<SysUser> umsAdminList = adminMapper.selectList(new QueryWrapper<SysUser>().eq("username",admin.getUsername()));
-        if (umsAdminList.size() > 0) {
-            return false;
-        }
+        admin.setUsername(null);
         admin.setId(id);
         String md5Password = passwordEncoder.encode(admin.getPassword());
         admin.setPassword(md5Password);

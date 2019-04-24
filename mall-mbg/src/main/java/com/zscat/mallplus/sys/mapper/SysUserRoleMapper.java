@@ -1,10 +1,7 @@
 package com.zscat.mallplus.sys.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zscat.mallplus.sys.entity.SysRole;
 import com.zscat.mallplus.sys.entity.SysUserRole;
-
-import java.util.List;
 
 /**
  * <p>
@@ -17,5 +14,5 @@ import java.util.List;
 public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 
 
-    List<SysRole> getRoleListByUserid(Long adminId);
+
 }

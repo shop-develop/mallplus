@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
-import com.zscat.mallplus.sys.entity.SysPermission;
 import com.zscat.mallplus.sys.entity.SysRole;
 import com.zscat.mallplus.sys.entity.SysRolePermission;
 import com.zscat.mallplus.sys.service.ISysRoleService;
@@ -141,7 +140,7 @@ public class SysRoleController extends ApiController {
     @RequestMapping(value = "/permission/{roleId}", method = RequestMethod.GET)
     @ResponseBody
     public Object getPermissionList(@PathVariable Long roleId) {
-        List<SysPermission> permissionList = sysRoleService.getPermissionList(roleId);
+        List<SysRolePermission> permissionList = sysRoleService.getRolePermission(roleId);
         return new CommonResult().success(permissionList);
     }
     @SysLog(MODULE = "sys", REMARK = "获取相应角色权限-单表")

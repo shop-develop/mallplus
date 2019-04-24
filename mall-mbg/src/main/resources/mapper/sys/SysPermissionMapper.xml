@@ -24,8 +24,8 @@
         SELECT
         p.*
         FROM
-        ums_role_permission_relation r
-        LEFT JOIN ums_permission p ON r.permission_id = p.id
+        sys_role_permission r
+        LEFT JOIN sys_permission p ON r.permission_id = p.id
         WHERE
         r.role_id = #{roleId}
     </select>
