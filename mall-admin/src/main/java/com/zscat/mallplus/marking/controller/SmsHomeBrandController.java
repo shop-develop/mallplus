@@ -133,7 +133,7 @@ public class SmsHomeBrandController {
     }
     @SysLog(MODULE = "sms", REMARK = "添加首页推荐品牌")
     @ApiOperation("添加首页推荐品牌")
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/batchCreate", method = RequestMethod.POST)
     @ResponseBody
     public Object batchCreate(@RequestBody List<SmsHomeBrand> homeBrandList) {
         boolean count = ISmsHomeBrandService.saveBatch(homeBrandList);
