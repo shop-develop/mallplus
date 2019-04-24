@@ -71,10 +71,10 @@ public class SysUserController extends ApiController {
 
     @SysLog(MODULE = "sys", REMARK = "保存用户")
     @ApiOperation("保存用户")
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/register")
     public Object saveUser(@RequestBody SysUser entity) {
         try {
-            if (sysUserService.save(entity)) {
+            if (sysUserService.saves(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -89,7 +89,7 @@ public class SysUserController extends ApiController {
     @PostMapping(value = "/update/{id}")
     public Object updateUser(@RequestBody SysUser entity) {
         try {
-            if (sysUserService.updateById(entity)) {
+            if (sysUserService.updates(entity.getId(),entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {

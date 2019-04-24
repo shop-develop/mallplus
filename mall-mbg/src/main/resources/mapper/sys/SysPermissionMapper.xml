@@ -27,8 +27,9 @@
         ums_role_permission_relation r
         LEFT JOIN ums_permission p ON r.permission_id = p.id
         WHERE
-        r.role_id = #{roleId};
+        r.role_id = #{roleId}
     </select>
+
     <select id="listMenuByUserId" resultType="com.zscat.mallplus.sys.entity.SysPermission">
         select distinct
         m.id , pid, name, uri,

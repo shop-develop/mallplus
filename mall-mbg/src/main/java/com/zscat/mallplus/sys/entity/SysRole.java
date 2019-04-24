@@ -57,6 +57,7 @@ public class SysRole implements Serializable {
     private Integer status;
 
     private Integer sort;
-
+    @TableField(exist = false)
+    private String menuIds;
 
 }

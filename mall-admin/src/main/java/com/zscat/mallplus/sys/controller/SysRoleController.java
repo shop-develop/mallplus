@@ -2,11 +2,12 @@ package com.zscat.mallplus.sys.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
+import com.zscat.mallplus.sys.entity.SysPermission;
 import com.zscat.mallplus.sys.entity.SysRole;
+import com.zscat.mallplus.sys.entity.SysRolePermission;
 import com.zscat.mallplus.sys.service.ISysRoleService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
@@ -59,8 +60,7 @@ public class SysRoleController extends ApiController {
     @PreAuthorize("hasAuthority('sys:role:create')")
     public Object saveRole(@RequestBody SysRole entity) {
         try {
-            entity.setId(IdWorker.getId());
-            if (sysRoleService.save(entity)) {
+            if (sysRoleService.saves(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -76,7 +76,7 @@ public class SysRoleController extends ApiController {
     @PreAuthorize("hasAuthority('sys:role:update')")
     public Object updateRole(@RequestBody SysRole entity) {
         try {
-            if (sysRoleService.updateById(entity)) {
+            if (sysRoleService.updates(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {
@@ -136,6 +136,21 @@ public class SysRoleController extends ApiController {
             return new CommonResult().failed();
         }
     }
-
+    @SysLog(MODULE = "sys", REMARK = "获取相应角色权限")
+    @ApiOperation("获取相应角色权限")
+    @RequestMapping(value = "/permission/{roleId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getPermissionList(@PathVariable Long roleId) {
+        List<SysPermission> permissionList = sysRoleService.getPermissionList(roleId);
+        return new CommonResult().success(permissionList);
+    }
+    @SysLog(MODULE = "sys", REMARK = "获取相应角色权限-单表")
+    @ApiOperation("获取相应角色权限-单表")
+    @RequestMapping(value = "/rolePermission/{roleId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object rolePermission(@PathVariable Long  roleId) {
+        List<SysRolePermission> rolePermission = sysRoleService.getRolePermission(roleId);
+        return new CommonResult().success(rolePermission);
+    }
 }
 

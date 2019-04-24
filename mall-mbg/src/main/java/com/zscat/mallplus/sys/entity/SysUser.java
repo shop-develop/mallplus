@@ -1,11 +1,13 @@
 package com.zscat.mallplus.sys.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -15,6 +17,7 @@ import java.io.Serializable;
  * @author zscat
  * @since 2019-04-14
  */
+@Data
 @TableName("sys_user")
 public class SysUser implements Serializable {
 
@@ -71,109 +74,9 @@ public class SysUser implements Serializable {
     @TableField("supply_id")
     private Long supplyId;
 
+    //角色
+    @TableField(exist = false)
+    private String roleIds;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(Date loginTime) {
-        this.loginTime = loginTime;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Long getSupplyId() {
-        return supplyId;
-    }
-
-    public void setSupplyId(Long supplyId) {
-        this.supplyId = supplyId;
-    }
-
-    @Override
-    public String toString() {
-        return "SysUser{" +
-        ", id=" + id +
-        ", username=" + username +
-        ", password=" + password +
-        ", icon=" + icon +
-        ", email=" + email +
-        ", nickName=" + nickName +
-        ", note=" + note +
-        ", createTime=" + createTime +
-        ", loginTime=" + loginTime +
-        ", status=" + status +
-        ", supplyId=" + supplyId +
-        "}";
-    }
 }

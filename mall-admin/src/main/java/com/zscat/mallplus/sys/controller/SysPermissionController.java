@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
 import com.zscat.mallplus.sys.entity.SysPermission;
+import com.zscat.mallplus.sys.entity.SysPermissionNode;
 import com.zscat.mallplus.sys.service.ISysPermissionService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
@@ -15,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,6 +57,9 @@ public class SysPermissionController extends BaseController{
     @PreAuthorize("hasAuthority('sys:SysPermission:create')")
     public Object saveRole(@RequestBody SysPermission entity) {
         try {
+            entity.setStatus(1);
+            entity.setCreateTime(new Date());
+            entity.setSort(0);
             if (ISysPermissionService.save(entity)) {
                 return new CommonResult().success();
             }
@@ -137,5 +142,14 @@ public class SysPermissionController extends BaseController{
     @ResponseBody
     public Object findPermissions() {
         return new CommonResult().success(ISysPermissionService.getPermissionsByUserId(getCurrentUser().getId()));
+    }
+
+    @SysLog(MODULE = "sys", REMARK = "以层级结构返回所有权限")
+    @ApiOperation("以层级结构返回所有权限")
+    @RequestMapping(value = "/treeList", method = RequestMethod.GET)
+    @ResponseBody
+    public Object treeList() {
+        List<SysPermissionNode> permissionNodeList = ISysPermissionService.treeList();
+        return new CommonResult().success(permissionNodeList);
     }
 }

@@ -20,10 +20,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +56,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysUserMapper adminMapper;
     @Resource
     private SysUserRoleMapper adminRoleRelationMapper;
+    @Resource
+    private ISysUserRoleService adminRoleRelationService;
     @Resource
     private SysUserPermissionMapper adminPermissionRelationMapper;
     @Resource
@@ -144,6 +149,43 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return permissionMapper.listMenuByUserId(adminId);
     }
 
+    @Override
+    public boolean saves(SysUser umsAdmin) {
+        umsAdmin.setCreateTime(new Date());
+        umsAdmin.setStatus(1);
+        //查询是否有相同用户名的用户
+
+        List<SysUser> umsAdminList = adminMapper.selectList(new QueryWrapper<SysUser>().eq("username",umsAdmin.getUsername()));
+        if (umsAdminList.size() > 0) {
+            return false;
+        }
+        //将密码进行加密操作
+        if (StringUtils.isEmpty(umsAdmin.getPassword())){
+            umsAdmin.setPassword("123456");
+        }
+        String md5Password = passwordEncoder.encode(umsAdmin.getPassword());
+        umsAdmin.setPassword(md5Password);
+        adminMapper.insert(umsAdmin);
+        updateRole(umsAdmin.getId(),umsAdmin.getRoleIds());
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public boolean updates(Long id, SysUser admin) {
+        //查询是否有相同用户名的用户
+        List<SysUser> umsAdminList = adminMapper.selectList(new QueryWrapper<SysUser>().eq("username",admin.getUsername()));
+        if (umsAdminList.size() > 0) {
+            return false;
+        }
+        admin.setId(id);
+        String md5Password = passwordEncoder.encode(admin.getPassword());
+        admin.setPassword(md5Password);
+        updateRole(id,admin.getRoleIds());
+         adminMapper.updateById(admin);
+        return true;
+    }
+
     /**
      * 将+-权限关系转化为对象
      */
@@ -156,5 +198,21 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return relation;
         }).collect(Collectors.toList());
         return relationList;
+    }
+    public void updateRole(Long adminId, String roleIds) {
+
+        adminRoleRelationMapper.delete(new QueryWrapper<SysUserRole>().eq("admin_id",adminId));
+        //建立新关系
+        if (!StringUtils.isEmpty(roleIds)) {
+            String[] rids = roleIds.split(",");
+            List<SysUserRole> list = new ArrayList<>();
+            for (String roleId : rids) {
+                SysUserRole roleRelation = new SysUserRole();
+                roleRelation.setAdminId(adminId);
+                roleRelation.setRoleId(Long.valueOf(roleId));
+                list.add(roleRelation);
+            }
+            adminRoleRelationService.saveBatch(list);
+        }
     }
 }

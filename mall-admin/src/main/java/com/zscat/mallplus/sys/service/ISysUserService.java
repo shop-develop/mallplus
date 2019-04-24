@@ -28,4 +28,7 @@ public interface ISysUserService extends IService<SysUser> {
     int updatePermissionByUserId(Long adminId, List<Long> permissionIds);
 
     List<SysPermission> getPermissionListByUserId(Long adminId);
+
+    boolean saves(SysUser entity);
+    boolean updates(Long id, SysUser admin);
 }
