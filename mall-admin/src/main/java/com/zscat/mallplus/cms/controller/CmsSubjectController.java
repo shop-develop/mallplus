@@ -55,7 +55,7 @@ public class CmsSubjectController {
     @PreAuthorize("hasAuthority('cms:CmsSubject:create')")
     public Object saveCmsSubject(@RequestBody CmsSubject entity) {
         try {
-            if (ICmsSubjectService.save(entity)) {
+            if (ICmsSubjectService.saves(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {

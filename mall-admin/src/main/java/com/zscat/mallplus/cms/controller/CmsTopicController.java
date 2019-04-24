@@ -59,7 +59,7 @@ public class CmsTopicController {
     @PreAuthorize("hasAuthority('cms:CmsTopic:create')")
     public Object saveCmsTopic(@RequestBody CmsTopic entity) {
         try {
-            if (ICmsTopicService.save(entity)) {
+            if (ICmsTopicService.saves(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {

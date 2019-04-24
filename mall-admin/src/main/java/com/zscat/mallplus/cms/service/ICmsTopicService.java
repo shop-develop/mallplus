@@ -1,7 +1,7 @@
 package com.zscat.mallplus.cms.service;
 
-import com.zscat.mallplus.cms.entity.CmsTopic;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.cms.entity.CmsTopic;
 
 /**
  * <p>
@@ -14,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ICmsTopicService extends IService<CmsTopic> {
 
     int updateVerifyStatus(Long ids, Long topicId,Integer verifyStatus);
+
+    boolean saves(CmsTopic entity);
 }

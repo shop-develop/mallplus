@@ -16,4 +16,6 @@ public interface ICmsSubjectService extends IService<CmsSubject> {
     int updateRecommendStatus(Long ids, Integer recommendStatus);
 
     int updateShowStatus(Long ids, Integer showStatus);
+
+    boolean saves(CmsSubject entity);
 }

@@ -55,7 +55,7 @@ public class CmsHelpController {
     @PreAuthorize("hasAuthority('cms:CmsHelp:create')")
     public Object saveCmsHelp(@RequestBody CmsHelp entity) {
         try {
-            if (ICmsHelpService.save(entity)) {
+            if (ICmsHelpService.saves(entity)) {
                 return new CommonResult().success();
             }
         } catch (Exception e) {

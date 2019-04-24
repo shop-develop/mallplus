@@ -3,11 +3,15 @@ package com.zscat.mallplus.cms.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zscat.mallplus.cms.entity.CmsSubject;
+import com.zscat.mallplus.cms.entity.CmsSubjectCategory;
+import com.zscat.mallplus.cms.mapper.CmsSubjectCategoryMapper;
 import com.zscat.mallplus.cms.mapper.CmsSubjectMapper;
 import com.zscat.mallplus.cms.service.ICmsSubjectService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * <p>
@@ -21,6 +25,22 @@ import javax.annotation.Resource;
 public class CmsSubjectServiceImpl extends ServiceImpl<CmsSubjectMapper, CmsSubject> implements ICmsSubjectService {
     @Resource
     private CmsSubjectMapper subjectMapper;
+
+
+    @Resource
+    private CmsSubjectCategoryMapper subjectCategoryMapper;
+
+    @Override
+    @Transactional
+    public boolean saves(CmsSubject entity) {
+        entity.setCreateTime(new Date());
+        subjectMapper.insert(entity);
+        CmsSubjectCategory category = subjectCategoryMapper.selectById(entity.getCategoryId());
+        category.setSubjectCount(category.getSubjectCount() + 1);
+        subjectCategoryMapper.updateById(category);
+        return true;
+    }
+
     @Override
     public int updateRecommendStatus(Long ids, Integer recommendStatus) {
         CmsSubject record = new CmsSubject();

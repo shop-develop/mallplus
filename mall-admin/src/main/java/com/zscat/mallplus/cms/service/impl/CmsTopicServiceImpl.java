@@ -1,15 +1,14 @@
 package com.zscat.mallplus.cms.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zscat.mallplus.cms.entity.CmsTopic;
-import com.zscat.mallplus.cms.entity.CmsTopicMember;
-import com.zscat.mallplus.cms.mapper.CmsTopicMapper;
-import com.zscat.mallplus.cms.mapper.CmsTopicMemberMapper;
+import com.zscat.mallplus.cms.entity.*;
+import com.zscat.mallplus.cms.mapper.*;
 import com.zscat.mallplus.cms.service.ICmsTopicService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * <p>
@@ -27,6 +26,19 @@ public class CmsTopicServiceImpl extends ServiceImpl<CmsTopicMapper, CmsTopic> i
     @Resource
     private CmsTopicMemberMapper topicMemberMapper;
 
+    @Resource
+    private CmsTopicCategoryMapper topicCategoryMapper;
+
+    @Override
+    @Transactional
+    public boolean saves(CmsTopic entity) {
+        entity.setCreateTime(new Date());
+        topicMapper.insert(entity);
+        CmsTopicCategory category = topicCategoryMapper.selectById(entity.getCategoryId());
+        category.setSubjectCount(category.getSubjectCount() + 1);
+        topicCategoryMapper.updateById(category);
+        return true;
+    }
     @Transactional
     @Override
     public int updateVerifyStatus(Long ids,Long topicId, Integer verifyStatus) {
