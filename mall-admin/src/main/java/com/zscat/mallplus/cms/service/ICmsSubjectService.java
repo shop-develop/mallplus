@@ -13,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICmsSubjectService extends IService<CmsSubject> {
 
+    int updateRecommendStatus(Long ids, Integer recommendStatus);
+
+    int updateShowStatus(Long ids, Integer showStatus);
 }

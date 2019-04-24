@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICmsTopicService extends IService<CmsTopic> {
 
+    int updateVerifyStatus(Long ids, Long topicId,Integer verifyStatus);
 }

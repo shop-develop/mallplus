@@ -1,10 +1,13 @@
 package com.zscat.mallplus.cms.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zscat.mallplus.cms.entity.CmsSubject;
 import com.zscat.mallplus.cms.mapper.CmsSubjectMapper;
 import com.zscat.mallplus.cms.service.ICmsSubjectService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -16,5 +19,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CmsSubjectServiceImpl extends ServiceImpl<CmsSubjectMapper, CmsSubject> implements ICmsSubjectService {
+    @Resource
+    private CmsSubjectMapper subjectMapper;
+    @Override
+    public int updateRecommendStatus(Long ids, Integer recommendStatus) {
+        CmsSubject record = new CmsSubject();
+        record.setRecommendStatus(recommendStatus);
+        return subjectMapper.update(record, new QueryWrapper<>(record).eq("id",ids));
+    }
 
+    @Override
+    public int updateShowStatus(Long ids, Integer showStatus) {
+        CmsSubject record = new CmsSubject();
+        record.setShowStatus(showStatus);
+        return subjectMapper.update(record, new QueryWrapper<>(record).eq("id",ids));
+    }
 }

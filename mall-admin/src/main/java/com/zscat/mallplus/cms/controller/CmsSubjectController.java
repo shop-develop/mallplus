@@ -131,5 +131,30 @@ public class CmsSubjectController {
             return new CommonResult().failed();
         }
     }
-
+    @ApiOperation("修改推荐状态")
+    @RequestMapping(value = "/update/updateRecommendStatus")
+    @ResponseBody
+    @SysLog(MODULE = "cms", REMARK = "修改推荐状态")
+    public Object updateRecommendStatus(@RequestParam("ids") Long ids,
+                                        @RequestParam("recommendStatus") Integer recommendStatus) {
+        int count = ICmsSubjectService.updateRecommendStatus(ids, recommendStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
+    @ApiOperation("修改展示状态")
+    @RequestMapping(value = "/update/updateShowStatus")
+    @ResponseBody
+    @SysLog(MODULE = "cms", REMARK = "修改展示状态")
+    public Object updateShowStatus(@RequestParam("ids") Long ids,
+                                   @RequestParam("showStatus") Integer showStatus) {
+        int count = ICmsSubjectService.updateShowStatus(ids, showStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
 }

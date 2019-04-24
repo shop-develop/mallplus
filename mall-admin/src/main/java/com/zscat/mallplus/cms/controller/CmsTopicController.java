@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
 import com.zscat.mallplus.cms.entity.CmsTopic;
+import com.zscat.mallplus.cms.entity.CmsTopicMember;
+import com.zscat.mallplus.cms.service.ICmsTopicMemberService;
 import com.zscat.mallplus.cms.service.ICmsTopicService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
@@ -32,6 +34,8 @@ import java.util.List;
 public class CmsTopicController {
     @Resource
     private ICmsTopicService ICmsTopicService;
+    @Resource
+    private ICmsTopicMemberService topicMemberService;
 
     @SysLog(MODULE = "cms", REMARK = "根据条件查询所有话题表列表")
     @ApiOperation("根据条件查询所有话题表列表")
@@ -132,4 +136,30 @@ public class CmsTopicController {
         }
     }
 
+    @ApiOperation("修改审核状态")
+    @RequestMapping(value = "/update/verifyStatus")
+    @ResponseBody
+    @SysLog(MODULE = "cms", REMARK = "修改审核状态")
+    public Object updateVerifyStatus(@RequestParam("ids") Long ids,
+                                     @RequestParam("topicId") Long topicId,
+                                     @RequestParam("verifyStatus") Integer verifyStatus) {
+
+        int count = ICmsTopicService.updateVerifyStatus(ids,topicId,verifyStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
+
+    @ApiOperation("根据活动id获取活动参与人员信息")
+    @RequestMapping(value = "/fetchCmsTopicMember/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    @SysLog(MODULE = "cms", REMARK = "根据活动id获取活动参与人员信息")
+    public Object fetchCmsTopicMember(@PathVariable Long id) {
+        CmsTopicMember member = new CmsTopicMember();
+        member.setTopicId(id);
+        List<CmsTopicMember> list = topicMemberService.list(new QueryWrapper<>(member));
+        return new CommonResult().success(list);
+    }
 }
