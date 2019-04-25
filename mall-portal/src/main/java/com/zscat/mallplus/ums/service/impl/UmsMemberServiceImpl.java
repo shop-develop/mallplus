@@ -6,17 +6,18 @@ import com.zscat.mallplus.config.WxAppletProperties;
 import com.zscat.mallplus.exception.ApiMallPlusException;
 import com.zscat.mallplus.single.ApiBaseAction;
 import com.zscat.mallplus.sys.mapper.SysAreaMapper;
+import com.zscat.mallplus.ums.entity.Sms;
 import com.zscat.mallplus.ums.entity.UmsMember;
 import com.zscat.mallplus.ums.mapper.UmsMemberMapper;
 import com.zscat.mallplus.ums.mapper.UmsMemberMemberTagRelationMapper;
 import com.zscat.mallplus.ums.service.IUmsMemberService;
 import com.zscat.mallplus.ums.service.RedisService;
-import com.zscat.mallplus.util.CharUtil;
-import com.zscat.mallplus.util.CommonUtil;
-import com.zscat.mallplus.util.JsonUtils;
-import com.zscat.mallplus.util.JwtTokenUtil;
+import com.zscat.mallplus.ums.service.SmsService;
+import com.zscat.mallplus.util.*;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.vo.MemberDetails;
+import com.zscat.mallplus.vo.SmsCode;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,10 +38,9 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * <p>
@@ -50,9 +50,12 @@ import java.util.Random;
  * @author zscat
  * @since 2019-04-19
  */
+@Slf4j
 @Service
 public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember> implements IUmsMemberService {
 
+    @Resource
+    private SmsService smsService;
     @Resource
     private UmsMemberMapper memberMapper;
 
@@ -77,6 +80,11 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     private Long AUTH_CODE_EXPIRE_SECONDS;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+
+    @Value("${aliyun.sms.expire-minute:15}")
+    private Integer expireMinute;
+    @Value("${aliyun.sms.day-count:30}")
+    private Integer dayCount;
     @Resource
     private UmsMemberMemberTagRelationMapper umsMemberMemberTagRelationMapper;
 
@@ -135,7 +143,83 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         umsMember.setPassword(null);
         return new CommonResult().success("注册成功", null);
     }
+    private String countKey(String phone) {
+        return "sms:count:" + LocalDate.now().toString() + ":" + phone;
+    }
 
+    private String smsRedisKey(String str) {
+        return "sms:" + str;
+    }
+    @Override
+    public SmsCode generateCode(String phone) {
+        //生成流水号
+        String uuid = UUID.randomUUID().toString();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 6; i++) {
+            sb.append(random.nextInt(10));
+        }
+        Map<String, String> map = new HashMap<>(2);
+        map.put("code", sb.toString());
+        map.put("phone", phone);
+
+        //短信验证码缓存15分钟，
+        redisService.set(smsRedisKey(uuid), JsonUtil.objectToJson(map));
+        redisService.expire(smsRedisKey(uuid), expireMinute*60);
+        log.info("缓存验证码：{}", map);
+
+        //存储sys_sms
+        saveSmsAndSendCode(phone, sb.toString());
+        SmsCode smsCode = new SmsCode();
+        smsCode.setKey(uuid);
+        return smsCode;
+    }
+    /**
+     * 保存短信记录，并发送短信
+     * @param phone
+     * @param code
+     */
+    private void saveSmsAndSendCode(String phone, String code) {
+        checkTodaySendCount(phone);
+
+        Sms sms = new Sms();
+        sms.setPhone(phone);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("code", code);
+       // smsService.save(sms, params);
+
+        //异步调用阿里短信接口发送短信
+        CompletableFuture.runAsync(() -> {
+            try {
+                smsService.sendSmsMsg(sms);
+            } catch (Exception e) {
+                log.error("发送短信失败：{}", e.getMessage());
+            }
+
+        });
+
+        // 当天发送验证码次数+1
+        String countKey = countKey(phone);
+        redisService.increment(countKey, 1L);
+        redisService.expire(countKey, 1*3600*24);
+    }
+    /**
+     * 获取当天发送验证码次数
+     * 限制号码当天次数
+     * @param phone
+     * @return
+     */
+    private void checkTodaySendCount(String phone) {
+        String value =   redisService.get(countKey(phone));
+        if (value != null) {
+            Integer count = Integer.valueOf(value );
+            if (count > dayCount) {
+                throw new IllegalArgumentException("已超过当天最大次数");
+            }
+        }
+
+    }
     @Override
     public CommonResult generateAuthCode(String telephone) {
         StringBuilder sb = new StringBuilder();

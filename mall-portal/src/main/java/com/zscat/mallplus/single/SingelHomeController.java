@@ -14,6 +14,8 @@ import com.zscat.mallplus.ums.service.IUmsMemberService;
 import com.zscat.mallplus.ums.service.RedisService;
 import com.zscat.mallplus.util.JsonUtil;
 import com.zscat.mallplus.utils.CommonResult;
+import com.zscat.mallplus.utils.PhoneUtil;
+import com.zscat.mallplus.vo.SmsCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,6 +115,23 @@ public class SingelHomeController {
         }
         return memberService.register(umsMember);
     }
+    /**
+     * 发送短信验证码
+     *
+     * @param phone
+     * @return
+     */
+    @PostMapping(value = "/sms-internal/codes", params = { "phone" })
+    public SmsCode sendSmsCode(String phone) {
+        if (!PhoneUtil.checkPhone(phone)) {
+            throw new IllegalArgumentException("手机号格式不正确");
+        }
+
+        SmsCode smsCode = memberService.generateCode(phone);
+
+        return smsCode;
+    }
+
     @IgnoreAuth
     @ApiOperation("获取验证码")
     @RequestMapping(value = "/getAuthCode", method = RequestMethod.GET)
