@@ -54,7 +54,7 @@ public class SmsCouponServiceImpl extends ServiceImpl<SmsCouponMapper, SmsCoupon
     public List<SmsCoupon> selectNotRecive(){
         SmsCoupon coupon = new SmsCoupon();
         coupon.setType(0);
-        return couponMapper.selectList(new QueryWrapper<>(coupon).gt("endTime",new Date()));
+        return couponMapper.selectList(new QueryWrapper<>(coupon).gt("end_time",new Date()));
     }
     @Override
     public CommonResult add(Long couponId) {

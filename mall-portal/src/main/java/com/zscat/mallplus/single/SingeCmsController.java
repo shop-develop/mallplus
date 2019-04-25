@@ -22,10 +22,7 @@ import com.zscat.mallplus.utils.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -91,7 +88,7 @@ public class SingeCmsController extends ApiBaseAction {
 
     @SysLog(MODULE = "cms", REMARK = "创建文章")
     @ApiOperation(value = "创建文章")
-    @GetMapping(value = "/createSubject")
+    @PostMapping(value = "/createSubject")
     public Object createSubject(CmsSubject subject, BindingResult result) {
         CommonResult commonResult;
         UmsMember member = this.getCurrentMember();

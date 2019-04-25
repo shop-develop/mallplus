@@ -23,10 +23,7 @@ import com.zscat.mallplus.util.DateUtils;
 import com.zscat.mallplus.utils.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -111,7 +108,7 @@ public class SingePmsController extends ApiBaseAction {
 
     @ApiOperation("创建商品")
     @SysLog(MODULE = "pms", REMARK = "创建商品")
-    @GetMapping(value = "/createGoods")
+    @PostMapping(value = "/createGoods")
     public Object createGoods(PmsProduct productParam) {
         CommonResult commonResult;
         UmsMember member = this.getCurrentMember();

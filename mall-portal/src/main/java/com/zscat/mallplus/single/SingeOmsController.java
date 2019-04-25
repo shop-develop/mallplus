@@ -12,10 +12,7 @@ import com.zscat.mallplus.ums.entity.UmsMember;
 import com.zscat.mallplus.utils.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -67,7 +64,7 @@ public class SingeOmsController extends ApiBaseAction {
      */
     @ApiOperation("商品详情生成订单")
     @SysLog(MODULE = "order", REMARK = "商品详情生成订单")
-    @GetMapping(value = "/bookOrder")
+    @PostMapping(value = "/bookOrder")
     public Object bookOrder(GroupAndOrderVo orderParam) {
         UmsMember member = this.getCurrentMember();
         return orderService.generateSingleOrder(orderParam,member);

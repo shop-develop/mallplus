@@ -62,7 +62,7 @@ public class SingeUmsController extends ApiBaseAction{
     }
 
     @ApiOperation(value = "会员绑定学校")
-    @GetMapping(value = "/bindSchool")
+    @PostMapping(value = "/bindSchool")
     @SysLog(MODULE = "ums", REMARK = "会员绑定学校")
     public Object bindSchool(@RequestParam(value = "schoolId", required = true) Long schoolId) {
         try {
@@ -77,8 +77,7 @@ public class SingeUmsController extends ApiBaseAction{
     }
 
     @ApiOperation(value = "会员绑定区域")
-    @RequestMapping(value = "/bindArea")
-    @ResponseBody
+    @PostMapping(value = "/bindArea")
     @SysLog(MODULE = "ums", REMARK = "会员绑定区域")
     public Object bindArea(@RequestParam(value = "areaIds", required = true) String  areaIds) {
         try {
