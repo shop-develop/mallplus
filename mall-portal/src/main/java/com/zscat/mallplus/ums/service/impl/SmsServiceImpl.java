@@ -4,6 +4,7 @@ package com.zscat.mallplus.ums.service.impl;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.zscat.mallplus.ums.entity.Sms;
 import com.zscat.mallplus.ums.mapper.SmsDao;
@@ -67,19 +68,19 @@ public class SmsServiceImpl implements SmsService {
 
 		SendSmsResponse response = null;
 //		测试时不需要开此 add by someday begin
-//		try {
-//			response = acsClient.getAcsResponse(request);
-//			if (response != null) {
-//				log.info("发送短信结果：code:{}，message:{}，requestId:{}，bizId:{}", response.getCode(), response.getMessage(),
-//						response.getRequestId(), response.getBizId());
-//
-//				sms.setCode(response.getCode());
-//				sms.setMessage(response.getMessage());
-//				sms.setBizId(response.getBizId());
-//			}
-//		} catch (ClientException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			response = acsClient.getAcsResponse(request);
+			if (response != null) {
+				log.info("发送短信结果：code:{}，message:{}，requestId:{}，bizId:{}", response.getCode(), response.getMessage(),
+						response.getRequestId(), response.getBizId());
+
+				sms.setCode(response.getCode());
+				sms.setMessage(response.getMessage());
+				sms.setBizId(response.getBizId());
+			}
+		} catch (ClientException e) {
+			e.printStackTrace();
+		}
 //		测试时不需要开此 add by someday end
 		update(sms);
 

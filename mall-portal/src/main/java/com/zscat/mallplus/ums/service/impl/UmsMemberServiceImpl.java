@@ -81,7 +81,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    @Value("${aliyun.sms.expire-minute:15}")
+    @Value("${aliyun.sms.expire-minute:1}")
     private Integer expireMinute;
     @Value("${aliyun.sms.day-count:30}")
     private Integer dayCount;
@@ -116,9 +116,9 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     @Override
     public CommonResult register(UmsMember user) {
         //验证验证码
-        /*if (!verifyAuthCode(authCode, telephone)) {
+        if (!verifyAuthCode(user.getCode(), user.getPhone())) {
             return new CommonResult().failed("验证码错误");
-        }*/
+        }
         if (!user.getPassword().equals(user.getConfimpassword())){
             return new CommonResult().failed("密码不一致");
         }
@@ -126,7 +126,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
 
         UmsMember queryM = new UmsMember();
         queryM.setUsername(user.getUsername());
-        queryM.setPassword(passwordEncoder.encode(user.getPassword()));
+      //  queryM.setPassword(passwordEncoder.encode(user.getPassword()));
         UmsMember umsMembers = memberMapper.selectOne(new QueryWrapper<>(queryM));
         if (umsMembers!=null) {
             return new CommonResult().failed("该用户已经存在");
@@ -164,8 +164,8 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         map.put("phone", phone);
 
         //短信验证码缓存15分钟，
-        redisService.set(smsRedisKey(uuid), JsonUtil.objectToJson(map));
-        redisService.expire(smsRedisKey(uuid), expireMinute*60);
+        redisService.set(REDIS_KEY_PREFIX_AUTH_CODE + phone, sb.toString());
+        redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE + phone, expireMinute*60);
         log.info("缓存验证码：{}", map);
 
         //存储sys_sms
@@ -184,16 +184,19 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
 
         Sms sms = new Sms();
         sms.setPhone(phone);
-
+        sms.setParams(code);
         Map<String, String> params = new HashMap<>();
         params.put("code", code);
-       // smsService.save(sms, params);
+        smsService.save(sms, params);
 
         //异步调用阿里短信接口发送短信
         CompletableFuture.runAsync(() -> {
             try {
                 smsService.sendSmsMsg(sms);
             } catch (Exception e) {
+                params.put("err",  e.getMessage());
+                smsService.save(sms, params);
+                e.printStackTrace();
                 log.error("发送短信失败：{}", e.getMessage());
             }
 
@@ -229,7 +232,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         }
         //验证码绑定手机号并存储到redis
         redisService.set(REDIS_KEY_PREFIX_AUTH_CODE + telephone, sb.toString());
-        redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE + telephone, AUTH_CODE_EXPIRE_SECONDS);
+        redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE + telephone, expireMinute);
         return new CommonResult().success("获取验证码成功", sb.toString());
     }
 
@@ -273,7 +276,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
 
 
     //对输入的验证码进行校验
-    private boolean verifyAuthCode(String authCode, String telephone) {
+    public boolean verifyAuthCode(String authCode, String telephone) {
         if (StringUtils.isEmpty(authCode)) {
             return false;
         }
@@ -369,23 +372,30 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     }
 
     @Override
-    public Map<String, Object> login(String username, String password) {
+    public Map<String, Object> login(UmsMember user) {
+
         Map<String, Object> tokenMap = new HashMap<>();
         String token = null;
         //密码需要客户端加密后传递
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, passwordEncoder.encode(password));
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(), passwordEncoder.encode(user.getPassword()));
         try {
+
            /* Authentication authentication = authenticationManager.authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             UmsMember member = this.getByUsername(username);
             token = jwtTokenUtil.generateToken(userDetails);*/
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            if(!passwordEncoder.matches(password,userDetails.getPassword())){
+            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+            if(!passwordEncoder.matches(user.getPassword(),userDetails.getPassword())){
                 throw new BadCredentialsException("密码不正确");
             }
-            UmsMember member = this.getByUsername(username);
+            UmsMember member = this.getByUsername(user.getUsername());
+            //验证验证码
+            if (!verifyAuthCode(user.getCode(), member.getPhone())) {
+                throw  new ApiMallPlusException("验证码错误");
+            }
+
             //   Authentication authentication = authenticationManager.authenticate(authenticationToken);
             Authentication authentication = new UsernamePasswordAuthenticationToken(
                     userDetails,null,userDetails.getAuthorities());

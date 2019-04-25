@@ -64,7 +64,7 @@ public interface IUmsMemberService extends IService<UmsMember> {
     public UmsMember queryByOpenId(String openId);
 
 
-    Map<String, Object> login(String username, String password);
+    Map<String, Object> login(UmsMember umsMember);
 
     String refreshToken(String token);
 

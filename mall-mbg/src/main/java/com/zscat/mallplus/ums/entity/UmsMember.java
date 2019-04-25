@@ -136,4 +136,7 @@ public class UmsMember implements Serializable {
     private Long schoolId;
     @TableField(exist = false)
     private String confimpassword;
+
+    @TableField(exist = false)
+    private String code;
 }

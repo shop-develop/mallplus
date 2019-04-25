@@ -88,13 +88,13 @@ public class SingelHomeController {
     @IgnoreAuth
     @ApiOperation(value = "登录以后返回token")
     @GetMapping(value = "/login")
-    @ResponseBody
     public Object login(UmsMember umsMember) {
         if (umsMember==null){
             return new CommonResult().validateFailed("用户名或密码错误");
         }
         try {
-            Map<String, Object> token = memberService.login(umsMember.getUsername(), umsMember.getPassword());
+
+            Map<String, Object> token = memberService.login(umsMember);
             if (token.get("token") == null) {
                 return new CommonResult().validateFailed("用户名或密码错误");
             }
@@ -102,18 +102,20 @@ public class SingelHomeController {
         } catch (AuthenticationException e) {
             return new CommonResult().validateFailed("用户名或密码错误");
         }
+        catch (Exception e) {
+            return new CommonResult().validateFailed(e.getMessage());
+        }
 
     }
 
     @IgnoreAuth
     @ApiOperation("注册")
-    @RequestMapping(value = "/reg")
-    @ResponseBody
+    @PostMapping(value = "/reg")
     public Object register(UmsMember umsMember) {
         if (umsMember==null){
             return new CommonResult().validateFailed("用户名或密码错误");
         }
-        return memberService.register(umsMember);
+        return new CommonResult().success(memberService.register(umsMember));
     }
     /**
      * 发送短信验证码
@@ -121,15 +123,21 @@ public class SingelHomeController {
      * @param phone
      * @return
      */
-    @PostMapping(value = "/sms-internal/codes", params = { "phone" })
-    public SmsCode sendSmsCode(String phone) {
-        if (!PhoneUtil.checkPhone(phone)) {
-            throw new IllegalArgumentException("手机号格式不正确");
+    @IgnoreAuth
+    @ApiOperation("获取验证码")
+    @PostMapping(value = "/sms/codes")
+    public Object sendSmsCode(@RequestParam String phone) {
+        try {
+            if (!PhoneUtil.checkPhone(phone)) {
+                throw new IllegalArgumentException("手机号格式不正确");
+            }
+            SmsCode smsCode = memberService.generateCode(phone);
+
+            return new CommonResult().success(smsCode);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new CommonResult().failed(e.getMessage());
         }
-
-        SmsCode smsCode = memberService.generateCode(phone);
-
-        return smsCode;
     }
 
     @IgnoreAuth
@@ -146,6 +154,6 @@ public class SingelHomeController {
     public Object updatePassword(@RequestParam String telephone,
                                  @RequestParam String password,
                                  @RequestParam String authCode) {
-        return memberService.updatePassword(telephone, password, authCode);
+        return new CommonResult().success(memberService.updatePassword(telephone, password, authCode));
     }
 }
