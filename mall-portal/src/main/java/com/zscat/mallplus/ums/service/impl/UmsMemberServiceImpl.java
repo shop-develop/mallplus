@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -291,9 +292,20 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, passwordEncoder.encode(password));
         try {
            /* Authentication authentication = authenticationManager.authenticate(authenticationToken);
-            SecurityContextHolder.getContext().setAuthentication(authentication);*/
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             UmsMember member = this.getByUsername(username);
+            token = jwtTokenUtil.generateToken(userDetails);*/
+
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            if(!passwordEncoder.matches(password,userDetails.getPassword())){
+                throw new BadCredentialsException("密码不正确");
+            }
+            UmsMember member = this.getByUsername(username);
+            //   Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                    userDetails,null,userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
             tokenMap.put("userInfo",member);
         } catch (AuthenticationException e) {
