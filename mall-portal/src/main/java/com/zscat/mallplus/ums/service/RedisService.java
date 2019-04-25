@@ -3,7 +3,7 @@ package com.zscat.mallplus.ums.service;
 /**
  * redis操作Service,
  * 对象和数组都以json形式进行存储
- * https://gitee.com/zscat-platform/mall on 2018/8/7.
+ * https://github.com/shenzhuan/mallplus on 2018/8/7.
  */
 public interface RedisService {
     /**

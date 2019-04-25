@@ -28,7 +28,7 @@
 > 后台管理系统
 
 小程序下载 地址 https://gitee.com/catshen/mall-applet
-后台管理下载地址 https://gitee.com/zscat-platform/mall
+后台管理下载地址 https://github.com/shenzhuan/mallplus
 项目演示地址： [http://39.98.190.128/index.html](http://39.98.190.128/index.html)  
   
 ![后台管理系统功能演示.gif](/document/resource/mall-admin.gif)
@@ -230,7 +230,7 @@ nginx | 1.10 | http://nginx.org/en/download.html
 - [Elasticsearch 技术解析与实战](https://book.douban.com/subject/26967826/)
 - [MongoDB实战(第二版)](https://book.douban.com/subject/27061123/)
 - [Kubernetes权威指南](https://book.douban.com/subject/26902153/)
-- [mall商城](https://gitee.com/zscat-platform/mall)
+- [mall商城](https://github.com/shenzhuan/mallplus)
 - [mybatis-plus](https://gitee.com/baomidou/mybatis-plus)
 
 

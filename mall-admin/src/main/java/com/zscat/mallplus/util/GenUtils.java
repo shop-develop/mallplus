@@ -4,7 +4,7 @@ package com.zscat.mallplus.util;
 import com.zscat.mallplus.bo.ColumnDO;
 import com.zscat.mallplus.bo.TableDO;
 import com.zscat.mallplus.config.Constant;
-import com.zscat.mallplus.exception.ApiRRException;
+import com.zscat.mallplus.exception.ApiMallPlusException;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
@@ -136,7 +136,7 @@ public class GenUtils {
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
             } catch (IOException e) {
-                throw new ApiRRException("渲染模板失败，表名：" + tableDO.getTableName(), e);
+                throw new ApiMallPlusException("渲染模板失败，表名：" + tableDO.getTableName(), e);
             }
         }
     }
@@ -170,7 +170,7 @@ public class GenUtils {
         try {
             return new PropertiesConfiguration("generator.properties");
         } catch (org.apache.commons.configuration.ConfigurationException e) {
-            throw new ApiRRException("获取配置文件失败，", e);
+            throw new ApiMallPlusException("获取配置文件失败，", e);
         }
     }
 

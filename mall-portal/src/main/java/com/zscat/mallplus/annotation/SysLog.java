@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * 系统日志注解
  *
- * @author lipengjun
+ * @author zscat
  * @email 939961241@qq.com
  * @date 2017年3月8日 上午10:19:56
  */

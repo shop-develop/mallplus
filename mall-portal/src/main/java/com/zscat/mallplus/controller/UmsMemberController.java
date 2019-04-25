@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * 会员登录注册管理Controller
- * https://gitee.com/zscat-platform/mall on 2018/8/3.
+ * https://github.com/shenzhuan/mallplus on 2018/8/3.
  */
 @Controller
 @Api(tags = "UmsMemberController", description = "会员管理系统")

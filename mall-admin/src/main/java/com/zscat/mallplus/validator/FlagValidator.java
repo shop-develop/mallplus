@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 
 /**
  * 用户验证状态是否在指定范围内的注解
- * https://gitee.com/zscat-platform/mall on 2018/4/26.
+ * https://github.com/shenzhuan/mallplus on 2018/4/26.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

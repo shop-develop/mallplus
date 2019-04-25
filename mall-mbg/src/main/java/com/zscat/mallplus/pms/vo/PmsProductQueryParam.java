@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * 产品查询参数
- * https://gitee.com/zscat-platform/mall on 2018/4/27.
+ * https://github.com/shenzhuan/mallplus on 2018/4/27.
  */
 @Data
 public class PmsProductQueryParam {

@@ -14,7 +14,7 @@ package com.zscat.mallplus.interceptor;
 
 import com.zscat.mallplus.annotation.IgnoreAuth;
 import com.zscat.mallplus.common.CommonConstant;
-import com.zscat.mallplus.exception.ApiRRException;
+import com.zscat.mallplus.exception.ApiMallPlusException;
 import com.zscat.mallplus.util.IpAddressUtil;
 import com.zscat.mallplus.util.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -137,7 +137,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             log.info(formMapKey(null, "token is null url=" + fullUrl, requestType,
                     IpAddressUtil.getIpAddr((HttpServletRequest)request), sbParams.toString(), "null")
                     + ",\"cost\":\"" + 0 + "ms\"");
-            throw new ApiRRException("请先登录", 401);
+            throw new ApiMallPlusException("请先登录", 401);
         }
 
         if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
@@ -161,7 +161,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                         + ",\"cost\":\"" + 0 + "ms\"");
             }
         }else {
-            throw new ApiRRException("请先登录", 401);
+            throw new ApiMallPlusException("请先登录", 401);
         }
         log.info("<== preHandle - 权限拦截器.  url={}", uri);
 

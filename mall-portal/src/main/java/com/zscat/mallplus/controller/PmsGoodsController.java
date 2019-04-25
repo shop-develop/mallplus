@@ -32,7 +32,7 @@ import java.util.Map;
 
 /**
  * 首页内容管理Controller
- * https://gitee.com/zscat-platform/mall on 2019/1/28.
+ * https://github.com/shenzhuan/mallplus on 2019/1/28.
  */
 @RestController
 @Api(tags = "GoodsController", description = "商品相关管理")

@@ -5,7 +5,7 @@ import com.zscat.mallplus.oms.entity.OmsCartItem;
 import java.math.BigDecimal;
 
 /**
- * https://gitee.com/zscat-platform/mall on 2018/8/27.
+ * https://github.com/shenzhuan/mallplus on 2018/8/27.
  * 购物车中促销信息的封装
  */
 public class CartPromotionItem extends OmsCartItem {

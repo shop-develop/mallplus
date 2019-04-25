@@ -11,7 +11,7 @@ import java.util.Collection;
 
 /**
  * 会员详情封装
- * https://gitee.com/zscat-platform/mall on 2018/8/3.
+ * https://github.com/shenzhuan/mallplus on 2018/8/3.
  */
 public class MemberDetails implements UserDetails {
     private UmsMember umsMember;

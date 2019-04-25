@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.List;
 
 /**
- * https://gitee.com/zscat-platform/mall on 2018/9/30.
+ * https://github.com/shenzhuan/mallplus on 2018/9/30.
  */
 public class SysPermissionNode extends SysPermission {
     @Getter

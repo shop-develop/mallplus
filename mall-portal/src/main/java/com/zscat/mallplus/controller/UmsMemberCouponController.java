@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * 用户优惠券管理Controller
- * https://gitee.com/zscat-platform/mall on 2018/8/29.
+ * https://github.com/shenzhuan/mallplus on 2018/8/29.
  */
 @Controller
 @Api(tags = "UmsMemberCouponController", description = "用户优惠券管理")

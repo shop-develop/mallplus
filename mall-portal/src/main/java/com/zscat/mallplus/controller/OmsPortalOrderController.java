@@ -3,7 +3,7 @@ package com.zscat.mallplus.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zscat.mallplus.constant.RedisKey;
-import com.zscat.mallplus.exception.ApiRRException;
+import com.zscat.mallplus.exception.ApiMallPlusException;
 import com.zscat.mallplus.oms.entity.OmsOrder;
 import com.zscat.mallplus.oms.entity.OmsOrderItem;
 import com.zscat.mallplus.oms.service.IOmsOrderItemService;
@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * 订单管理Controller
- * https://gitee.com/zscat-platform/mall on 2018/8/30.
+ * https://github.com/shenzhuan/mallplus on 2018/8/30.
  */
 @Slf4j
 @Controller
@@ -92,7 +92,7 @@ public class OmsPortalOrderController extends ApiBaseAction {
         try {
             ConfirmOrderResult result = orderService.submitPreview(orderParam);
             return new CommonResult().success(result);
-        }catch(ApiRRException e){
+        }catch(ApiMallPlusException e){
             return new CommonResult().failed(e.getMessage());
         }catch (Exception e){
             e.printStackTrace();

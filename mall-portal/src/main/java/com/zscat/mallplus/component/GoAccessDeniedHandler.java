@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * https://gitee.com/zscat-platform/mall on 2018/8/6.
+ * https://github.com/shenzhuan/mallplus on 2018/8/6.
  */
 public class GoAccessDeniedHandler implements AccessDeniedHandler {
     @Override

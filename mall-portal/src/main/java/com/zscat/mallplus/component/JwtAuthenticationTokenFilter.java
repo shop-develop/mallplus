@@ -26,7 +26,7 @@ import java.util.Map;
 
 /**
  * JWT登录授权过滤器
- * https://gitee.com/zscat-platform/mall on 2018/4/26.
+ * https://github.com/shenzhuan/mallplus on 2018/4/26.
  */
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);

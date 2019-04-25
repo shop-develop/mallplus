@@ -9,7 +9,7 @@ import com.zscat.mallplus.pms.entity.PmsSkuStock;
 import java.util.List;
 
 /**
- * https://gitee.com/zscat-platform/mall on 2018/8/27.
+ * https://github.com/shenzhuan/mallplus on 2018/8/27.
  * 商品的促销信息，包括sku、打折优惠、满减优惠
  */
 public class PromotionProduct extends PmsProduct {

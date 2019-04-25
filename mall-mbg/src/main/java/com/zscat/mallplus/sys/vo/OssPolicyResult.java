@@ -2,7 +2,7 @@ package com.zscat.mallplus.sys.vo;
 
 /**
  * 获取OSS上传授权返回结果
- * https://gitee.com/zscat-platform/mall on 2018/5/17.
+ * https://github.com/shenzhuan/mallplus on 2018/5/17.
  */
 public class OssPolicyResult {
     private String accessKeyId;

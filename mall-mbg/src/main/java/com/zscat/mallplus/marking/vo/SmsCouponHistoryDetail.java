@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 优惠券领取历史详情封装
- * https://gitee.com/zscat-platform/mall on 2018/8/29.
+ * https://github.com/shenzhuan/mallplus on 2018/8/29.
  */
 public class SmsCouponHistoryDetail extends SmsCouponHistory {
     //相关优惠券信息

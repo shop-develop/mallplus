@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * redis操作Service的实现类
- * https://gitee.com/zscat-platform/mall on 2018/8/7.
+ * https://github.com/shenzhuan/mallplus on 2018/8/7.
  */
 @Service
 public class RedisServiceImpl implements RedisService {

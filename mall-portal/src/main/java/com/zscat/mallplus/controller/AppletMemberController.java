@@ -48,7 +48,7 @@ import java.util.Map;
 
 /**
  * 会员登录注册管理Controller
- * https://gitee.com/zscat-platform/mall on 2018/8/3.
+ * https://github.com/shenzhuan/mallplus on 2018/8/3.
  */
 @RestController
 @Api(tags = "AppletMemberController", description = "小程序登录首页")

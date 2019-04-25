@@ -30,7 +30,7 @@ import java.util.Map;
 
 /**
  * 统一日志处理切面
- * https://gitee.com/zscat-platform/mall on 2018/4/26.
+ * https://github.com/shenzhuan/mallplus on 2018/4/26.
  */
 @Aspect
 @Component

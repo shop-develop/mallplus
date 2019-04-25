@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  * 当未登录或者token失效访问接口时，自定义的返回结果
- * https://gitee.com/zscat-platform/mall on 2018/5/14.
+ * https://github.com/shenzhuan/mallplus on 2018/5/14.
  */
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {

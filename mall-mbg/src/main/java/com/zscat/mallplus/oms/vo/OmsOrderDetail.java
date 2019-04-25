@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * 订单详情信息
- * https://gitee.com/zscat-platform/mall on 2018/10/11.
+ * https://github.com/shenzhuan/mallplus on 2018/10/11.
  */
 public class OmsOrderDetail extends OmsOrder {
     @Getter

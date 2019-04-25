@@ -5,40 +5,40 @@
 
 package com.zscat.mallplus.exception;
 
-public class BusinessException extends RuntimeException {
+public class BusinessMallException extends RuntimeException {
     private static final long serialVersionUID = 2874510430549463213L;
     private int returnCode;
 
-    public BusinessException() {
+    public BusinessMallException() {
     }
 
-    public BusinessException(String message, Throwable cause) {
+    public BusinessMallException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public BusinessException(String message) {
+    public BusinessMallException(String message) {
         super(message);
     }
 
-    public BusinessException(Throwable cause) {
+    public BusinessMallException(Throwable cause) {
         super(cause);
     }
 
-    public BusinessException(int returnCode) {
+    public BusinessMallException(int returnCode) {
         this.returnCode = returnCode;
     }
 
-    public BusinessException(Exception e, int returnCode) {
+    public BusinessMallException(Exception e, int returnCode) {
         super(e);
         this.returnCode = returnCode;
     }
 
-    public BusinessException(String message, int returnCode) {
+    public BusinessMallException(String message, int returnCode) {
         super(message);
         this.returnCode = returnCode;
     }
 
-    public BusinessException(String message, Exception e, int returnCode) {
+    public BusinessMallException(String message, Exception e, int returnCode) {
         super(message, e);
         this.returnCode = returnCode;
     }

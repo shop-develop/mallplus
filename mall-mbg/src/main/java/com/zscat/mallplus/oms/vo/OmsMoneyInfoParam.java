@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 /**
  * 修改订单费用信息参数
- * https://gitee.com/zscat-platform/mall on 2018/10/29.
+ * https://github.com/shenzhuan/mallplus on 2018/10/29.
  */
 @Getter
 @Setter

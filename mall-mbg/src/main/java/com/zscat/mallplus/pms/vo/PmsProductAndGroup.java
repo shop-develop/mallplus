@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * 创建和修改商品时使用的参数
- * https://gitee.com/zscat-platform/mall on 2018/4/26.
+ * https://github.com/shenzhuan/mallplus on 2018/4/26.
  */
 @Data
 public class PmsProductAndGroup extends PmsProduct {

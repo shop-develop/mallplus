@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * 首页内容返回信息封装
- * https://gitee.com/zscat-platform/mall on 2019/1/28.
+ * https://github.com/shenzhuan/mallplus on 2019/1/28.
  */
 @Getter
 @Setter

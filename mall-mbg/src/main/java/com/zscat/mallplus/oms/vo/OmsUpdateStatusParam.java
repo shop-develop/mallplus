@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 /**
  * 确认收货提交参数
- * https://gitee.com/zscat-platform/mall on 2018/10/18.
+ * https://github.com/shenzhuan/mallplus on 2018/10/18.
  */
 @Getter
 @Setter

@@ -3,7 +3,7 @@ package com.zscat.mallplus.ums.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zscat.mallplus.config.WxAppletProperties;
-import com.zscat.mallplus.exception.ApiRRException;
+import com.zscat.mallplus.exception.ApiMallPlusException;
 import com.zscat.mallplus.single.ApiBaseAction;
 import com.zscat.mallplus.sys.mapper.SysAreaMapper;
 import com.zscat.mallplus.ums.entity.UmsMember;
@@ -273,7 +273,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
             resultObj.put("userInfo", me);
 
             return ApiBaseAction.toResponsSuccess(resultObj);
-        } catch (ApiRRException e) {
+        } catch (ApiMallPlusException e) {
             e.printStackTrace();
             return ApiBaseAction.toResponsFail(e.getMessage());
         }catch (Exception e) {

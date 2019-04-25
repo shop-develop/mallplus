@@ -28,7 +28,7 @@ import java.util.List;
 
 /**
  * 首页内容管理Controller
- * https://gitee.com/zscat-platform/mall on 2019/1/28.
+ * https://github.com/shenzhuan/mallplus on 2019/1/28.
  */
 @RestController
 @Api(tags = "HomeController", description = "首页内容管理")

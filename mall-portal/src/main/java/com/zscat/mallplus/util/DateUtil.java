@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * 日期工具类
- * https://gitee.com/zscat-platform/mall on 2019/1/29.
+ * https://github.com/shenzhuan/mallplus on 2019/1/29.
  */
 public class DateUtil {
 

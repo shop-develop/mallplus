@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * https://gitee.com/zscat-platform/mall on 2018/8/24.
+ * https://github.com/shenzhuan/mallplus on 2018/8/24.
  * 订单超时取消并解锁库存的定时器
  */
 @Component

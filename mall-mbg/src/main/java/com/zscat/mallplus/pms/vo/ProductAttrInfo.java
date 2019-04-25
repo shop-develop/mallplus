@@ -3,7 +3,7 @@ package com.zscat.mallplus.pms.vo;
 
 /**
  * 商品分类对应属性信息
- * https://gitee.com/zscat-platform/mall on 2018/5/23.
+ * https://github.com/shenzhuan/mallplus on 2018/5/23.
  */
 public class ProductAttrInfo {
     private Long attributeId;

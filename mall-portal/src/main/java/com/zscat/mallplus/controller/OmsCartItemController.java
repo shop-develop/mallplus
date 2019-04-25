@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * 购物车管理Controller
- * https://gitee.com/zscat-platform/mall on 2018/8/2.
+ * https://github.com/shenzhuan/mallplus on 2018/8/2.
  */
 @Controller
 @Api(tags = "OmsCartItemController", description = "购物车管理")

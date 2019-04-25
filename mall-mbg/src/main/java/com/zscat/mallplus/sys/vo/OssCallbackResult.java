@@ -1,7 +1,7 @@
 package com.zscat.mallplus.sys.vo;
 
 /**
- * https://gitee.com/zscat-platform/mall on 2018/5/17.
+ * https://github.com/shenzhuan/mallplus on 2018/5/17.
  */
 public class OssCallbackResult {
     private String filename;

@@ -34,7 +34,7 @@ import java.util.List;
 
 /**
  * SpringSecurity的配置
- * https://gitee.com/zscat-platform/mall on 2018/4/26.
+ * https://github.com/shenzhuan/mallplus on 2018/4/26.
  */
 @Configuration
 @EnableWebSecurity

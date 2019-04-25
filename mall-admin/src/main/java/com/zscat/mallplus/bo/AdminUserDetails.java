@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 /**
  * SpringSecurity需要的用户详情
- * https://gitee.com/zscat-platform/mall on 2018/4/26.
+ * https://github.com/shenzhuan/mallplus on 2018/4/26.
  */
 public class AdminUserDetails implements UserDetails {
     private SysUser umsAdmin;

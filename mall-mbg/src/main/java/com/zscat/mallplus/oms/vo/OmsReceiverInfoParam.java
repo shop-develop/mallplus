@@ -5,7 +5,7 @@ import lombok.Setter;
 
 /**
  * 订单修改收货人信息参数
- * https://gitee.com/zscat-platform/mall on 2018/10/29.
+ * https://github.com/shenzhuan/mallplus on 2018/10/29.
  */
 @Getter
 @Setter

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 购物车中选择规格的商品信息
- * https://gitee.com/zscat-platform/mall on 2018/8/2.
+ * https://github.com/shenzhuan/mallplus on 2018/8/2.
  */
 public class CartProduct extends PmsProduct {
     private List<PmsProductAttribute> productAttributeList;

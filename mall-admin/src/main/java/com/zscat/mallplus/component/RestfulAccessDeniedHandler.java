@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  * 当访问接口没有权限时，自定义的返回结果
- * https://gitee.com/zscat-platform/mall on 2018/4/26.
+ * https://github.com/shenzhuan/mallplus on 2018/4/26.
  */
 @Component
 public class RestfulAccessDeniedHandler implements AccessDeniedHandler {

@@ -3,7 +3,7 @@ package com.zscat.mallplus.oms.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zscat.mallplus.config.WxAppletProperties;
-import com.zscat.mallplus.exception.ApiRRException;
+import com.zscat.mallplus.exception.ApiMallPlusException;
 import com.zscat.mallplus.marking.entity.*;
 import com.zscat.mallplus.marking.service.ISmsCouponHistoryService;
 import com.zscat.mallplus.marking.service.ISmsCouponService;
@@ -120,14 +120,14 @@ public class OmsOrderServiceImpl extends ServiceImpl<OmsOrderMapper, OmsOrder> i
         //设置订单为已付款
         OmsOrder tbOrder=orderMapper.selectById(tbThanks.getOrderId());
         if (tbOrder==null){
-            throw new ApiRRException("订单不存在");
+            throw new ApiMallPlusException("订单不存在");
         }
         tbOrder.setStatus(1);
         tbOrder.setPayType(tbThanks.getPayType());
         tbOrder.setPaymentTime(new Date());
         tbOrder.setModifyTime(new Date());
         if(orderMapper.updateById(tbOrder)!=1){
-            throw new ApiRRException("更新订单失败");
+            throw new ApiMallPlusException("更新订单失败");
         }
         //恢复所有下单商品的锁定库存，扣减真实库存
         OmsOrderItem queryO = new OmsOrderItem();
@@ -168,7 +168,7 @@ public class OmsOrderServiceImpl extends ServiceImpl<OmsOrderMapper, OmsOrder> i
         if( "1".equals(type)) {
             String cartId = orderParam.getCartId();
             if (org.apache.commons.lang.StringUtils.isBlank(cartId)){
-                throw new  ApiRRException("参数为空");
+                throw new ApiMallPlusException("参数为空");
             }
             OmsCartItem omsCartItem = cartItemService.selectById(Long.valueOf(cartId));
             List<OmsCartItem> list = new ArrayList<>();
@@ -179,7 +179,7 @@ public class OmsOrderServiceImpl extends ServiceImpl<OmsOrderMapper, OmsOrder> i
         }else if ("2".equals(type)){
             String cart_id_list1 =orderParam.getCartIds();
             if (org.apache.commons.lang.StringUtils.isBlank(cart_id_list1)){
-                throw new ApiRRException("参数为空");
+                throw new ApiMallPlusException("参数为空");
             }
             String[] ids1 =cart_id_list1.split(",");
             List<Long> resultList = new ArrayList<>(ids1.length);

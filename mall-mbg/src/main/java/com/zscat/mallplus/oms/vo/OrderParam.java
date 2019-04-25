@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * 生成订单时传入的参数
- * https://gitee.com/zscat-platform/mall on 2018/8/30.
+ * https://github.com/shenzhuan/mallplus on 2018/8/30.
  */
 @Data
 public class OrderParam {

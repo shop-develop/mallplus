@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * 包含有分类下属性的dto
- * https://gitee.com/zscat-platform/mall on 2018/5/24.
+ * https://github.com/shenzhuan/mallplus on 2018/5/24.
  */
 public class PmsProductAttributeCategoryItem extends PmsProductAttributeCategory {
     private List<PmsProductAttribute> productAttributeList;

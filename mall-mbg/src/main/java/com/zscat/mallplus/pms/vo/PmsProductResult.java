@@ -2,7 +2,7 @@ package com.zscat.mallplus.pms.vo;
 
 /**
  * 查询单个产品进行修改时返回的结果
- * https://gitee.com/zscat-platform/mall on 2018/4/26.
+ * https://github.com/shenzhuan/mallplus on 2018/4/26.
  */
 public class PmsProductResult extends PmsProductParam {
     //商品所选分类的父id

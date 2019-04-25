@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * 会员收货地址管理Controller
- * https://gitee.com/zscat-platform/mall on 2018/8/28.
+ * https://github.com/shenzhuan/mallplus on 2018/8/28.
  */
 @Controller
 @Api(tags = "UmsMemberReceiveAddressController", description = "会员收货地址管理")

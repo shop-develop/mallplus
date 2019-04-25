@@ -12,7 +12,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 /**
  * Jackson配置类
  * json不返回null的字段
- * https://gitee.com/zscat-platform/mall on 2018/8/2.
+ * https://github.com/shenzhuan/mallplus on 2018/8/2.
  */
 @Configuration
 public class JacksonConfig {
