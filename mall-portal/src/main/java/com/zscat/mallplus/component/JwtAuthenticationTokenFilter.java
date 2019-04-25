@@ -79,10 +79,15 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
         endTime = System.currentTimeMillis();
         String requestType = ((HttpServletRequest)request).getMethod();
+if (fullUrl.contains(".css") || fullUrl.contains(".js")||fullUrl.contains(".png")||
+        fullUrl.contains(".jpeg")||fullUrl.contains(".jpg")){
 
-        logger.info(formMapKey(11, fullUrl, requestType,
-                IpAddressUtil.getIpAddr((HttpServletRequest) request), sbParams.toString(), authHeader)
-                + ",\"cost\":\"" + (endTime - startTime) + "ms\"");
+}else {
+    logger.info(formMapKey(11, fullUrl, requestType,
+            IpAddressUtil.getIpAddr((HttpServletRequest) request), sbParams.toString(), authHeader)
+            + ",\"cost\":\"" + (endTime - startTime) + "ms\"");
+}
+
     }
     private String formMapKey(Object userId, String mothedName, String requestType,
                               String ip, String params, String token) {

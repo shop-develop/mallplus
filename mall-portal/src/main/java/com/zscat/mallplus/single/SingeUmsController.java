@@ -29,7 +29,7 @@ import java.util.List;
  * @Description:
  */
 @RestController
-@Api(tags = "UmsController", description = "会员关系管理")
+@Api(tags = "SingeUmsController", description = "会员关系管理")
 @RequestMapping("/api/single/user")
 public class SingeUmsController extends ApiBaseAction{
 

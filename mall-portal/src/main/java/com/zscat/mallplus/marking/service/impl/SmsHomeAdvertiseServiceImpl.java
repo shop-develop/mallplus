@@ -25,8 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -109,27 +109,35 @@ public class SmsHomeAdvertiseServiceImpl extends ServiceImpl<SmsHomeAdvertiseMap
     @Override
     public List<PmsBrand> getRecommendBrandList(int pageNum, int pageSize) {
         List<SmsHomeBrand> brands = homeBrandService.list(new QueryWrapper<>());
-        List<Long> ids = new ArrayList<>();
-        return (List<PmsBrand>) brandService.listByIds(brands);
+        List<Long> ids = brands.stream()
+                .map(SmsHomeBrand::getId)
+                .collect(Collectors.toList());
+        return (List<PmsBrand>) brandService.listByIds(ids);
 
     }
     @Override
     public List<PmsProduct> getNewProductList(int pageNum, int pageSize) {
         List<SmsHomeNewProduct> brands = homeNewProductService.list(new QueryWrapper<>());
-        List<Long> ids = new ArrayList<>();
-        return (List<PmsProduct>) pmsProductService.listByIds(brands);
+        List<Long> ids = brands.stream()
+                .map(SmsHomeNewProduct::getId)
+                .collect(Collectors.toList());
+        return (List<PmsProduct>) pmsProductService.listByIds(ids);
     }
     @Override
     public List<PmsProduct> getHotProductList(int pageNum, int pageSize) {
         List<SmsHomeRecommendProduct> brands = homeRecommendProductService.list(new QueryWrapper<>());
-        List<Long> ids = new ArrayList<>();
-        return (List<PmsProduct>) pmsProductService.listByIds(brands);
+        List<Long> ids = brands.stream()
+                .map(SmsHomeRecommendProduct::getId)
+                .collect(Collectors.toList());
+        return (List<PmsProduct>) pmsProductService.listByIds(ids);
     }
     @Override
     public List<CmsSubject> getRecommendSubjectList(int pageNum, int pageSize) {
         List<SmsHomeRecommendSubject> brands = homeRecommendSubjectService.list(new QueryWrapper<>());
-        List<Long> ids = new ArrayList<>();
-        return (List<CmsSubject>) subjectService.listByIds(brands);
+        List<Long> ids = brands.stream()
+                .map(SmsHomeRecommendSubject::getId)
+                .collect(Collectors.toList());
+        return (List<CmsSubject>) subjectService.listByIds(ids);
     }
     @Override
     public List<SmsHomeAdvertise> getHomeAdvertiseList() {

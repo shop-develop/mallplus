@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  * @Description:
  */
 @RestController
-@Api(tags = "OmsController", description = "订单管理系统")
+@Api(tags = "SingeOmsController", description = "订单管理系统")
 @RequestMapping("/api/single/oms")
 public class SingeOmsController extends ApiBaseAction {
 

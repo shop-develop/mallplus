@@ -29,7 +29,7 @@ import java.util.Map;
  * https://github.com/shenzhuan/mallplus on 2019/1/28.
  */
 @RestController
-@Api(tags = "HomeController", description = "首页内容管理")
+@Api(tags = "SingelHomeController", description = "首页内容管理")
 @RequestMapping("/api/single/home")
 public class SingelHomeController {
 

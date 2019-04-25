@@ -33,7 +33,7 @@ import java.util.List;
  * @Description:
  */
 @RestController
-@Api(tags = "CmsController", description = "内容关系管理")
+@Api(tags = "SingeCmsController", description = "内容关系管理")
 @RequestMapping("/api/single/cms")
 public class SingeCmsController extends ApiBaseAction {
 
