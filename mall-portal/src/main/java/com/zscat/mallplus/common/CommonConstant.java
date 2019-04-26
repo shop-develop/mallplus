@@ -1,6 +1,7 @@
 package com.zscat.mallplus.common;
 
 
+import com.zscat.mallplus.pay.ConfigUtil;
 
 public class CommonConstant {
 	
@@ -58,4 +59,5 @@ public class CommonConstant {
 	public static final int VOTE_LIMITED = 301;
 	
 	public static final String CUSTOM_COURSE_SALT = "FITCAMP_CUSTOMCOURSE_";
+    public static final String DOMAIN = ConfigUtil.getString("mallplus.domain");
 }
