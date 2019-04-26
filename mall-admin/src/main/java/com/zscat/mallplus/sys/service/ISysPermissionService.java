@@ -1,7 +1,8 @@
 package com.zscat.mallplus.sys.service;
 
-import com.zscat.mallplus.sys.entity.SysPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.bo.Tree;
+import com.zscat.mallplus.sys.entity.SysPermission;
 import com.zscat.mallplus.sys.entity.SysPermissionNode;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public interface ISysPermissionService extends IService<SysPermission> {
 
-    Object getPermissionsByUserId(Long id);
+    List<Tree<SysPermission>> getPermissionsByUserId(Long id);
 
     List<SysPermissionNode> treeList();
 }

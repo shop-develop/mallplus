@@ -33,4 +33,6 @@ public interface ISysUserService extends IService<SysUser> {
     boolean updates(Long id, SysUser admin);
 
     List<SysPermission> listUserPerms(Long id);
+
+    void removePermissRedis(Long id);
 }

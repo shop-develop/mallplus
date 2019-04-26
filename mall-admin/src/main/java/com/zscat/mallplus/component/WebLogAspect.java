@@ -39,7 +39,7 @@ public class WebLogAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
     private ThreadLocal<Long> startTime = new ThreadLocal<>();
 
-    @Pointcut("execution(public * com.zscat.mallplus.controller.*.*(..))")
+    @Pointcut("execution(public * com.zscat.mallplus.*.controller.*.*(..))")
     public void webLog() {
     }
 
