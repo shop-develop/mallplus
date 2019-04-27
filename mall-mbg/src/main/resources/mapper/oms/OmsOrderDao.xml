@@ -55,7 +55,7 @@
         <result column="school_id" property="schoolId" />
     </resultMap>
     <resultMap id="orderDetailMap" type="com.zscat.mallplus.oms.vo.OmsOrderDetail"
-               extends="com.zscat.mallplus.oms.mapper.OmsOrderMapper.BaseResultMap">
+               extends="BaseResultMap">
         <collection property="orderItemList" columnPrefix="ot_"
                     resultMap="com.zscat.mallplus.oms.mapper.OmsOrderItemMapper.BaseResultMap">
         </collection>
