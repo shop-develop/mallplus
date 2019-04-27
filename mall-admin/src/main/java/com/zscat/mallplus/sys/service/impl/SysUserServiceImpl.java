@@ -16,6 +16,7 @@ import com.zscat.mallplus.util.JsonUtil;
 import com.zscat.mallplus.util.JwtTokenUtil;
 import com.zscat.mallplus.util.UserUtils;
 import com.zscat.mallplus.utils.CommonResult;
+import com.zscat.mallplus.utils.ValidatorUtils;
 import com.zscat.mallplus.vo.SmsCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -242,6 +243,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public Object reg(SysUser umsAdmin) {
+        if (ValidatorUtils.empty(umsAdmin.getUsername())) {
+            return new CommonResult().failed("手机号为空");
+        }
+        if (ValidatorUtils.empty(umsAdmin.getPassword())) {
+            return new CommonResult().failed("密码为空");
+        }
         //验证验证码
         if (!verifyAuthCode(umsAdmin.getCode(), umsAdmin.getUsername())) {
             return new CommonResult().failed("验证码错误");
@@ -264,7 +271,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         String md5Password = passwordEncoder.encode(umsAdmin.getPassword());
         umsAdmin.setPassword(md5Password);
         adminMapper.insert(umsAdmin);
-        updateRole(umsAdmin.getId(),umsAdmin.getRoleIds());
+        SysUserRole roleRelation = new SysUserRole();
+        roleRelation.setAdminId(umsAdmin.getId());
+        roleRelation.setRoleId(5l);
 
         return true;
     }
@@ -313,6 +322,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         sms.setParams(code);
         Map<String, String> params = new HashMap<>();
         params.put("code", code);
+        params.put("admin", "admin");
         smsService.save(sms, params);
 
         //异步调用阿里短信接口发送短信
@@ -334,11 +344,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         redisService.expire(countKey, 1*3600*24);
     }
     private String countKey(String phone) {
-        return "sms:count:" + LocalDate.now().toString() + ":" + phone;
+        return "sms:admin:count:" + LocalDate.now().toString() + ":" + phone;
     }
 
     private String smsRedisKey(String str) {
-        return "sms:" + str;
+        return "sms:admin:" + str;
     }
     /**
      * 获取当天发送验证码次数
