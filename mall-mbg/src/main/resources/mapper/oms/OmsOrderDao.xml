@@ -134,26 +134,7 @@
         </foreach>
     </update>
 
-    <select id="getTimeOutOrders" resultMap="orderDetailMap">
-        SELECT
-        o.id,
-        o.order_sn,
-        o.coupon_id,
-        o.integration,
-        o.member_id,
-        o.use_integration,
-        ot.id ot_id,
-        ot.product_name ot_product_name,
-        ot.product_sku_id ot_product_sku_id,
-        ot.product_sku_code ot_product_sku_code,
-        ot.product_quantity ot_product_quantity
-        FROM
-        oms_order o
-        LEFT JOIN oms_order_item ot ON o.id = ot.order_id
-        WHERE
-        o.status = 0
-        AND o.create_time &lt; date_add(NOW(), INTERVAL -#{minute} MINUTE);
-    </select>
+
     <update id="updateOrderStatus">
         update oms_order
         set status=#{status}
