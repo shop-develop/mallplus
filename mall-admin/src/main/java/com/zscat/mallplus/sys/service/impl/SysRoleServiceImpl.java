@@ -10,6 +10,7 @@ import com.zscat.mallplus.sys.mapper.SysRoleMapper;
 import com.zscat.mallplus.sys.mapper.SysRolePermissionMapper;
 import com.zscat.mallplus.sys.service.ISysRolePermissionService;
 import com.zscat.mallplus.sys.service.ISysRoleService;
+import com.zscat.mallplus.sys.service.ISysUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -39,7 +40,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     private SysRolePermissionMapper rolePermissionRelationMapper;
     @Resource
     private ISysRolePermissionService rolePermissionRelationDao;
-    
+    @Resource
+    private ISysUserService userService;
     @Override
     public List<SysPermission> getPermissionList(Long roleId) {
         return permissionMapper.getPermissionList(roleId);
@@ -67,6 +69,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         return true;
     }
     public void updatePermission(Long roleId, String permissionIds) {
+
         //先删除原有关系
         rolePermissionRelationMapper.delete(new QueryWrapper<SysRolePermission>().eq("role_id",roleId));
         //批量插入新关系

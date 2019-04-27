@@ -6,6 +6,7 @@ import com.zscat.mallplus.annotation.SysLog;
 import com.zscat.mallplus.sys.entity.SysPermission;
 import com.zscat.mallplus.sys.entity.SysPermissionNode;
 import com.zscat.mallplus.sys.service.ISysPermissionService;
+import com.zscat.mallplus.ums.service.RedisService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
@@ -34,6 +35,9 @@ import java.util.List;
 public class SysPermissionController extends BaseController{
     @Resource
     private ISysPermissionService ISysPermissionService;
+
+    @Resource
+    private RedisService redisService;
 
     @SysLog(MODULE = "sys", REMARK = "根据条件查询所有后台用户权限表列表")
     @ApiOperation("根据条件查询所有后台用户权限表列表")
@@ -141,7 +145,8 @@ public class SysPermissionController extends BaseController{
     @RequestMapping(value = "/findPermissions", method = RequestMethod.GET)
     @ResponseBody
     public Object findPermissions() {
-        return new CommonResult().success(ISysPermissionService.getPermissionsByUserId(getCurrentUser().getId()));
+        Long userId = getCurrentUser().getId();
+        return new CommonResult().success(ISysPermissionService.getPermissionsByUserId(userId));
     }
 
     @SysLog(MODULE = "sys", REMARK = "以层级结构返回所有权限")

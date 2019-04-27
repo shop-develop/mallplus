@@ -8,7 +8,7 @@
 
 > 或者您可以 "follow" 一下，该项目将持续更新，不断完善功能。
 
-> 项目交流人QQ：[951449465]
+> 项目交流人QQ群：[195405248]
 
 > 如有问题或者好的建议可以在 Issues 中提。
 
@@ -202,6 +202,7 @@ nginx | 1.10 | http://nginx.org/en/download.html
 > 本地环境搭建
 
 - 本地安装开发环境中的所有工具并启动，具体参考
+- 安装最新的数据库mallplus.sql，解压 前端vue mallplsu-admin-web.zip
 - 克隆源代码到本地，使用IDEA或Eclipse打开，并完成编译;
 - 在mysql中新建mall数据库，导入document/sql下的mall.sql文件；
 - 启动mall-admin项目：直接运行com.zscat.mallplus.MallAdminApplication的main方法即可，

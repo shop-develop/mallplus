@@ -7,6 +7,7 @@ import com.zscat.mallplus.sys.entity.SysPermission;
 import com.zscat.mallplus.sys.entity.SysPermissionNode;
 import com.zscat.mallplus.sys.mapper.SysPermissionMapper;
 import com.zscat.mallplus.sys.service.ISysPermissionService;
+import com.zscat.mallplus.sys.service.ISysUserService;
 import com.zscat.mallplus.util.BuildTree;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -31,10 +32,13 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
     @Resource
     private SysPermissionMapper permissionMapper;
+    @Resource
+    private ISysUserService userService;
     @Override
-    public Object getPermissionsByUserId(Long id) {
+    public List<Tree<SysPermission>> getPermissionsByUserId(Long id) {
         List<Tree<SysPermission>> trees = new ArrayList<Tree<SysPermission>>();
-        List<SysPermission> menuDOs = permissionMapper.listMenuByUserId(id);
+      //  List<SysPermission> menuDOs = permissionMapper.listMenuByUserId(id);
+        List<SysPermission> menuDOs = userService.listUserPerms(id);
         for (SysPermission sysMenuDO : menuDOs) {
             Tree<SysPermission> tree = new Tree<SysPermission>();
             tree.setId(sysMenuDO.getId().toString());

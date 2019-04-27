@@ -2,13 +2,17 @@ package com.zscat.mallplus.sys.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zscat.mallplus.bo.Rediskey;
 import com.zscat.mallplus.sys.entity.*;
 import com.zscat.mallplus.sys.mapper.*;
 import com.zscat.mallplus.sys.service.ISysRolePermissionService;
 import com.zscat.mallplus.sys.service.ISysUserPermissionService;
 import com.zscat.mallplus.sys.service.ISysUserRoleService;
 import com.zscat.mallplus.sys.service.ISysUserService;
+import com.zscat.mallplus.ums.service.RedisService;
+import com.zscat.mallplus.util.JsonUtil;
 import com.zscat.mallplus.util.JwtTokenUtil;
+import com.zscat.mallplus.util.UserUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -72,6 +76,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private ISysUserRoleService userRoleService;
     @Resource
     private SysPermissionMapper permissionMapper;
+
+    @Resource
+    private RedisService redisService;
     @Override
     public String refreshToken(String oldToken) {
         String token = oldToken.substring(tokenHead.length());
@@ -84,8 +91,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public String login(String username, String password) {
         String token = null;
+
         //密码需要客户端加密后传递
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, passwordEncoder.encode(password));
+     //   UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, passwordEncoder.encode(password));
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             if(!passwordEncoder.matches(password,userDetails.getPassword())){
@@ -96,6 +104,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                     userDetails,null,userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
+            this.removePermissRedis(UserUtils.getCurrentMember().getId());
         } catch (AuthenticationException e) {
             log.warn("登录异常:{}", e.getMessage());
         }
@@ -153,7 +162,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public List<SysPermission> getPermissionListByUserId(Long adminId) {
-        return permissionMapper.listMenuByUserId(adminId);
+        if (!redisService.exists(String.format(Rediskey.menuList,adminId))){
+            List<SysPermission> list= permissionMapper.listMenuByUserId(adminId);
+            redisService.set(String.format(Rediskey.menuTreesList,adminId),JsonUtil.objectToJson(list));
+            return list;
+        }else {
+            return JsonUtil.jsonToList(redisService.get(String.format(Rediskey.menuTreesList,adminId)),SysPermission.class);
+        }
+
     }
 
     @Override
@@ -192,7 +208,22 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public List<SysPermission> listUserPerms(Long id) {
-        return permissionMapper.listUserPerms(id);
+        if (!redisService.exists(String.format(Rediskey.menuList,id))){
+            List<SysPermission> list= permissionMapper.listUserPerms(id);
+            String key =String.format(Rediskey.menuList,id);
+            redisService.set(key,JsonUtil.objectToJson(list));
+            return list;
+        }else {
+            return JsonUtil.jsonToList(redisService.get(String.format(Rediskey.menuList,id)),SysPermission.class);
+        }
+
+
+    }
+
+    @Override
+    public void removePermissRedis(Long id) {
+        redisService.remove(String.format(Rediskey.menuTreesList,id));
+        redisService.remove(String.format(Rediskey.menuList,id));
     }
 
     /**
@@ -209,7 +240,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return relationList;
     }
     public void updateRole(Long adminId, String roleIds) {
-
+        this.removePermissRedis(adminId);
         adminRoleRelationMapper.delete(new QueryWrapper<SysUserRole>().eq("admin_id",adminId));
         //建立新关系
         if (!StringUtils.isEmpty(roleIds)) {

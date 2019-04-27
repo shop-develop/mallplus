@@ -11,7 +11,7 @@ import com.zscat.mallplus.sys.entity.SysUser;
 import com.zscat.mallplus.sys.service.ISysPermissionService;
 import com.zscat.mallplus.sys.service.ISysRoleService;
 import com.zscat.mallplus.sys.service.ISysUserService;
-import com.zscat.mallplus.util.UserUtils;
+import com.zscat.mallplus.ums.service.RedisService;
 import com.zscat.mallplus.utils.CommonResult;
 import com.zscat.mallplus.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
@@ -53,6 +53,8 @@ public class SysUserController extends ApiController {
     private ISysRoleService roleService;
     @Resource
     private ISysPermissionService permissionService;
+    @Resource
+    private RedisService redisService;
 
     @SysLog(MODULE = "sys", REMARK = "根据条件查询所有用户列表")
     @ApiOperation("根据条件查询所有用户列表")
@@ -162,8 +164,7 @@ public class SysUserController extends ApiController {
         Map<String, Object> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-        tokenMap.put("menus", permissionService.getPermissionsByUserId(UserUtils.getCurrentMember().getId()));
-        return new CommonResult().success(tokenMap);
+       return new CommonResult().success(tokenMap);
     }
 
     @SysLog(MODULE = "sys", REMARK = "获取当前登录用户信息")
