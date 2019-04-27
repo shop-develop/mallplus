@@ -175,7 +175,7 @@ public class SysUserController extends ApiController {
     @PostMapping(value = "/reg")
     public Object reg(@RequestBody SysUser entity) {
         try {
-                return new CommonResult().success(sysUserService.reg(entity));
+                return sysUserService.reg(entity);
         } catch (Exception e) {
             log.error("保存用户：%s", e.getMessage(), e);
             return new CommonResult().failed();
@@ -185,18 +185,17 @@ public class SysUserController extends ApiController {
     /**
      * 发送短信验证码
      *
-     * @param phone
      * @return
      */
     @IgnoreAuth
     @ApiOperation("获取验证码")
-    @PostMapping(value = "/sms/codes")
-    public Object sendSmsCode(@RequestParam String phone) {
+    @GetMapping(value = "/sms/codes/{username}")
+    public Object sendSmsCode(@PathVariable("username") String username) {
         try {
-            if (!PhoneUtil.checkPhone(phone)) {
+            if (!PhoneUtil.checkPhone(username)) {
                 throw new IllegalArgumentException("手机号格式不正确");
             }
-            SmsCode smsCode = sysUserService.generateCode(phone);
+            SmsCode smsCode = sysUserService.generateCode(username);
 
             return new CommonResult().success(smsCode);
         }catch (Exception e){

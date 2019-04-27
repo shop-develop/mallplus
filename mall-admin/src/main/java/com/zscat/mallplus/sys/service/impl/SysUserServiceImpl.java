@@ -262,7 +262,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         List<SysUser> umsAdminList = adminMapper.selectList(new QueryWrapper<SysUser>().eq("username",umsAdmin.getUsername()));
         if (umsAdminList.size() > 0) {
-            return false;
+            return new CommonResult().failed("手机号已注册");
         }
         //将密码进行加密操作
         if (StringUtils.isEmpty(umsAdmin.getPassword())){
@@ -274,8 +274,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         SysUserRole roleRelation = new SysUserRole();
         roleRelation.setAdminId(umsAdmin.getId());
         roleRelation.setRoleId(5l);
-
-        return true;
+        adminRoleRelationMapper.insert(roleRelation);
+        return  new CommonResult().failed("注册成功");
     }
     //对输入的验证码进行校验
     public boolean verifyAuthCode(String authCode, String telephone) {

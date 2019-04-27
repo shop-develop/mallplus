@@ -6,7 +6,7 @@ import com.zscat.mallplus.ums.entity.Sms;
 import java.util.Map;
 
 /**
- * @author 作者 owen E-mail: 624191343@qq.com
+ * @author 作者 zscat E-mail: 951449465@qq.com
  * @version 创建时间：2017年11月12日 上午22:57:51
  * 短信service 
  */

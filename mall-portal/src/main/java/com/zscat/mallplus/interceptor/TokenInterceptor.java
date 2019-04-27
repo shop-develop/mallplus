@@ -201,7 +201,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     private String getToken(HttpServletRequest request) {
         String token = request.getHeader(CommonConstant.AJAX_REQUEST_TOKEN_KEY);
         if(StringUtils.isNotBlank(token)){
-            //Bearer xxxxxx  (xxxxxx 是 token)
+            //Bearer 京怡君商贸  (京怡君商贸 是 token)
             String[] temp = token.split(" ");
             if(temp.length > 1){
                 return temp[1];
