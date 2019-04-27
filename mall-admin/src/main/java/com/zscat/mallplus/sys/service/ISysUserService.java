@@ -4,6 +4,7 @@ import com.zscat.mallplus.sys.entity.SysPermission;
 import com.zscat.mallplus.sys.entity.SysRole;
 import com.zscat.mallplus.sys.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zscat.mallplus.vo.SmsCode;
 
 import java.util.List;
 
@@ -35,4 +36,8 @@ public interface ISysUserService extends IService<SysUser> {
     List<SysPermission> listUserPerms(Long id);
 
     void removePermissRedis(Long id);
+
+    Object reg(SysUser entity);
+
+    SmsCode generateCode(String phone);
 }

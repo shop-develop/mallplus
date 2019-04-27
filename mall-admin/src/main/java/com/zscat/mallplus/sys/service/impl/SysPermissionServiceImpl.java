@@ -38,7 +38,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     public List<Tree<SysPermission>> getPermissionsByUserId(Long id) {
         List<Tree<SysPermission>> trees = new ArrayList<Tree<SysPermission>>();
       //  List<SysPermission> menuDOs = permissionMapper.listMenuByUserId(id);
-        List<SysPermission> menuDOs = userService.listUserPerms(id);
+        List<SysPermission> menuDOs = userService.getPermissionListByUserId(id);
         for (SysPermission sysMenuDO : menuDOs) {
             Tree<SysPermission> tree = new Tree<SysPermission>();
             tree.setId(sysMenuDO.getId().toString());
@@ -57,7 +57,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
     @Override
     public List<SysPermissionNode> treeList() {
-        List<SysPermission> permissionList = permissionMapper.selectList(new QueryWrapper<>());
+        List<SysPermission> permissionList = permissionMapper.selectList(new QueryWrapper<SysPermission>().orderByAsc("sort"));
         List<SysPermissionNode> result = permissionList.stream()
                 .filter(permission -> permission.getPid().equals(0L))
                 .map(permission -> covert(permission, permissionList)).collect(Collectors.toList());

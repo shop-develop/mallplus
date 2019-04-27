@@ -1,7 +1,6 @@
 package com.zscat.mallplus.sys.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zscat.mallplus.annotation.SysLog;
 import com.zscat.mallplus.sys.entity.SysPermission;
 import com.zscat.mallplus.sys.entity.SysPermissionNode;
@@ -48,7 +47,7 @@ public class SysPermissionController extends BaseController{
                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
     ) {
         try {
-            return new CommonResult().success(ISysPermissionService.page(new Page<SysPermission>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return new CommonResult().success(ISysPermissionService.list(new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有后台用户权限表列表：%s", e.getMessage(), e);
         }

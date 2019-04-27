@@ -78,5 +78,10 @@ public class SysUser implements Serializable {
     @TableField(exist = false)
     private String roleIds;
 
+    @TableField(exist = false)
+    private String code;
+
+    @TableField(exist = false)
+    private String confimpassword;
 
 }

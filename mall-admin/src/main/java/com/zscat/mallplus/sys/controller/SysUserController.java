@@ -4,6 +4,7 @@ package com.zscat.mallplus.sys.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zscat.mallplus.annotation.IgnoreAuth;
 import com.zscat.mallplus.annotation.SysLog;
 import com.zscat.mallplus.sys.entity.SysPermission;
 import com.zscat.mallplus.sys.entity.SysRole;
@@ -13,7 +14,9 @@ import com.zscat.mallplus.sys.service.ISysRoleService;
 import com.zscat.mallplus.sys.service.ISysUserService;
 import com.zscat.mallplus.ums.service.RedisService;
 import com.zscat.mallplus.utils.CommonResult;
+import com.zscat.mallplus.utils.PhoneUtil;
 import com.zscat.mallplus.utils.ValidatorUtils;
+import com.zscat.mallplus.vo.SmsCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -167,6 +170,40 @@ public class SysUserController extends ApiController {
        return new CommonResult().success(tokenMap);
     }
 
+    @SysLog(MODULE = "sys", REMARK = "保存用户")
+    @ApiOperation("外部注册")
+    @PostMapping(value = "/reg")
+    public Object reg(@RequestBody SysUser entity) {
+        try {
+                return new CommonResult().success(sysUserService.reg(entity));
+        } catch (Exception e) {
+            log.error("保存用户：%s", e.getMessage(), e);
+            return new CommonResult().failed();
+        }
+
+    }
+    /**
+     * 发送短信验证码
+     *
+     * @param phone
+     * @return
+     */
+    @IgnoreAuth
+    @ApiOperation("获取验证码")
+    @PostMapping(value = "/sms/codes")
+    public Object sendSmsCode(@RequestParam String phone) {
+        try {
+            if (!PhoneUtil.checkPhone(phone)) {
+                throw new IllegalArgumentException("手机号格式不正确");
+            }
+            SmsCode smsCode = sysUserService.generateCode(phone);
+
+            return new CommonResult().success(smsCode);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new CommonResult().failed(e.getMessage());
+        }
+    }
     @SysLog(MODULE = "sys", REMARK = "获取当前登录用户信息")
     @ApiOperation(value = "获取当前登录用户信息")
     @RequestMapping(value = "/info", method = RequestMethod.GET)

@@ -27,7 +27,7 @@
         sys_role_permission r
         LEFT JOIN sys_permission p ON r.permission_id = p.id
         WHERE
-        r.role_id = #{roleId}
+        r.role_id = #{roleId} and p.status=1
     </select>
 
     <select id="listMenuByUserId" resultType="com.zscat.mallplus.sys.entity.SysPermission">
@@ -40,7 +40,7 @@
         sys_user_role ur
         on rm.role_id =ur.role_id where ur.admin_id =  #{id}
         and
-        m.type in(0,1)
+        m.type in(0,1) and m.status=1
         order by
         m.sort
     </select>
@@ -52,7 +52,7 @@
         left
         join sys_role_permission rm on m.id = rm.permission_id left join
         sys_user_role ur
-        on rm.role_id =ur.role_id where ur.admin_id =  #{id}
+        on rm.role_id =ur.role_id where ur.admin_id =  #{id} and m.status=1
 
     </select>
 
