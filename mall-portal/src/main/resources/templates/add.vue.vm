@@ -1,0 +1,14 @@
+<template> 
+  <${entity}-detail :is-edit='false'></${entity}-detail>
+</template>
+<script>
+  import ${entity}Detail from './components/${entity}Detail'
+  export default {
+    name: 'add${entity}',
+    components: { ${entity}Detail }
+  }
+</script>
+<style>
+</style>
+
+

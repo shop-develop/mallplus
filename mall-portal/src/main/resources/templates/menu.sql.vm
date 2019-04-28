@@ -1,0 +1,13 @@
+
+
+-- 菜单对应按钮SQL
+
+insert into `ums_permission` ( `name`, `pid`, `status`, `sort`, `value`, `type`, `create_time`, `uri`, `icon`) values
+ ( '$!{table.comment}列表', '1', '1', '0', '${package.ModuleName}:${entity}:read', '1', '2018-09-29 16:18:51', '${entity}', null);
+ insert into `ums_permission` ( `name`, `pid`, `status`, `sort`, `value`, `type`, `create_time`, `uri`, `icon`) values
+ ( '添加$!{table.comment}', '1', '1', '0', '${package.ModuleName}:${entity}:create', '2', '2018-09-29 16:18:51', 'add${className}', null);
+ insert into `ums_permission` ( `name`, `pid`, `status`, `sort`, `value`, `type`, `create_time`, `uri`, `icon`) values
+ ( '修改$!{table.comment}', '1', '1', '0', '${package.ModuleName}:${entity}:update', '2', '2018-09-29 16:18:51', 'update${className}', null);
+ insert into `ums_permission` ( `name`, `pid`, `status`, `sort`, `value`, `type`, `create_time`, `uri`, `icon`) values
+ ( '删除$!{table.comment}', '1', '1', '0', '${package.ModuleName}:${entity}:delete', '2', '2018-09-29 16:18:51', 'delete${className}', null);
+

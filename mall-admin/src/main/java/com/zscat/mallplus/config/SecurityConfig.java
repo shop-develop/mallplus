@@ -106,10 +106,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             user.setUsername(username);
             SysUser admin = sysUserService.getOne(new QueryWrapper<>(user));
             if (admin != null) {
+                if (admin.getStatus()!=1){
+                    throw new UsernameNotFoundException("用户已被禁用");
+                }
                 List<SysPermission> permissionList = sysUserService.listUserPerms(admin.getId());
                 return new AdminUserDetails(admin, permissionList);
+            }else {
+                throw new UsernameNotFoundException("用户名或者密码错误");
             }
-            throw new UsernameNotFoundException("用户名或密码错误");
+
         };
     }
 

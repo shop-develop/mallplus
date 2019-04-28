@@ -309,6 +309,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         smsCode.setKey(uuid);
         return smsCode;
     }
+
+    @Override
+    public int updateShowStatus(List<Long> ids, Integer showStatus) {
+        SysUser productCategory = new SysUser();
+        productCategory.setStatus(showStatus);
+        return adminMapper.update(productCategory, new QueryWrapper<SysUser>().eq("id",ids));
+
+    }
+
     /**
      * 保存短信记录，并发送短信
      * @param phone

@@ -29,20 +29,20 @@ public class GenUtils {
 
     public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
-        templates.add("templates/common/generator/domain.java.vm");
-        templates.add("templates/common/generator/Dao.java.vm");
+        templates.add("templatess/common/generator/domain.java.vm");
+        templates.add("templatess/common/generator/Dao.java.vm");
         //templates.add("templates/common/generator/Mapper.java.vm");
-        templates.add("templates/common/generator/Mapper.xml.vm");
-        templates.add("templates/common/generator/Service.java.vm");
-        templates.add("templates/common/generator/ServiceImpl.java.vm");
-        templates.add("templates/common/generator/Controller.java.vm");
-        templates.add("templates/common/generator/add.vue.vm");
-        templates.add("templates/common/generator/index.vue.vm");
-        templates.add("templates/common/generator/api.js.vm");
-        templates.add("templates/common/generator/update.vue.vm");
+        templates.add("templatess/common/generator/Mapper.xml.vm");
+        templates.add("templatess/common/generator/Service.java.vm");
+        templates.add("templatess/common/generator/ServiceImpl.java.vm");
+        templates.add("templatess/common/generator/Controller.java.vm");
+        templates.add("templatess/common/generator/add.vue.vm");
+        templates.add("templatess/common/generator/index.vue.vm");
+        templates.add("templatess/common/generator/api.js.vm");
+        templates.add("templatess/common/generator/update.vue.vm");
 
-        templates.add("templates/common/generator/BrandDetail.vue.vm");
-        templates.add("templates/common/generator/menu.sql.vm");
+        templates.add("templatess/common/generator/BrandDetail.vue.vm");
+        templates.add("templatess/common/generator/menu.sql.vm");
         return templates;
     }
 

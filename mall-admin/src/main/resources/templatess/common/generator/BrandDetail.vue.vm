@@ -57,7 +57,7 @@
     },
     methods: {
       onSubmit(formName) {
-        this.qwertyrefs[formName].validate((valid) => {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$confirm('是否提交数据', '提示', {
               confirmButtonText: '确定',
@@ -67,7 +67,7 @@
               if (this.isEdit) {
                 update${className}(this.$route.query.id, this.${classname}).then(response => {
                     if(response.code==200){
-                      this.qwertyrefs[formName].resetFields();
+                      this.$refs[formName].resetFields();
                       this.$message({
                           message: '修改成功',
                           type: 'success',
@@ -86,7 +86,7 @@
               } else {
                 create${className}(this.${classname}).then(response => {
                     if(response.code==200){
-                      this.qwertyrefs[formName].resetFields();
+                      this.$refs[formName].resetFields();
                       this.${classname} = Object.assign({},default${className});
                       this.$message({
                           message: '提交成功',
@@ -117,7 +117,7 @@
         });
       },
       resetForm(formName) {
-        this.qwertyrefs[formName].resetFields();
+        this.$refs[formName].resetFields();
         this.${classname} = Object.assign({},default${className});
       }
     }

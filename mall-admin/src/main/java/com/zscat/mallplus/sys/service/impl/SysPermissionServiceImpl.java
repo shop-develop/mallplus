@@ -63,6 +63,15 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
                 .map(permission -> covert(permission, permissionList)).collect(Collectors.toList());
         return result;
     }
+
+    @Override
+    public int updateShowStatus(List<Long> ids, Integer showStatus) {
+        SysPermission productCategory = new SysPermission();
+        productCategory.setStatus(showStatus);
+        return permissionMapper.update(productCategory, new QueryWrapper<SysPermission>().eq("id",ids));
+
+    }
+
     /**
      * 将权限转换为带有子级的权限对象
      * 当找不到子级权限的时候map操作不会再递归调用covert

@@ -72,27 +72,29 @@ public class MpGenerator {
                 // to do nothing
             }
         };
+        // 自定义输出配置
         List<FileOutConfig> focList = new ArrayList<>();
-        // 调整 xml 生成目录演示
-       /* focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Mapper.xml";
-            }
-        });*/
-
-        cfg.setFileOutConfigList(focList);
-        mpg.setCfg(cfg);
-
+        // 自定义配置会被优先输出
         focList.add(new FileOutConfig("/templates/controller.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
                 return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Controller.java";
             }
         });
-
+        /*
+        cfg.setFileCreate(new IFileCreate() {
+            @Override
+            public boolean isCreate(ConfigBuilder configBuilder, FileType fileType, String filePath) {
+                // 判断自定义文件夹是否需要创建
+                checkDir("调用默认方法创建的目录");
+                return false;
+            }
+        });
+        */
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
+
 
         mpg.setTemplate(new TemplateConfig().setXml(null));
         // 策略配置
@@ -163,7 +165,7 @@ public class MpGenerator {
 
         // 关闭默认 xml 生成，调整生成 至 根目录
         TemplateConfig tc = new TemplateConfig();
-        tc.setXml(null);
+
         mpg.setTemplate(tc);
 
         // 自定义模板配置，可以 copy 源码 mybatis-plus/src/main/resources/templates 下面内容修改，

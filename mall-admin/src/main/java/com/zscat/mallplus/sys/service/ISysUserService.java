@@ -40,4 +40,6 @@ public interface ISysUserService extends IService<SysUser> {
     Object reg(SysUser entity);
 
     SmsCode generateCode(String phone);
+
+    int updateShowStatus(List<Long> ids, Integer showStatus);
 }

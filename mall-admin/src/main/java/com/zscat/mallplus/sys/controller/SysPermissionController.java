@@ -156,4 +156,14 @@ public class SysPermissionController extends BaseController{
         List<SysPermissionNode> permissionNodeList = ISysPermissionService.treeList();
         return new CommonResult().success(permissionNodeList);
     }
+    @ApiOperation("修改显示状态")
+    @RequestMapping(value = "/update/showStatus", method = RequestMethod.POST)
+    public Object updateShowStatus(@RequestParam("ids") List<Long> ids, @RequestParam("showStatus") Integer showStatus) {
+        int count = ISysPermissionService.updateShowStatus(ids, showStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
+    }
 }

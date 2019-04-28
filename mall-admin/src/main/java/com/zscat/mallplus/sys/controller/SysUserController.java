@@ -175,6 +175,7 @@ public class SysUserController extends ApiController {
     @PostMapping(value = "/reg")
     public Object reg(@RequestBody SysUser entity) {
         try {
+            entity.setStatus(1);
                 return sysUserService.reg(entity);
         } catch (Exception e) {
             log.error("保存用户：%s", e.getMessage(), e);
@@ -287,6 +288,16 @@ public class SysUserController extends ApiController {
     public Object getPermissionList(@PathVariable Long adminId) {
         List<SysPermission> permissionList = sysUserService.getPermissionListByUserId(adminId);
         return new CommonResult().success(permissionList);
+    }
+    @ApiOperation("修改显示状态")
+    @RequestMapping(value = "/update/showStatus", method = RequestMethod.POST)
+    public Object updateShowStatus(@RequestParam("ids") List<Long> ids, @RequestParam("showStatus") Integer showStatus) {
+        int count = sysUserService.updateShowStatus(ids, showStatus);
+        if (count > 0) {
+            return new CommonResult().success(count);
+        } else {
+            return new CommonResult().failed();
+        }
     }
 }
 
