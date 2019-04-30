@@ -11,6 +11,7 @@
 
     <modules>
         <module>mall-mbg</module>
+        <module>mall-encrypt</module>
         <module>mall-admin</module>
 
         <module>mall-portal</module>

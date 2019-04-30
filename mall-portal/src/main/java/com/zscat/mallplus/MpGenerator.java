@@ -26,8 +26,8 @@ public class MpGenerator {
      */
     public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
-    // 选择 freemarker 引擎，默认 Veloctiy
-    //  mpg.setTemplateEngine(new FreemarkerTemplateEngine());
+        // 选择 freemarker 引擎，默认 Veloctiy
+        //  mpg.setTemplateEngine(new FreemarkerTemplateEngine());
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
@@ -37,7 +37,7 @@ public class MpGenerator {
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(true);// XML columList
-    // .setKotlin(true) 是否生成 kotlin 代码
+        // .setKotlin(true) 是否生成 kotlin 代码
         gc.setAuthor("zscat");
 
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
@@ -55,7 +55,7 @@ public class MpGenerator {
             // 自定义数据库表字段类型转换【可选】
             public DbColumnType processTypeConvert(String fieldType) {
                 System.out.println("转换类型：" + fieldType);
-        // 注意！！processTypeConvert 存在默认类型转换，如果不是你要的效果请自定义返回、非如下直接返回。
+                // 注意！！processTypeConvert 存在默认类型转换，如果不是你要的效果请自定义返回、非如下直接返回。
                 return super.processTypeConvert(gc,fieldType);
             }
         });
@@ -72,36 +72,34 @@ public class MpGenerator {
                 // to do nothing
             }
         };
-        // 自定义输出配置
         List<FileOutConfig> focList = new ArrayList<>();
-        // 自定义配置会被优先输出
-        focList.add(new FileOutConfig("/templates/controller.java.vm") {
+        // 调整 xml 生成目录演示
+        focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Controller.java";
+                return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Mapper.xml";
             }
         });
-        /*
-        cfg.setFileCreate(new IFileCreate() {
-            @Override
-            public boolean isCreate(ConfigBuilder configBuilder, FileType fileType, String filePath) {
-                // 判断自定义文件夹是否需要创建
-                checkDir("调用默认方法创建的目录");
-                return false;
-            }
-        });
-        */
+
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
 
+        focList.add(new FileOutConfig("/templates/controller.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return "/Users/shenzhuan/gen/" + tableInfo.getEntityName() + "Controller.java";
+            }
+        });
 
-        mpg.setTemplate(new TemplateConfig().setXml(null));
+        cfg.setFileOutConfigList(focList);
+        mpg.setCfg(cfg);
+
+        mpg.setTemplate(new TemplateConfig().setXml(null).setController(null));
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-    // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-     //   strategy.setTablePrefix(new String[] { "tlog_", "tsys_" });// 此处可以修改为您的表前缀
+        // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
+        //   strategy.setTablePrefix(new String[] { "tlog_", "tsys_" });// 此处可以修改为您的表前缀
        /* strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
          strategy.setInclude(new String[] { "sys_user_permission","sys_area","sys_member_area","sys_permission",
                  "sys_role","sys_role_permission","sys_school", "sys_user","sys_user_permission",
@@ -130,10 +128,10 @@ public class MpGenerator {
                 "sms_home_recommend_subject","sms_red_packet","sms_user_red_packet"
                 }); */
 
-            strategy.setInclude(new String[] { "ums_collect","ums_member","ums_member_blance_log","ums_member_level",
-                    "ums_member_member_tag_relation","ums_member_product_category_relation",
-                    "ums_member_receive_address", "ums_member_rule_setting","ums_member_statistics_info","ums_member_tag",
-            "ums_member_task","ums_growth_change_history","ums_integration_change_history","ums_integration_consume_setting"}); // 需要生成的表
+        strategy.setInclude(new String[] { "ums_collect","ums_member","ums_member_blance_log","ums_member_level",
+                "ums_member_member_tag_relation","ums_member_product_category_relation",
+                "ums_member_receive_address", "ums_member_rule_setting","ums_member_statistics_info","ums_member_tag",
+                "ums_member_task","ums_growth_change_history","ums_integration_change_history","ums_integration_consume_setting"}); // 需要生成的表
 
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
@@ -153,7 +151,7 @@ public class MpGenerator {
         // strategy.setEntityColumnConstant(true);
         // 【实体】是否为构建者模型（默认 false）
         // public User setName(String name) {this.name = name; return this;}
-       //  strategy.setEntityBuilderModel(true);
+        //  strategy.setEntityBuilderModel(true);
         mpg.setStrategy(strategy);
 
         // 包配置
@@ -165,7 +163,7 @@ public class MpGenerator {
 
         // 关闭默认 xml 生成，调整生成 至 根目录
         TemplateConfig tc = new TemplateConfig();
-
+        tc.setXml(null);
         mpg.setTemplate(tc);
 
         // 自定义模板配置，可以 copy 源码 mybatis-plus/src/main/resources/templates 下面内容修改，
@@ -177,7 +175,7 @@ public class MpGenerator {
         // tc.setXml("...");
         // tc.setService("...");
         // tc.setServiceImpl("...");
-    // 如上任何一个模块如果设置 空 OR Null 将不生成该模块。
+        // 如上任何一个模块如果设置 空 OR Null 将不生成该模块。
         // mpg.setTemplate(tc);
 
         // 执行生成

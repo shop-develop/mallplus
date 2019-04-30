@@ -3,6 +3,7 @@ package com.zscat.mallplus.single;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cxytiandi.encrypt.springboot.annotation.NotNeedEncrypt;
 import com.zscat.mallplus.annotation.IgnoreAuth;
 import com.zscat.mallplus.annotation.SysLog;
 import com.zscat.mallplus.cms.entity.CmsSubject;
@@ -66,6 +67,7 @@ public class SingeCmsController extends ApiBaseAction {
         return new CommonResult().success(subjectService.page(new Page<CmsSubject>(pageNum, pageSize), new QueryWrapper<>(subject)));
     }
 
+    @NotNeedEncrypt
     @SysLog(MODULE = "cms", REMARK = "查询文章分类列表")
     @IgnoreAuth
     @ApiOperation(value = "查询文章分类列表")
